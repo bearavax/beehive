@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import Image from "next/image";
 
 // Custom icon components
 const Hexagon = ({ size = 24, className = "" }) => (
