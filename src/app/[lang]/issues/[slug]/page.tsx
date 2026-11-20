@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { IssueThread } from "@/components/issues-view";
-import { issueBySlug, issues } from "@/data/issues";
+import { issueBySlug } from "@/data/issues";
 import { cards, decisionsForIssue } from "@/lib/data";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return issues.map((issue) => ({ slug: issue.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;

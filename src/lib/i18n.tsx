@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { isLang, stripLang, withLang, type Lang } from "@/lib/lang";
 
-export type Lang = "en" | "mi" | "bi";
+export type { Lang };
 
 type LanguageContextValue = {
   lang: Lang;
@@ -12,7 +14,18 @@ type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function writeCookie(lang: Lang) {
-  document.cookie = `beehive-reo=${lang}; Path=/; Max-Age=31536000; SameSite=Lax`;
+  const secure = window.location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `beehive-reo=${lang}; Path=/; Max-Age=31536000; SameSite=Lax${secure}`;
+}
+
+function pathFor(lang: Lang) {
+  const url = new URL(window.location.href);
+  const parts = url.pathname.split("/");
+  if (isLang(parts[1])) parts[1] = lang;
+  else parts.splice(1, 0, lang);
+  url.pathname = parts.join("/") || `/${lang}`;
+  url.searchParams.delete("reo");
+  return url;
 }
 
 export function LanguageProvider({
@@ -22,7 +35,7 @@ export function LanguageProvider({
   initial: Lang;
   children: React.ReactNode;
 }) {
-  const [lang, setLangState] = useState<Lang>(initial);
+  const [lang] = useState<Lang>(initial);
 
   useEffect(() => {
     document.documentElement.lang = lang === "mi" ? "mi" : "en";
@@ -32,11 +45,8 @@ export function LanguageProvider({
     () => ({
       lang,
       setLang: (next) => {
-        setLangState(next);
         writeCookie(next);
-        const url = new URL(window.location.href);
-        url.searchParams.set("reo", next);
-        window.history.replaceState(null, "", url);
+        window.location.assign(pathFor(next));
       },
     }),
     [lang],
@@ -50,6 +60,21 @@ export function useLang() {
   if (!value) throw new Error("LanguageProvider is missing");
   return value;
 }
+
+export function LangLink({
+  href,
+  children,
+  ...props
+}: { href: string } & Omit<React.ComponentProps<typeof Link>, "href">) {
+  const { lang } = useLang();
+  return (
+    <Link href={withLang(lang, href)} {...props}>
+      {children}
+    </Link>
+  );
+}
+
+export { stripLang };
 
 export function T({ en, mi }: { en: string; mi: string }) {
   const { lang } = useLang();

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LangLink } from "@/lib/i18n";
 import { OutboundLink } from "@/components/outbound";
 import { T } from "@/lib/i18n";
 
@@ -106,9 +106,9 @@ export function AboutView({ syncedAt }: { syncedAt: string }) {
           />
         </p>
         <p>
-          <Link href="/plugins">
+          <LangLink href="/plugins">
             <T en="See the plug-in register" mi="" />
-          </Link>
+          </LangLink>
         </p>
       </section>
 

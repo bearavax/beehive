@@ -6,7 +6,7 @@ Beehive does not invent votes. It reads published Mātai Manapori (TrackDem) rec
 
 ## Reo
 
-The site runs in English, te reo Māori, or both. The language standard is [docs/bilingual-standard.md](docs/bilingual-standard.md). Share a page with `?reo=en`, `?reo=mi`, or `?reo=bi`.
+The site runs in English (`/en`), te reo Māori (`/mi`), or both (`/bi`). `/` redirects using the saved choice, then the browser language, then bilingual. An old `?reo=` link is sent to the matching path. The language standard is [docs/bilingual-standard.md](docs/bilingual-standard.md).
 
 ## Develop
 

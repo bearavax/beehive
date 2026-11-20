@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Profile } from "@/components/directory";
-import { memberBySlug, members } from "@/data/members";
+import { memberBySlug } from "@/data/members";
 import { scoreFor } from "@/lib/data";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return members.map((member) => ({ slug: member.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;

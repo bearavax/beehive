@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LangLink } from "@/lib/i18n";
 import { useMemo, useState } from "react";
 import { issues } from "@/data/issues";
 import { T, useLang } from "@/lib/i18n";
@@ -146,7 +146,7 @@ export function Feed({ items, syncedAt }: { items: DecisionCard[]; syncedAt: str
           </p>
         ) : (
           shown.map((item) => (
-            <Link key={item.slug} href={`/decisions/${item.slug}`} className="card">
+            <LangLink key={item.slug} href={`/decisions/${item.slug}`} className="card">
               <div className="kicker">
                 <span>
                   {item.committeeMi} · {item.committeeEn}
@@ -230,7 +230,7 @@ export function Feed({ items, syncedAt }: { items: DecisionCard[]; syncedAt: str
                   </span>
                 )}
               </div>
-            </Link>
+            </LangLink>
           ))
         )}
       </div>
