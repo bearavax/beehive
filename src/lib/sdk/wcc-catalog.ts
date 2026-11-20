@@ -40,7 +40,7 @@ function text(en: string, mi: string | null | undefined): BilingualText {
 }
 
 function provenance(sourceUrl: string | null, mataiReportId: number | null, when: string | null = syncedAt): Provenance {
-  return { sourceUrl, mataiReportId, syncedAt: when, attribution: DATA_MODEL };
+  return { sourceUrl, mataiReportId, syncedAt: when, access: "public", attribution: DATA_MODEL };
 }
 
 function voteOf(clause: { number: string; result: string; votes: StoredClause["votes"] }): ApiVote {
