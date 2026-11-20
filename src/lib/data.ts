@@ -1,20 +1,8 @@
 import synced from "@/data/synced/decisions.json";
 import { committees } from "@/data/committees";
 import { issues } from "@/data/issues";
-import { members } from "@/data/members";
 import { plainLanguage } from "@/data/plain-language";
-import type {
-  DecisionCard,
-  DecisionFile,
-  Member,
-  MemberScore,
-  PlainLayers,
-  Stance,
-  StoredClause,
-  StoredDecision,
-  Tally,
-  VoteBlock,
-} from "@/lib/types";
+import type { DecisionCard, DecisionFile, PlainLayers, StoredClause, StoredDecision, Tally, VoteBlock } from "@/lib/types";
 
 const file = synced as DecisionFile;
 
@@ -141,97 +129,6 @@ export function cards(): DecisionCard[] {
 
 export function withPlain(decision: StoredDecision) {
   return { decision, plain: layersFor(decision), tally: tallyOf(decision) };
-}
-
-function norm(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[’‘]/g, "'")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-type Division = { votes: VoteBlock; result: string };
-
-function divisionsOf(decision: StoredDecision): Division[] {
-  const bag: Division[] = [];
-  const seen = new Set<string>();
-  const push = (votes: VoteBlock, result: string) => {
-    if (!votes.namesRecorded || result === "Not required") return;
-    const key = signature(votes, result);
-    if (seen.has(key)) return;
-    seen.add(key);
-    bag.push({ votes, result });
-  };
-  for (const clause of decision.finalClauses) push(clause.votes, clause.result);
-  for (const amendment of decision.amendments) push(amendment.votes, amendment.result);
-  return bag;
-}
-
-function stanceOn(name: string, division: Division): Stance | null {
-  const target = norm(name);
-  const hit = (list: string[]) => list.some((item) => norm(item) === target);
-  const sides = [hit(division.votes.for), hit(division.votes.against), hit(division.votes.notVoting)];
-  if (!sides.some(Boolean)) return null;
-  if (hit(division.votes.for) && !hit(division.votes.against) && !hit(division.votes.notVoting)) return "for";
-  if (hit(division.votes.against) && !hit(division.votes.for) && !hit(division.votes.notVoting)) return "against";
-  if (hit(division.votes.notVoting) && !hit(division.votes.for) && !hit(division.votes.against)) return "not-voting";
-  return "mixed";
-}
-
-function majoritySide(votes: VoteBlock): "for" | "against" | "tie" {
-  if (votes.for.length > votes.against.length) return "for";
-  if (votes.against.length > votes.for.length) return "against";
-  return "tie";
-}
-
-function matched(stance: Stance, votes: VoteBlock) {
-  if (stance === "not-voting") return "not-voting";
-  const side = majoritySide(votes);
-  if (side === "tie") return "other";
-  if (stance === side) return "matched";
-  if (stance === "for" || stance === "against") return "opposed";
-  return "other";
-}
-
-export function scoreFor(member: Member): MemberScore {
-  let namedDivisions = 0;
-  let matchedResult = 0;
-  let opposedResult = 0;
-  let notVoting = 0;
-  const rows: MemberScore["decisions"] = [];
-
-  for (const decision of decisions) {
-    const stances = new Set<Stance>();
-    for (const division of divisionsOf(decision)) {
-      for (const alias of member.voteAliases) {
-        const stance = stanceOn(alias, division);
-        if (!stance) continue;
-        stances.add(stance);
-        namedDivisions += 1;
-        const mark = matched(stance, division.votes);
-        if (mark === "matched") matchedResult += 1;
-        else if (mark === "opposed") opposedResult += 1;
-        else if (mark === "not-voting") notVoting += 1;
-        break;
-      }
-    }
-    if (stances.size === 0) continue;
-    const stance: Stance = stances.size === 1 ? [...stances][0] : "mixed";
-    rows.push({
-      slug: decision.slug,
-      title: decision.title,
-      date: decision.date,
-      bodyId: decision.bodyId,
-      stance,
-    });
-  }
-
-  return { slug: member.slug, namedDivisions, matchedResult, opposedResult, notVoting, decisions: rows };
-}
-
-export function allScores() {
-  return members.map((member) => scoreFor(member));
 }
 
 export function bodies() {

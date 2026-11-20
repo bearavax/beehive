@@ -3,6 +3,7 @@
 import { LangLink } from "@/lib/i18n";
 import { OutboundLink } from "@/components/outbound";
 import { T } from "@/lib/i18n";
+import { aboutNoScore } from "@/lib/minutes/copy";
 
 export function AboutView({ syncedAt }: { syncedAt: string }) {
   return (
@@ -89,8 +90,8 @@ export function AboutView({ syncedAt }: { syncedAt: string }) {
         </h2>
         <p>
           <T
-            en="It is not a poll, a whip count, or a prediction. Alignment on a profile is the share of named divisions in this set where the member’s vote matched the recorded result. It will move when more reports are synced. The old Express API is archived under archive/legacy-express and is not part of this website."
-            mi="Ehara i te pōti whakaaro, i te tatau porotēhi, i te matapae rānei. Ko te hāngai i te kōtaha te wāhi o ngā wehenga kua whakaingoatia i tēnei huinga i ōrite ai te pōti a te mema ki te hua i tuhia. Ka neke ina tukutahitia ētahi atu pūrongo. Kei archive/legacy-express te API Express tawhito, ā, ehara i te wāhanga o tēnei paetukutuku."
+            en={aboutNoScore.en}
+            mi={aboutNoScore.mi}
           />
         </p>
       </section>

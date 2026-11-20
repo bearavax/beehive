@@ -299,14 +299,6 @@ h3,
   background: var(--color-paper);
 }
 
-.pill.for {
-  background: var(--color-pounamu-soft);
-}
-
-.pill.against {
-  background: var(--color-kokowai-soft);
-}
-
 .split {
   display: grid;
   gap: 2rem;
@@ -319,6 +311,11 @@ h3,
 .prose p + p,
 .stack > * + * {
   margin-top: 0.9rem;
+}
+
+.prose h2,
+.prose h3 {
+  margin: 1.45rem 0 0.4rem;
 }
 
 .note {
@@ -425,19 +422,8 @@ h3,
   color: var(--color-muted);
 }
 
-.statrow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem;
-  margin: 1rem 0 0.2rem;
-}
-
-.stat strong {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  color: var(--color-ink);
-  font-weight: 550;
+.minutes-scroll {
+  overflow-x: auto;
 }
 
 @media (max-width: 720px) {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Profile } from "@/components/directory";
 import { memberBySlug } from "@/data/members";
-import { scoreFor } from "@/lib/data";
+import { memberMinutes } from "@/lib/minutes/load";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -19,5 +19,5 @@ export default async function MemberPage({ params }: Props) {
   const { slug } = await params;
   const member = memberBySlug(slug);
   if (!member) notFound();
-  return <Profile member={member} score={scoreFor(member)} />;
+  return <Profile member={member} meetings={memberMinutes(member.slug)} />;
 }

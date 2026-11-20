@@ -12,6 +12,7 @@ export function GET() {
     resources: {
       decisions: "/api/v1/decisions",
       members: "/api/v1/members",
+      memberVotes: "/api/v1/members/{id}/votes",
       issues: "/api/v1/issues",
       committees: "/api/v1/committees",
       meetings: "/api/v1/meetings",
