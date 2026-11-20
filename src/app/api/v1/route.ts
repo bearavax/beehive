@@ -1,6 +1,6 @@
 import { json, options } from "@/lib/api/respond";
+import { statutoryAdapter } from "@/lib/sdk/councils";
 import { plugins } from "@/plugins/registry";
-import { wellingtonAdapter } from "@/lib/sdk/wcc";
 
 export function OPTIONS() {
   return options();
@@ -8,7 +8,7 @@ export function OPTIONS() {
 
 export function GET() {
   return json({
-    council: wellingtonAdapter.manifest.council,
+    council: statutoryAdapter.manifest.council,
     resources: {
       decisions: "/api/v1/decisions",
       members: "/api/v1/members",

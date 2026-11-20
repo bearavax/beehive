@@ -1,6 +1,11 @@
 import type { AdapterQuery, ApiMeeting, ApiDecisionSummary, ApiVote, CouncilAdapter } from "@/lib/sdk/adapter";
-import type { PluginManifest } from "@/lib/sdk/manifest";
+import { validatePluginManifest } from "@/lib/sdk/manifest";
 import manifestJson from "../beehive-plugin.json";
+
+const parsed = validatePluginManifest(manifestJson);
+if (!parsed.ok) {
+  throw new Error(parsed.errors.join("; "));
+}
 
 /**
  * Hackathon starter. Every method returns an empty list or null.
@@ -8,7 +13,7 @@ import manifestJson from "../beehive-plugin.json";
  * When a field is not in your source, leave it null.
  */
 export const starterAdapter: CouncilAdapter = {
-  manifest: manifestJson as PluginManifest,
+  manifest: parsed.manifest,
   async fetchMeetings(_query?: AdapterQuery): Promise<ApiMeeting[]> {
     return [];
   },

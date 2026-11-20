@@ -4,7 +4,7 @@ Version `1.0.0`. This is the May 2027 hackathon surface. Builders add a plug-in.
 
 ## Read API
 
-`GET /api/v1` lists the resources. All responses are JSON, `Cache-Control: public`, and allow cross-origin GET.
+`GET /api/v1` lists the resources. All responses are JSON, `Cache-Control: public`, and allow cross-origin GET. The records are the registered statutory adapter (`nz.wcc.matai-manapori`). Pass `?council=` with that id, or omit it. Any other council id is `404` until another adapter is registered in `src/lib/sdk/councils.ts`.
 
 | Path | What it returns |
 | --- | --- |
