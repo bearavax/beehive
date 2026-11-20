@@ -1,0 +1,45 @@
+name: Sync Mātai Manapori
+
+on:
+  schedule:
+    # Monday 16:20 UTC, Tuesday morning in Wellington. One read of the public API.
+    - cron: "20 16 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run sync:wcc
+      - id: diff
+        run: |
+          if git diff --quiet -- src/data/synced/decisions.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Open a data pull request
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="data/matai-manapori-${GITHUB_RUN_ID}"
+          git config user.name "beehive-sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add src/data/synced/decisions.json
+          git commit -m "Refresh the Mātai Manapori seed"
+          git push origin "$branch"
+          gh pr create --base "$GITHUB_REF_NAME" --head "$branch" \
+            --title "Refresh Mātai Manapori seed" \
+            --body "Scheduled read of the public Mātai Manapori API for committees 5, 93, 96, and 97. No staff directory and no write routes. Open this only when the normalised decisions changed."

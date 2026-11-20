@@ -30,6 +30,8 @@ Every record has `provenance`:
 
 Bilingual fields are `{ "en": "...", "mi": "..." }` or `"mi": null` when te reo has not been sourced. Vote rows leave `abstain`, `absent`, and `conflictOfInterest` null. Empty `for` / `against` arrays mean the export did not name the division.
 
+`implementation.status` is `"In progress"`, `"Completed"`, or `null`. `null` means Mātai Manapori did not publish an approved status for that row. `implementation.source` is the read URL that supplied the status, or `null` when the status itself is null or the clauses disagree about the source. The decision register is `GET /api/clause/getAllClauses`. A status is copied from there only when the clause text matches. It is never guessed from a neighbouring clause.
+
 Plain-language layers appear only when Beehive has written them. `statutoryRecord` on those layers is false. The clauses are the cited text.
 
 ## Manifest

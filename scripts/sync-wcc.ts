@@ -10,7 +10,7 @@
  * If a source cannot be read, the script exits without writing a seed.
  */
 import { createHash } from "node:crypto";
-import { mkdir, rename, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const BASE = "https://meetings.wellington.govt.nz";
@@ -61,9 +61,10 @@ type StoredClause = {
   result: string;
   movedBy: string | null;
   secondedBy: string | null;
-  actionStatus: string | null;
+  actionStatus: "In progress" | "Completed" | null;
   actionComment: string | null;
   actionUpdated: string | null;
+  actionSource: string | null;
   votes: VoteBlock;
 };
 
@@ -94,15 +95,34 @@ const HEADERS = {
   "user-agent": "BeehiveSync/1.0 (public civic transparency; +https://github.com/bearavax/beehive)",
 };
 
+const READ_ALLOWLIST = [
+  `${BASE}/api/committee/allClauses`,
+  `${BASE}/api/clause/getAllClauses`,
+  `${BASE}/your-council/meetings-calendar`,
+];
+
+const REGISTER_SOURCE = `${BASE}/api/clause/getAllClauses`;
+const EXPORT_SOURCE = `${BASE}/api/committee/allClauses`;
+const GAP_MS = 1200;
+
 function sha256(value: string) {
   return createHash("sha256").update(value).digest("hex");
 }
 
+function redact(value: string): string {
+  return value.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[redacted]");
+}
+
 function blank(value: unknown): string {
   if (typeof value !== "string") return "";
-  const text = value.replace(/\s+/g, " ").trim();
+  const text = redact(value).replace(/\s+/g, " ").trim();
   if (text === "-" || text === "- - -" || text === "—") return "";
   return text;
+}
+
+function approvedStatus(value: string): "In progress" | "Completed" | null {
+  if (value === "In progress" || value === "Completed") return value;
+  return null;
 }
 
 function nameList(value: unknown): string[] {
@@ -161,18 +181,73 @@ function titleHas(title: string, phrases: string[]) {
   });
 }
 
-async function readText(url: string, init?: RequestInit): Promise<{ text: string; rowsHint?: number }> {
-  const response = await fetch(url, { ...init, headers: { ...HEADERS, ...(init?.headers ?? {}) } });
-  if (!response.ok) throw new Error(`${response.status} ${response.statusText} for ${url}`);
-  const text = await response.text();
+function assertRead(url: string) {
+  if (/councilStaff|\/api\/update|\/api\/delete|\/api\/auth|\/api\/flow/i.test(url)) {
+    throw new Error(`Refusing non-read Mātai Manapori route: ${url}`);
+  }
+  if (!READ_ALLOWLIST.includes(url)) {
+    throw new Error(`URL is not on the read allowlist: ${url}`);
+  }
+}
+
+let lastCall = 0;
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function readText(url: string, init?: RequestInit): Promise<{ text: string }> {
+  assertRead(url);
+  const cacheDir = path.join(process.cwd(), ".cache/wcc");
+  const key = sha256(`${init?.method ?? "GET"} ${url} ${typeof init?.body === "string" ? init.body : ""}`);
+  const cacheFile = path.join(cacheDir, `${key}.json`);
+  try {
+    const cached = JSON.parse(await readFile(cacheFile, "utf8")) as { savedAt: number; text: string };
+    if (Date.now() - cached.savedAt < 12 * 60 * 60 * 1000 && typeof cached.text === "string") {
+      console.log(`cache ${url}`);
+      return { text: cached.text };
+    }
+  } catch {
+    /* cache miss */
+  }
+
+  const wait = GAP_MS - (Date.now() - lastCall);
+  if (lastCall !== 0 && wait > 0) await sleep(wait);
+
+  let text = "";
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    lastCall = Date.now();
+    const response = await fetch(url, { ...init, headers: { ...HEADERS, ...(init?.headers ?? {}) } });
+    if (response.status === 429 || response.status === 503) {
+      const retryAfter = Number(response.headers.get("retry-after"));
+      await sleep((Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter : 5 * (attempt + 1)) * 1000);
+      continue;
+    }
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText} for ${url}`);
+    text = await response.text();
+    break;
+  }
+  if (!text) throw new Error(`Gave up after rate limits for ${url}`);
+  await mkdir(cacheDir, { recursive: true });
+  await writeFile(cacheFile, JSON.stringify({ savedAt: Date.now(), text }));
   return { text };
 }
 
-function implementationOf(clauses: StoredClause[]): "in-progress" | "completed" | "not-stated" {
-  const statuses = clauses.map((clause) => (clause.actionStatus ?? "").toLowerCase());
-  if (statuses.some((status) => status.includes("progress"))) return "in-progress";
-  if (statuses.some((status) => status === "completed")) return "completed";
-  return "not-stated";
+function implementationOf(clauses: StoredClause[]): {
+  status: "In progress" | "Completed" | null;
+  source: string | null;
+  updatedAt: string | null;
+} {
+  const known = clauses.filter((clause) => clause.actionStatus);
+  if (known.length === 0) return { status: null, source: null, updatedAt: null };
+  const status = known.some((clause) => clause.actionStatus === "In progress") ? "In progress" : "Completed";
+  const sources = [...new Set(known.map((clause) => clause.actionSource).filter((source): source is string => Boolean(source)))];
+  const updates = [...new Set(known.map((clause) => clause.actionUpdated).filter((value): value is string => Boolean(value)))];
+  return {
+    status,
+    source: sources.length === 1 ? sources[0] : null,
+    updatedAt: updates.length === 1 ? updates[0] : null,
+  };
 }
 
 function decisionResult(clauses: StoredClause[]): string {
@@ -193,11 +268,11 @@ function joinRegister(reportId: number | null, clauseNumber: string, text: strin
   if (reportId == null) return null;
   const rows = register.get(`${reportId}|${clauseNumber.trim()}`) ?? [];
   if (rows.length === 0) return null;
-  const needle = text.slice(0, 80).toLowerCase();
-  return (
-    rows.find((row) => needle && row.action.toLowerCase().includes(needle.slice(0, 40))) ??
-    rows[0]
-  );
+  const needle = text.slice(0, 40).toLowerCase();
+  const matches = needle ? rows.filter((row) => row.action.toLowerCase().includes(needle)) : [];
+  if (matches.length === 1) return matches[0];
+  if (rows.length === 1 && matches.length === 1) return rows[0];
+  return null;
 }
 
 async function main() {
@@ -317,8 +392,9 @@ async function main() {
       const amendment = blank(row.Amendment_clause_text);
       const text = kind === "amendment" ? amendment : altered && blank(row.Change_state) === "Altered" ? altered : original || altered;
       const joined = joinRegister(reportId, number, text || original, register);
-      const exportStatus = blank(row.Approved_action_status);
-      const exportComment = blank(row.Approved_action_update_comment);
+      const exportStatus = approvedStatus(blank(row.Approved_action_status));
+      const registerStatus = approvedStatus(joined?.approvedActionStatus ?? "");
+      const status = joined ? registerStatus : exportStatus;
       const result =
         kind === "amendment"
           ? blank(row.Amendment_vote_result) || blank(row.Final_amendment_vote_result) || "Not stated"
@@ -332,9 +408,14 @@ async function main() {
         result,
         movedBy: kind === "amendment" ? blank(row.Member_moved_amendment) || null : blank(row.Member_moved_decision_motion) || null,
         secondedBy: kind === "amendment" ? blank(row.Member_seconded_amendment) || null : blank(row.Member_seconded_decision_motion) || null,
-        actionStatus: joined?.approvedActionStatus || exportStatus || null,
-        actionComment: joined?.approvedActionUpdateComment || exportComment || null,
-        actionUpdated: joined?.approvedActionUpdatedDate || blank(row.Approved_action_update_date_time) || null,
+        actionStatus: status,
+        actionComment: status ? (joined ? joined.approvedActionUpdateComment || null : blank(row.Approved_action_update_comment) || null) : null,
+        actionUpdated: status
+          ? joined
+            ? joined.approvedActionUpdatedDate || null
+            : blank(row.Approved_action_update_date_time) || null
+          : null,
+        actionSource: status ? (joined ? REGISTER_SOURCE : EXPORT_SOURCE) : null,
         votes:
           kind === "amendment"
             ? votes(row.Members_voting_for_the_amendment, row.Members_voting_against_the_amendment, row.Members_not_voting_on_the_amendment)
@@ -414,7 +495,7 @@ async function main() {
   const payload = {
     source: BASE,
     syncedAt: new Date().toISOString(),
-    note: "Built from POST /api/committee/allClauses for committees 5, 93, 96 and 97 (2025-2028), joined to approved action fields on GET /api/clause/getAllClauses and to agendas, minutes, video, and additional documents on the meetings calendar. Vote names are copied only from the committee export. No votes are inferred. Email fields are not stored. Public-excluded rows are dropped. getAllClauses.finalClauseVoteResult is not used as a vote result.",
+    note: "Built from POST /api/committee/allClauses for committees 5, 93, 96 and 97 (2025-2028). Approved implementation status is joined from GET /api/clause/getAllClauses only when the clause text matches; otherwise it stays null. Agendas, minutes, video, and additional documents come from the meetings calendar. Vote names are copied only from the committee export. Email addresses are redacted. Public-excluded rows are dropped. getAllClauses.finalClauseVoteResult is not used as a vote result.",
     fetches,
     decisions,
   };
@@ -422,6 +503,16 @@ async function main() {
   const outDir = path.join(process.cwd(), "src/data/synced");
   await mkdir(outDir, { recursive: true });
   const outFile = path.join(outDir, "decisions.json");
+  const nextDecisions = JSON.stringify(payload.decisions);
+  try {
+    const previous = JSON.parse(await readFile(outFile, "utf8")) as { decisions?: unknown };
+    if (JSON.stringify(previous.decisions) === nextDecisions) {
+      console.log(`unchanged ${payload.decisions.length} decisions`);
+      return;
+    }
+  } catch {
+    /* first seed */
+  }
   const tmp = `${outFile}.tmp`;
   await writeFile(tmp, `${JSON.stringify(payload, null, 2)}\n`);
   await rename(tmp, outFile);

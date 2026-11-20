@@ -19,9 +19,10 @@ export type StoredClause = {
   result: string;
   movedBy: string | null;
   secondedBy: string | null;
-  actionStatus: string | null;
+  actionStatus: "In progress" | "Completed" | null;
   actionComment: string | null;
   actionUpdated: string | null;
+  actionSource: string | null;
   votes: VoteBlock;
 };
 
@@ -43,7 +44,11 @@ export type StoredDecision = {
   committeeEn: string;
   committeeMi: string;
   result: string;
-  implementation: "in-progress" | "completed" | "not-stated";
+  implementation: {
+    status: "In progress" | "Completed" | null;
+    source: string | null;
+    updatedAt: string | null;
+  };
   publicExclusion: string;
   mataiUrl: string;
   reportUrl: string | null;

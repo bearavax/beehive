@@ -58,7 +58,11 @@ export type ApiDecisionSummary = {
   bodyId: string;
   body: BilingualText;
   result: string | null;
-  implementation: string | null;
+  implementation: {
+    status: "In progress" | "Completed" | null;
+    source: string | null;
+    updatedAt: string | null;
+  };
   issueIds: string[];
   provenance: Provenance;
 };
@@ -79,8 +83,13 @@ export type ApiDecision = ApiDecisionSummary & {
     result: string | null;
     movedBy: string | null;
     secondedBy: string | null;
-    actionStatus: string | null;
-    actionComment: string | null;
+    implementation: {
+      status: "In progress" | "Completed" | null;
+      comment: string | null;
+      updatedAt: string | null;
+      clauseId: number | null;
+      source: string | null;
+    };
     votes: ApiVote;
   }>;
   amendments: Array<{

@@ -30,7 +30,8 @@ export function Feed({ items, syncedAt }: { items: DecisionCard[]; syncedAt: str
       if (body !== "all" && item.bodyId !== body) return false;
       if (issue !== "all" && !item.issueIds.includes(issue)) return false;
       if (status !== "all" && item.result !== status) return false;
-      if (progress !== "all" && item.implementation !== progress) return false;
+      if (progress === "unrecorded" && item.implementation.status !== null) return false;
+      if (progress !== "all" && progress !== "unrecorded" && item.implementation.status !== progress) return false;
       if (year !== "all" && !item.date.startsWith(year)) return false;
       if (q && !item.searchText.includes(q)) return false;
       return true;
@@ -124,9 +125,9 @@ export function Feed({ items, syncedAt }: { items: DecisionCard[]; syncedAt: str
           </span>
           {[
             ["all", "All", "Katoa"],
-            ["in-progress", "In progress", "Kei te haere"],
-            ["completed", "Completed", "Kua oti"],
-            ["not-stated", "Not stated", "Kāore i kīia"],
+            ["In progress", "In progress", "Kei te haere"],
+            ["Completed", "Completed", "Kua oti"],
+            ["unrecorded", "Not recorded", "Kāore i tuhia"],
           ].map(([id, en, mi]) => (
             <button key={id} type="button" className="chip" aria-pressed={progress === id} onClick={() => setProgress(id)}>
               <T en={en} mi={mi} />
@@ -152,6 +153,13 @@ export function Feed({ items, syncedAt }: { items: DecisionCard[]; syncedAt: str
                 </span>
                 <span>{formatDate(item.date, dateLang)}</span>
                 <span>{item.result}</span>
+                <span>
+                  {item.implementation.status ? (
+                    item.implementation.status
+                  ) : (
+                    <T en="Status not recorded" mi="Kāore i tuhia te tūnga" />
+                  )}
+                </span>
               </div>
               <h2>{item.title}</h2>
               {!item.authored ? (

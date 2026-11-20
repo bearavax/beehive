@@ -117,12 +117,22 @@ function ClauseBlock({ clause }: { clause: StoredClause }) {
           ) : null}
         </p>
       )}
-      {clause.actionStatus ? (
-        <p className="meta">
-          <T en="Approved implementation status" mi="Tūnga whakatinana kua whakaaetia" />: {clause.actionStatus}
-          {clause.actionUpdated ? ` · ${clause.actionUpdated}` : ""}
-        </p>
-      ) : null}
+      <p className="meta">
+        <T en="Approved implementation status" mi="Tūnga whakatinana kua whakaaetia" />:{" "}
+        {clause.actionStatus ? (
+          clause.actionStatus
+        ) : (
+          <T en="not recorded" mi="kāore i tuhia" />
+        )}
+        {clause.actionUpdated ? ` · ${clause.actionUpdated}` : ""}
+        {clause.clauseId ? ` · clause ${clause.clauseId}` : ""}
+        {clause.actionSource ? (
+          <>
+            {" · "}
+            <a href={clause.actionSource}>{clause.actionSource.replace("https://meetings.wellington.govt.nz", "Mātai Manapori")}</a>
+          </>
+        ) : null}
+      </p>
       {clause.actionComment ? <p>{clause.actionComment}</p> : null}
       <VoteTable votes={clause.votes} result={clause.result} />
     </article>
