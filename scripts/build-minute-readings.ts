@@ -11,7 +11,9 @@ import path from "node:path";
 import { members } from "../src/data/members.ts";
 import { attributeDivision } from "../src/lib/minutes/match.ts";
 import { parseMinutes } from "../src/lib/minutes/parse.ts";
-import { toStoredDivision, type ReadingsFile, type StoredMeeting } from "../src/lib/minutes/record.ts";
+import { toStoredDivision, type ExtractRecord, type ReadingsFile, type StoredMeeting } from "../src/lib/minutes/record.ts";
+import { allowFeedUrl } from "../src/lib/safe-url.ts";
+import { EXTRACTOR } from "../src/lib/minutes/extractor.ts";
 
 const dir = process.argv[2];
 if (!dir) {
@@ -29,6 +31,7 @@ type IndexRow = {
   pages: number | null;
   chars: number;
   error: string | null;
+  extract: ExtractRecord | null;
 };
 
 const index = JSON.parse(await readFile(path.join(dir, "index.json"), "utf8")) as IndexRow[];
@@ -42,18 +45,26 @@ for (const row of index) {
   } catch {
     text = "";
   }
-  const usable = !row.error && text.trim().length >= 400;
+  const minutesUrl = allowFeedUrl(row.url);
+  const usable = Boolean(minutesUrl) && !row.error && text.trim().length >= 400;
   const parsed = usable ? parseMinutes(text) : { closedSessionOmitted: false, divisions: [] };
+  const extract: ExtractRecord = row.extract ?? {
+    name: "pypdf",
+    version: EXTRACTOR.version,
+    status: usable ? "parsed" : "skipped",
+    reason: minutesUrl ? row.error : "url-rejected",
+  };
   meetings.push({
     date: row.date,
     bodyId: row.bodyId,
-    minutesUrl: row.url,
+    minutesUrl,
     sha256: row.sha256,
     bytes: row.bytes,
     pages: row.pages,
     chars: usable ? text.length : row.chars,
     status: usable ? "read" : "unreadable",
     closedSessionOmitted: parsed.closedSessionOmitted,
+    extract,
     divisions: usable ? parsed.divisions.map((division) => toStoredDivision(attributeDivision(division, members))) : [],
   });
 }
@@ -63,7 +74,12 @@ meetings.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.bodyId.l
 const payload: ReadingsFile = {
   source: "wcc-minutes-pdf",
   syncedAt: new Date().toISOString(),
-  note: "Division blocks copied from public Wellington City Council minutes PDFs. A block is stored only when For and Against counts match the printed majority. Absent, abstained, and not voting stay separate. Closed-session text is not stored. Names that are not in a division list are not stored.",
+  extractor: {
+    name: "pypdf",
+    version: EXTRACTOR.version,
+    poppler: "Poppler pdftotext without -layout yields 0 read blocks on these minutes. This file is built from pypdf only.",
+  },
+  note: "Division blocks copied from public Wellington City Council minutes PDFs. A block is stored only when For and Against counts match the printed majority. Absent, abstained, and not voting stay separate. Closed-session text is not stored. Names that are not in a division list are not stored. A minutes URL that fails the feed allowlist is not stored.",
   meetings,
 };
 

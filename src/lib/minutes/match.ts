@@ -49,6 +49,8 @@ export function attributeDivision(division: MinuteDivision, members: Member[]): 
 function unread(division: MinuteDivision): MinuteDivision {
   return {
     clauseLabel: division.clauseLabel,
+    item: division.item,
+    page: division.page,
     for: [],
     against: null,
     abstained: null,

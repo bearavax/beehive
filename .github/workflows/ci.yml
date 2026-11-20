@@ -36,6 +36,7 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci --ignore-scripts
+      - run: python3 -m pip install --break-system-packages -r requirements-minutes.txt
       - run: npx tsc --noEmit
       - run: npm test
       - run: npm run lint

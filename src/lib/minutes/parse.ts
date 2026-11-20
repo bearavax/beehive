@@ -9,6 +9,10 @@ export type MinuteResult = "Carried" | "Lost";
 
 export type MinuteDivision = {
   clauseLabel: string | null;
+  /** Agenda item such as 2.1, when the block has no clause heading. */
+  item: string | null;
+  /** PDF page of the division, from the running header. */
+  page: number | null;
   for: string[];
   against: string[] | null;
   abstained: string[] | null;
@@ -38,12 +42,42 @@ export function parseMinutes(text: string): MinutesParse {
   const matches = [...closed.text.matchAll(INTRO)];
   for (let index = 0; index < matches.length; index += 1) {
     const match = matches[index];
-    const start = (match.index ?? 0) + match[0].length;
+    const at = match.index ?? 0;
+    const start = at + match[0].length;
     const end = index + 1 < matches.length ? (matches[index + 1].index ?? closed.text.length) : closed.text.length;
     const inline = cleanLabel(match[1] ?? null);
-    divisions.push(...parseSlice(closed.text.slice(start, end), inline ?? labelBefore(closed.text, match.index ?? 0)));
+    const found = parseSlice(closed.text.slice(start, end), inline ?? labelBefore(closed.text, at));
+    const page = pageBefore(closed.text, at);
+    const item = itemBefore(closed.text, at);
+    for (const division of found) {
+      division.page = division.page ?? page;
+      division.item = division.item ?? item;
+    }
+    divisions.push(...found);
   }
   return { closedSessionOmitted: closed.omitted, divisions };
+}
+
+function pageBefore(text: string, index: number): number | null {
+  const before = text.slice(0, index);
+  let page: number | null = null;
+  for (const match of before.matchAll(/\bPage\s+(\d+)\b/gi)) {
+    page = Number(match[1]);
+  }
+  return page;
+}
+
+function itemBefore(text: string, index: number): string | null {
+  const lines = text.slice(0, index).split(/\n/);
+  let item: string | null = null;
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i]?.trim() ?? "";
+    const match = line.match(/^(\d+)\.(\d+)\s+[A-ZĀĒĪŌŪ]/);
+    if (!match) continue;
+    const window = lines.slice(i, i + 8).map((entry) => entry.trim());
+    if (window.some((entry) => /^moved\b/i.test(entry))) item = `${match[1]}.${match[2]}`;
+  }
+  return item;
 }
 
 function omitClosedSession(text: string): { text: string; omitted: boolean } {
@@ -151,6 +185,8 @@ function finish(
 ): MinuteDivision {
   const blank: MinuteDivision = {
     clauseLabel: label,
+    item: null,
+    page: null,
     for: [],
     against: null,
     abstained: null,
@@ -187,6 +223,8 @@ function finish(
 
   return {
     clauseLabel: label,
+    item: null,
+    page: null,
     for: forNames,
     against: againstNames,
     abstained: parsed.abstained?.names ?? null,

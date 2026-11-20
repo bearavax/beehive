@@ -11,6 +11,13 @@ function phrase(en: string) {
   return minutesPhrases.find((item) => item.en === en) ?? { en, mi: "", review: true };
 }
 
+function minutesHref(url: string, page: number | null) {
+  if (!page) return url;
+  const [base, hash = ""] = url.split("#");
+  if (/(^|&)page=/.test(hash)) return url;
+  return `${base}#page=${page}`;
+}
+
 function State({ state }: { state: MinuteVoteState }) {
   const copy = voteState[state];
   return <T en={copy.en} mi={copy.mi} />;
@@ -22,6 +29,7 @@ export function MinutesRecord({ meetings }: { meetings: MemberMeeting[] }) {
   const legend = phrase(
     "For, against, abstained, absent, and not voting are copied only when the minutes use that list. Not recorded means this person was not named. Not read means the block could not be checked. No division recorded means the text had no standing-order division. Nothing is filled in from a missing name.",
   );
+  const outsideTerm = phrase("A meeting outside the dates this person held office is left off the page. It is not a vote.");
   const closedCopied = phrase("The closed session in these minutes was not copied.");
   const closedNone = phrase("No closed-session text was in the extract.");
   const clauseMissing = phrase("Clause heading not in the block");
@@ -35,14 +43,15 @@ export function MinutesRecord({ meetings }: { meetings: MemberMeeting[] }) {
         <T en={title.en} mi={title.mi} />
       </h2>
       <p style={{ maxWidth: "44rem" }}>
-        <T en={legend.en} mi={legend.mi} />{" "}
+        <T en={legend.en} mi={legend.mi} /> <T en={outsideTerm.en} mi={outsideTerm.mi} />{" "}
         <LangLink href="/how-this-works">
           <T en="How this works" mi="Pēhea tēnei mahi" />
         </LangLink>
       </p>
       {meetings.map((meeting) => {
         const body = committees.find((committee) => committee.id === meeting.bodyId);
-        const rows = meeting.divisions;
+        const rows = meeting.divisions.filter((row) => row.state !== "not-in-office");
+        if (rows.length === 0) return null;
         return (
           <section key={`${meeting.date}-${meeting.bodyId}`} style={{ marginTop: "1.4rem" }}>
             <h3>
@@ -95,7 +104,13 @@ export function MinutesRecord({ meetings }: { meetings: MemberMeeting[] }) {
                     <tr key={`${meeting.minutesUrl}-${index}`}>
                       <td>{formatDate(meeting.date, dateLang)}</td>
                       <td>
-                        {row.clauseLabel ?? <T en={clauseMissing.en} mi={clauseMissing.mi} />}
+                        {row.clauseLabel ? (
+                          row.clauseLabel
+                        ) : row.item ? (
+                          <T en={`Item ${row.item}`} mi="" />
+                        ) : (
+                          <T en={clauseMissing.en} mi={clauseMissing.mi} />
+                        )}
                       </td>
                       <td>
                         {row.state === "not-read" || row.state === "no-division" ? (
@@ -111,8 +126,8 @@ export function MinutesRecord({ meetings }: { meetings: MemberMeeting[] }) {
                       </td>
                       <td>{row.recordedAs ?? "—"}</td>
                       <td>
-                        <FeedLink href={meeting.minutesUrl}>
-                          <T en="Minutes" mi="Meneti" />
+                        <FeedLink href={meeting.minutesUrl ? minutesHref(meeting.minutesUrl, row.page) : null}>
+                          <T en={row.page ? `Minutes, page ${row.page}` : "Minutes"} mi="Meneti" />
                         </FeedLink>
                       </td>
                       <td>

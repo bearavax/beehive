@@ -34,6 +34,67 @@ The route handlers stay in place. `output: "export"` is not set, because that mo
 
 Council text stays untrusted input. A community plug-in still runs outside this process and only hands back JSON that cites a real decision id.
 
+## Serving a mirror
+
+`out/` is a directory of JSON files. A mirror can serve it with no application server. JSON responses need a JSON content type. The public API already sends `Access-Control-Allow-Origin: *` and `X-Content-Type-Options: nosniff`. Collection files can be cached for an hour. Item files use the same rule. Do not send a cookie, and do not redirect an unknown language onto these paths.
+
+Caddy:
+
+```
+:8080 {
+	root * /var/www/beehive/out
+	encode gzip
+	header {
+		X-Content-Type-Options nosniff
+		Access-Control-Allow-Origin *
+		Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+	}
+	@json path *.json
+	header @json Content-Type "application/json; charset=utf-8"
+	header @json Cache-Control "public, max-age=3600"
+	@index path /api/v1
+	rewrite @index /api/v1/index.json
+	@decisionVotes path_regexp dv ^/api/v1/decisions/([^/]+)/votes$
+	rewrite @decisionVotes /api/v1/decisions/items/{re.dv.1}/votes.json
+	@decision path_regexp d ^/api/v1/decisions/([^/]+)$
+	rewrite @decision /api/v1/decisions/items/{re.d.1}.json
+	@memberVotes path_regexp mv ^/api/v1/members/([^/]+)/votes$
+	rewrite @memberVotes /api/v1/members/items/{re.mv.1}/votes.json
+	@member path_regexp m ^/api/v1/members/([^/]+)$
+	rewrite @member /api/v1/members/items/{re.m.1}.json
+	@collection path_regexp c ^/api/v1/(decisions|members|issues|committees|meetings)$
+	rewrite @collection /api/v1/{re.c.1}.json
+	@one path_regexp one ^/api/v1/(issues|committees|meetings)/([^/]+)$
+	rewrite @one /api/v1/{re.one.1}/items/{re.one.2}.json
+	file_server
+}
+```
+
+nginx:
+
+```
+server {
+	listen 8080;
+	root /var/www/beehive/out;
+	add_header X-Content-Type-Options nosniff always;
+	add_header Access-Control-Allow-Origin * always;
+	add_header Access-Control-Allow-Methods "GET, HEAD, OPTIONS" always;
+	location /api/v1 {
+		default_type application/json;
+		add_header Cache-Control "public, max-age=3600" always;
+		rewrite ^/api/v1$ /api/v1/index.json last;
+		rewrite ^/api/v1/decisions$ /api/v1/decisions.json last;
+		rewrite ^/api/v1/decisions/([^/]+)/votes$ /api/v1/decisions/items/$1/votes.json last;
+		rewrite ^/api/v1/decisions/([^/]+)$ /api/v1/decisions/items/$1.json last;
+		rewrite ^/api/v1/members/([^/]+)/votes$ /api/v1/members/items/$1/votes.json last;
+		rewrite ^/api/v1/members/([^/]+)$ /api/v1/members/items/$1.json last;
+		rewrite ^/api/v1/([^/]+)$ /api/v1/$1.json last;
+	}
+}
+```
+
+The same rewrites apply to `issues`, `committees`, and `meetings`: a bare collection is `<name>.json`, and one record is `items/<id>.json`. Offset pages stay at `offset/<n>.json` and do not need a rewrite.
+
 ## Still not built
 
 1. A strict hash CSP for the pages, which waits on a Next.js bootstrap that can run under `strict-dynamic` without a per-request nonce.

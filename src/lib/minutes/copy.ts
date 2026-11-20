@@ -12,6 +12,7 @@ export const voteState: Record<MinuteVoteState, Phrase> = {
   "not-recorded": { en: "Not recorded", mi: "Kāore i tuhia", review: false },
   "not-read": { en: "Not read", mi: "Kāore i pānuitia", review: true },
   "no-division": { en: "No division recorded", mi: "Kāore he wehenga i tuhia", review: true },
+  "not-in-office": { en: "Not in office", mi: "", review: true },
 };
 
 export const howNav: Phrase = { en: "How this works", mi: "Pēhea tēnei mahi", review: true };
@@ -38,6 +39,11 @@ export const minutesPhrases: Phrase[] = [
   {
     en: "For, against, abstained, absent, and not voting are copied only when the minutes use that list. Not recorded means this person was not named. Not read means the block could not be checked. No division recorded means the text had no standing-order division. Nothing is filled in from a missing name.",
     mi: "Ka tāruatia te āe, te whakahē, te waiho, te tāwāhi, me te kore pōti anake mēnā kei ngā meneti tēnā rārangi. Ko te ‘kāore i tuhia’ te tangata kāore i whakaingoatia. Ko te ‘kāore i pānuitia’ te poraka kāore i taea te tiro. Ko te ‘kāore he wehenga i tuhia’ te kupu kāore he wehenga ā-tūtohu-tū. Kāore e whakakīa mai i te ingoa ngaro.",
+    review: true,
+  },
+  {
+    en: "A meeting outside the dates this person held office is left off the page. It is not a vote.",
+    mi: "",
     review: true,
   },
 ];

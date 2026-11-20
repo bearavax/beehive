@@ -7,7 +7,7 @@ import { members } from "@/data/members";
 import { formatSyncTime } from "@/lib/format";
 import { attributeDivision, matchMinutesName } from "@/lib/minutes/match";
 import { parseMinutes } from "@/lib/minutes/parse";
-import { meetingsForMember, toStoredDivision, type ReadingsFile, type StoredDivision } from "@/lib/minutes/record";
+import { inOffice, meetingsForMember, toStoredDivision, type ReadingsFile, type StoredDivision } from "@/lib/minutes/record";
 
 const readings = readingsJson as ReadingsFile;
 const fixtures = path.join(import.meta.dirname, "fixtures");
@@ -57,35 +57,62 @@ test("absent stays absent, and a missing name stays not recorded", () => {
   const chung = meetingsForMember(readings, "ray-chung", members).find((item) => item.minutesUrl === meeting.minutesUrl);
   const little = meetingsForMember(readings, "andrew-little", members).find((item) => item.minutesUrl === meeting.minutesUrl);
   const randle = meetingsForMember(readings, "tony-randle", members).find((item) => item.minutesUrl === meeting.minutesUrl);
-  assert.ok(kelly && chung && little && randle);
+  const oconnor = meetingsForMember(readings, "greg-oconnor", members).find((item) => item.minutesUrl === meeting.minutesUrl);
+  assert.ok(kelly && chung && little && randle && oconnor);
   const at = (divisions: { clauseLabel: string | null; state: string; recordedAs: string | null }[]) =>
     divisions.find((item) => item.clauseLabel === "Recommendation 2.2");
   assert.equal(at(kelly.divisions)?.state, "absent");
   assert.equal(at(kelly.divisions)?.recordedAs, "Pou Iwi Kelly");
   assert.equal(at(chung.divisions)?.state, "against");
   assert.equal(at(little.divisions)?.state, "for");
-  assert.equal(at(randle.divisions)?.state, "not-recorded");
-  assert.equal(at(randle.divisions)?.recordedAs, null);
+  assert.equal(randle.divisions.length, 1);
+  assert.equal(randle.divisions[0].state, "not-in-office");
+  assert.equal(oconnor.divisions.length, 1);
+  assert.equal(oconnor.divisions[0].state, "not-in-office");
 });
 
-test("every councillor gets the same meetings and the same division headings", () => {
-  const rows = members.map((member) => meetingsForMember(readings, member.slug, members));
-  const first = rows[0];
-  assert.ok(first);
-  for (const row of rows) {
-    assert.equal(row.length, first.length);
-    row.forEach((meeting, index) => {
-      assert.equal(meeting.minutesUrl, first[index].minutesUrl);
-      assert.equal(meeting.date, first[index].date);
+test("a person who held office and was not named stays not recorded", () => {
+  const meeting = readings.meetings.find((item) => item.date === "2026-09-24" && item.bodyId === "te-kaunihera");
+  assert.ok(meeting);
+  const little = meetingsForMember(readings, "andrew-little", members).find((item) => item.date === meeting.date && item.bodyId === meeting.bodyId);
+  assert.ok(little);
+  assert.ok(little.divisions.some((division) => division.state === "not-recorded"));
+  assert.ok(inOffice(members.find((member) => member.slug === "andrew-little")!, meeting.date));
+});
+
+test("meetings outside a term are one not-in-office row, not a missing vote", () => {
+  const oconnor = meetingsForMember(readings, "greg-oconnor", members);
+  const randle = meetingsForMember(readings, "tony-randle", members);
+  assert.equal(oconnor.flatMap((meeting) => meeting.divisions).filter((division) => division.state === "not-recorded").length, 0);
+  assert.ok(oconnor.some((meeting) => meeting.divisions[0]?.state === "not-in-office"));
+  assert.ok(randle.some((meeting) => meeting.divisions[0]?.state === "not-in-office"));
+  assert.ok(randle.flatMap((meeting) => meeting.divisions).some((division) => division.state === "not-recorded"));
+  for (const member of members) {
+    for (const meeting of meetingsForMember(readings, member.slug, members)) {
+      if (inOffice(member, meeting.date)) continue;
       assert.deepEqual(
-        meeting.divisions.map((division) => division.clauseLabel),
-        first[index].divisions.map((division) => division.clauseLabel),
+        meeting.divisions.map((division) => division.state),
+        ["not-in-office"],
       );
+    }
+  }
+});
+
+test("people in office on the same day share the same division headings", () => {
+  for (const meeting of readings.meetings) {
+    const present = members.filter((member) => inOffice(member, meeting.date));
+    const rows = present.map((member) =>
+      meetingsForMember(readings, member.slug, members).find((item) => item.minutesUrl === meeting.minutesUrl && item.date === meeting.date),
+    );
+    const first = rows[0];
+    assert.ok(first);
+    for (const row of rows) {
+      assert.ok(row);
       assert.deepEqual(
-        meeting.divisions.map((division) => division.state).map((state) => typeof state),
-        first[index].divisions.map(() => "string"),
+        row.divisions.map((division) => division.clauseLabel),
+        first.divisions.map((division) => division.clauseLabel),
       );
-    });
+    }
   }
 });
 

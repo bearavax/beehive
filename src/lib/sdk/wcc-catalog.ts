@@ -187,7 +187,10 @@ export function getMeeting(id: string): ApiMeeting | null {
 }
 
 export const MINUTES_VOTE_NOTE =
-  "Votes on this record are read from official minutes, not from the Mātai Manapori name lists. For, against, abstained, absent, and not voting stay separate. Not recorded means the person was not named. Not read means the block could not be checked. A missing list is not inferred.";
+  "Votes on this record are read from official minutes, not from the Mātai Manapori name lists. For, against, abstained, absent, and not voting stay separate. Not recorded means the person was not named. Not read means the block could not be checked. A meeting outside the person's term is not-in-office and is not a vote. A missing list is not inferred.";
+
+const REMOVED_RECORD_NOTE =
+  "Removed. This object no longer counts votes or compares them with the majority. Use minutesVotes.href. The field will be deleted after this release.";
 
 export function listMembers(): ApiMember[] {
   return members.map((member) => {
@@ -205,6 +208,15 @@ export function listMembers(): ApiMember[] {
         href: `/api/v1/members/${member.slug}/votes`,
         source: "official-minutes",
         note: MINUTES_VOTE_NOTE,
+      },
+      record: {
+        deprecated: true,
+        note: REMOVED_RECORD_NOTE,
+        namedDivisions: null,
+        withMajority: null,
+        againstMajority: null,
+        notVoting: null,
+        decisions: [],
       },
       provenance: provenance(member.profileUrl, null, null),
     };
