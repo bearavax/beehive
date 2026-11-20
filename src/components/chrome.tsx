@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { OutboundLink } from "@/components/outbound";
 import { usePathname } from "next/navigation";
 import { T, useLang, type Lang } from "@/lib/i18n";
 
@@ -80,8 +81,8 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
             />
           </p>
           <p className="sources">
-            <a href="https://meetings.wellington.govt.nz">Mātai Manapori</a>
-            <a href="https://wellington.govt.nz">wellington.govt.nz</a>
+            <OutboundLink href="https://meetings.wellington.govt.nz">Mātai Manapori</OutboundLink>
+            <OutboundLink href="https://wellington.govt.nz">wellington.govt.nz</OutboundLink>
             <Link href="/about">
               <T en="Te Tiriti and methodology" mi="Te Tiriti me te tikanga" />
             </Link>

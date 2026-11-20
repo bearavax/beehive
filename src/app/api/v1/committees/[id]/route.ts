@@ -1,4 +1,4 @@
-import { json, notFound, options } from "@/lib/api/respond";
+import { badRequest, json, notFound, options, readResourceId } from "@/lib/api/respond";
 import { assertStatutoryCouncil } from "@/lib/sdk/councils";
 import { getCommittee } from "@/lib/sdk/wcc-catalog";
 
@@ -12,7 +12,9 @@ export async function GET(request: Request, context: Context) {
   const denied = assertStatutoryCouncil(new URL(request.url));
   if (denied) return denied;
   const { id } = await context.params;
-  const committee = getCommittee(decodeURIComponent(id));
+  const parsed = readResourceId(id);
+  if ("error" in parsed) return badRequest("id");
+  const committee = getCommittee(parsed.id);
   if (!committee) return notFound("committee", id);
   return json({ data: committee });
 }

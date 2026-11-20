@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { OutboundLink } from "@/components/outbound";
 import { T } from "@/lib/i18n";
 
 export function AboutView({ syncedAt }: { syncedAt: string }) {
@@ -88,8 +89,8 @@ export function AboutView({ syncedAt }: { syncedAt: string }) {
         </h2>
         <p>
           <T
-            en="It is not a poll, a whip count, or a prediction. Alignment on a profile is the share of named divisions in this set where the member’s vote matched the recorded result. It will move when more reports are synced. The legacy Express API under backend/ is an earlier, unused project and is not part of this website."
-            mi="Ehara i te pōti whakaaro, i te tatau porotēhi, i te matapae rānei. Ko te hāngai i te kōtaha te wāhi o ngā wehenga kua whakaingoatia i tēnei huinga i ōrite ai te pōti a te mema ki te hua i tuhia. Ka neke ina tukutahitia ētahi atu pūrongo. He kaupapa tawhito kāore i te whakamahia te API Express i raro i a backend/, ā, ehara i te wāhanga o tēnei paetukutuku."
+            en="It is not a poll, a whip count, or a prediction. Alignment on a profile is the share of named divisions in this set where the member’s vote matched the recorded result. It will move when more reports are synced. The old Express API is archived under archive/legacy-express and is not part of this website."
+            mi="Ehara i te pōti whakaaro, i te tatau porotēhi, i te matapae rānei. Ko te hāngai i te kōtaha te wāhi o ngā wehenga kua whakaingoatia i tēnei huinga i ōrite ai te pōti a te mema ki te hua i tuhia. Ka neke ina tukutahitia ētahi atu pūrongo. Kei archive/legacy-express te API Express tawhito, ā, ehara i te wāhanga o tēnei paetukutuku."
           />
         </p>
       </section>
@@ -117,40 +118,40 @@ export function AboutView({ syncedAt }: { syncedAt: string }) {
         </h2>
         <ul>
           <li>
-            <a href="https://meetings.wellington.govt.nz">Mātai Manapori</a>
+            <OutboundLink href="https://meetings.wellington.govt.nz">Mātai Manapori</OutboundLink>
           </li>
           <li>
-            <a href="https://wellington.govt.nz/your-council/about-the-council/mayor-and-councillors/councillors">
+            <OutboundLink href="https://wellington.govt.nz/your-council/about-the-council/mayor-and-councillors/councillors">
               <T en="Councillor directory" mi="Rārangi kaikaunihera" />
-            </a>
+            </OutboundLink>
           </li>
           <li>
-            <a href="https://wellington.govt.nz/-/media/your-council/elections/2025/wellington-city-council-2025-triennial-elections---final-result.pdf">
+            <OutboundLink href="https://wellington.govt.nz/-/media/your-council/elections/2025/wellington-city-council-2025-triennial-elections---final-result.pdf">
               <T en="2025 election declaration" mi="Whakapuakanga pōtitanga 2025" />
-            </a>
+            </OutboundLink>
           </li>
           <li>
-            <a href="https://wellington.govt.nz/news-and-events/news-and-information/our-wellington/2026/10/northern-ward-by-election">
+            <OutboundLink href="https://wellington.govt.nz/news-and-events/news-and-information/our-wellington/2026/10/northern-ward-by-election">
               <T en="2026 Takapū/Northern by-election" mi="Pōtitanga 2026 o Takapū/te Raki" />
-            </a>
+            </OutboundLink>
           </li>
           <li>
-            <a href="https://wellington.govt.nz/-/media/your-council/meetings/tor-2025-2028/2025-11-24-terms-of-reference-and-delegations-2025.pdf">
+            <OutboundLink href="https://wellington.govt.nz/-/media/your-council/meetings/tor-2025-2028/2025-11-24-terms-of-reference-and-delegations-2025.pdf">
               <T en="Terms of reference, 2025–2028" mi="Ngā tikanga tohutoro, 2025–2028" />
-            </a>
+            </OutboundLink>
           </li>
           <li>
-            <a href="https://wellington.govt.nz/-/media/your-council/meetings/files/standing-orders.pdf">
+            <OutboundLink href="https://wellington.govt.nz/-/media/your-council/meetings/files/standing-orders.pdf">
               <T en="Standing orders" mi="Ngā tūtohu tū" />
-            </a>
+            </OutboundLink>
           </li>
           <li>
-            <a href="https://wellington.govt.nz/-/media/your-council/about-the-council/information-requests/2025/irc-8897-voting-records.pdf">
+            <OutboundLink href="https://wellington.govt.nz/-/media/your-council/about-the-council/information-requests/2025/irc-8897-voting-records.pdf">
               IRC-8897
-            </a>
+            </OutboundLink>
           </li>
           <li>
-            <a href="https://www.legislation.govt.nz/act/public/2002/0084/latest/DLM170873.html">Local Government Act 2002</a>
+            <OutboundLink href="https://www.legislation.govt.nz/act/public/2002/0084/latest/DLM170873.html">Local Government Act 2002</OutboundLink>
           </li>
         </ul>
       </section>

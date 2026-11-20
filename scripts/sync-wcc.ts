@@ -12,6 +12,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { allowFeedUrl } from "../src/lib/safe-url.ts";
 
 const BASE = "https://meetings.wellington.govt.nz";
 const TRIENNIUM = "2025-2028";
@@ -104,6 +105,7 @@ const READ_ALLOWLIST = [
 const REGISTER_SOURCE = `${BASE}/api/clause/getAllClauses`;
 const EXPORT_SOURCE = `${BASE}/api/committee/allClauses`;
 const GAP_MS = 1200;
+const MAX_BYTES = 20_000_000;
 
 function sha256(value: string) {
   return createHash("sha256").update(value).digest("hex");
@@ -196,6 +198,34 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+async function readCapped(response: Response): Promise<string> {
+  const reader = response.body?.getReader();
+  if (!reader) {
+    const text = await response.text();
+    if (Buffer.byteLength(text) > MAX_BYTES) throw new Error(`response larger than ${MAX_BYTES} bytes`);
+    return text;
+  }
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > MAX_BYTES) {
+      await reader.cancel();
+      throw new Error(`response larger than ${MAX_BYTES} bytes`);
+    }
+    chunks.push(value);
+  }
+  const merged = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    merged.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(merged);
+}
+
 async function readText(url: string, init?: RequestInit): Promise<{ text: string }> {
   assertRead(url);
   const cacheDir = path.join(process.cwd(), ".cache/wcc");
@@ -217,14 +247,19 @@ async function readText(url: string, init?: RequestInit): Promise<{ text: string
   let text = "";
   for (let attempt = 0; attempt < 3; attempt += 1) {
     lastCall = Date.now();
-    const response = await fetch(url, { ...init, headers: { ...HEADERS, ...(init?.headers ?? {}) } });
+    const response = await fetch(url, {
+      ...init,
+      redirect: "error",
+      signal: AbortSignal.timeout(30_000),
+      headers: { ...HEADERS, ...(init?.headers ?? {}) },
+    });
     if (response.status === 429 || response.status === 503) {
       const retryAfter = Number(response.headers.get("retry-after"));
       await sleep((Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter : 5 * (attempt + 1)) * 1000);
       continue;
     }
     if (!response.ok) throw new Error(`${response.status} ${response.statusText} for ${url}`);
-    text = await response.text();
+    text = await readCapped(response);
     break;
   }
   if (!text) throw new Error(`Gave up after rate limits for ${url}`);
@@ -460,16 +495,19 @@ async function main() {
       result: decisionResult(finalClauses.length ? finalClauses : []),
       implementation: implementationOf(finalClauses),
       publicExclusion: blank(first.Public_exclusion) || "Not stated",
-      mataiUrl: reportUrl || `${BASE}/your-council/reports`,
-      reportUrl: reportUrl || null,
-      minutesUrl: meeting?.minutesUrl || blank(first.Link_to_meeting_minutes) || null,
-      agendaUrl: meeting?.agendaUrl || blank(first.Link_to_meeting_agenda) || null,
-      videoUrl: meeting?.videoUrl || blank(first.Link_to_video_of_meeting) || null,
+      mataiUrl: allowFeedUrl(reportUrl) || `${BASE}/your-council/reports`,
+      reportUrl: allowFeedUrl(reportUrl),
+      minutesUrl: allowFeedUrl(meeting?.minutesUrl || blank(first.Link_to_meeting_minutes) || null),
+      agendaUrl: allowFeedUrl(meeting?.agendaUrl || blank(first.Link_to_meeting_agenda) || null),
+      videoUrl: allowFeedUrl(meeting?.videoUrl || blank(first.Link_to_video_of_meeting) || null),
       issueIds,
       reportId,
       relatedReports: titleList(first.Related_reports),
       reciprocalReports: titleList(first.Reciprocal_reports),
-      additionalDocuments: meeting?.additional ?? [],
+      additionalDocuments: (meeting?.additional ?? []).flatMap((doc) => {
+        const url = allowFeedUrl(doc.url);
+        return url ? [{ name: doc.name, url }] : [];
+      }),
       recommendations,
       amendments,
       finalClauses,

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { issues } from "@/data/issues";
 import { matchMember } from "@/data/members";
+import { FeedLink } from "@/components/outbound";
 import { T, useLang } from "@/lib/i18n";
 import { formatDate } from "@/lib/format";
 import type { PlainLayers, StoredAmendment, StoredClause, StoredDecision, Tally, VoteBlock } from "@/lib/types";
@@ -129,7 +130,7 @@ function ClauseBlock({ clause }: { clause: StoredClause }) {
         {clause.actionSource ? (
           <>
             {" · "}
-            <a href={clause.actionSource}>{clause.actionSource.replace("https://meetings.wellington.govt.nz", "Mātai Manapori")}</a>
+            <FeedLink href={clause.actionSource}>Mātai Manapori</FeedLink>
           </>
         ) : null}
       </p>
@@ -233,15 +234,15 @@ export function DecisionView({
       </dl>
 
       <div className="sources" style={{ marginTop: "1rem" }}>
-        <a href={decision.mataiUrl}>Mātai Manapori</a>
-        {decision.minutesUrl ? <a href={decision.minutesUrl}><T en="Minutes" mi="Meneti" /></a> : null}
-        {decision.agendaUrl ? <a href={decision.agendaUrl}><T en="Agenda" mi="Rārangi take" /></a> : null}
-        {decision.reportUrl ? <a href={decision.reportUrl}><T en="Report" mi="Pūrongo" /></a> : null}
-        {decision.videoUrl ? <a href={decision.videoUrl}><T en="Meeting video" mi="Ataata hui" /></a> : null}
+        <FeedLink href={decision.mataiUrl}>Mātai Manapori</FeedLink>
+        {decision.minutesUrl ? <FeedLink href={decision.minutesUrl}><T en="Minutes" mi="Meneti" /></FeedLink> : null}
+        {decision.agendaUrl ? <FeedLink href={decision.agendaUrl}><T en="Agenda" mi="Rārangi take" /></FeedLink> : null}
+        {decision.reportUrl ? <FeedLink href={decision.reportUrl}><T en="Report" mi="Pūrongo" /></FeedLink> : null}
+        {decision.videoUrl ? <FeedLink href={decision.videoUrl}><T en="Meeting video" mi="Ataata hui" /></FeedLink> : null}
         {decision.additionalDocuments.map((doc) => (
-          <a key={doc.url} href={doc.url}>
+          <FeedLink key={doc.url} href={doc.url}>
             {doc.name}
-          </a>
+          </FeedLink>
         ))}
         <button type="button" className="chip" onClick={copyLink}>
           {copied ? <T en="Link copied" mi="Kua tārua te hono" /> : <T en="Copy share link" mi="Tārua te hono" />}

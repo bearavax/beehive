@@ -1,5 +1,6 @@
 "use client";
 
+import { OutboundLink } from "@/components/outbound";
 import { T } from "@/lib/i18n";
 import type { RegisteredPlugin } from "@/plugins/registry";
 
@@ -15,7 +16,7 @@ export function PluginsView({ plugins }: { plugins: RegisteredPlugin[] }) {
       </h1>
       <p style={{ maxWidth: "42rem", marginTop: "0.9rem" }}>
         <T
-          en="A council adapter carries the statutory badge only when Beehive core ships it. Every other manifest is badged as a community plug-in, including this starter. Plug-ins may read. They may not write, and they may not show a decision they cannot cite."
+          en="Only the Wellington adapter is loaded in this process, and it is the statutory record. A community plug-in runs outside Beehive: it reads the public API and publishes JSON with citations. This site does not execute that code."
           mi=""
         />
       </p>
@@ -37,7 +38,7 @@ export function PluginsView({ plugins }: { plugins: RegisteredPlugin[] }) {
               {plugin.manifest.maintainer.url ? (
                 <>
                   {" "}
-                  · <a href={plugin.manifest.maintainer.url}>{plugin.manifest.maintainer.url}</a>
+                  · <OutboundLink href={plugin.manifest.maintainer.url}>{plugin.manifest.maintainer.url}</OutboundLink>
                 </>
               ) : null}
               {" · "}

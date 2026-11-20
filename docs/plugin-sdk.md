@@ -56,9 +56,17 @@ Required:
 
 Write scopes are rejected. A community manifest cannot set `council`.
 
+## Community plug-ins stay outside this process
+
+The production register loads only the Wellington adapter. `examples/starter-plugin` is a file a builder can copy. It is not imported by the running site.
+
+A community plug-in is data in, data out. It runs in the builder’s own process, reads `/api/v1` or a future signed bundle, and publishes JSON that cites real decision ids. Beehive does not import that code, does not give it the filesystem or environment, and does not run it beside the statutory adapter. Any text Beehive later renders from a community file is plain text, length-capped, with https links only. That renderer is not built yet.
+
+`npm run plugins:check` still validates the example manifest on disk. Validation is not execution.
+
 ## Badge
 
-The register at `/plugins` badges `nz.wcc.matai-manapori` as **Statutory record** because core ships it. Every other manifest, including one that claims `statutory-adapter`, is badged **Community plug-in**.
+The page at `/plugins` lists only what core ships. Today that is `nz.wcc.matai-manapori`, badged **Statutory record**. A community manifest cannot earn that badge by claiming `statutory-adapter`, because it is not in the production register.
 
 ## CouncilAdapter
 

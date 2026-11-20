@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { FeedLink } from "@/components/outbound";
 import { committees } from "@/data/committees";
 import { members, wards } from "@/data/members";
 import { T, useLang } from "@/lib/i18n";
@@ -159,7 +160,7 @@ export function Profile({ member, score }: { member: Member; score: MemberScore 
             <T en="until" mi="tae atu ki" /> {formatDate(member.until, dateLang)}
           </>
         ) : null}
-        . <a href={member.profileUrl}><T en="Public source" mi="Puna tūmatanui" /></a>
+        . <FeedLink href={member.profileUrl}><T en="Public source" mi="Puna tūmatanui" /></FeedLink>
       </p>
 
       <div className="statrow" aria-label="Recorded divisions">
