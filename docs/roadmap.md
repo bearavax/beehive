@@ -1,15 +1,14 @@
-# Roadmap note: a library agents can read
+# Roadmap note: papers, and local nodes
 
-Not built. This is a constraint on the current API so a later library does not have to break it.
+Not built. This is a constraint on the current API.
 
-Beehive may host verified civic and educational papers that agents read as premium, agent-readable knowledge. Council decisions stay the statutory record. Papers would be a separate collection, with their own ids, and would not be mixed into vote rows.
+Beehive is free for citizens. There is no payment, no premium tier, and no access field on a record. A later library of verified civic and educational papers, if it is added, is for agents to read in the same way people read the decisions: stable ids, a source URL, an explicit licence, and attribution. Papers would be their own collection. They would not be mixed into vote rows, and they would not be gated.
 
-What the current `/api/v1` records already keep stable:
+`/api/v1` already keeps what that library would need:
 
-- An id that does not change when a title is edited (`slug`, Mātai report id, member slug).
+- An id that does not change when a title is edited (decision slug, Mātai report id, member slug).
 - `provenance.sourceUrl` and `provenance.mataiReportId` for the citation. Either may be null. Neither is invented.
 - `provenance.attribution` names the licence. The TrackDem data model is CC BY 4.0. Council minutes are public records and are not relicensed by Beehive.
-- `provenance.access` is `"public"` on every record served today. A future tier would be another string on this same field. Nothing in the API checks a key, sells access, or hides a record.
 - JSON only. Bilingual text is `{ "en", "mi" }`, and `mi` is null when it has not been sourced.
 
-A paper, when one exists, should carry the same provenance shape: stable id, source URL, explicit licence, attribution, and `access`. Until that collection exists, `/api/v1` does not grow a papers route.
+The same shape can run on a local, privacy-preserving node later. The seed is a file in the repo. The read API has no account, no third-party tracker, and no personal data beyond names already published by the Council. A node should not need one hosted Beehive backend. Until a local runtime exists, this is only a note: do not add a hard dependency on a single server, and do not collect data the statutory record does not already contain.

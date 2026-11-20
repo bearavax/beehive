@@ -21,17 +21,10 @@ export type Attribution = {
   };
 };
 
-/**
- * Only `public` is served. Other tiers are reserved for a later library of
- * verified papers and are not implemented.
- */
-export type AccessTier = "public";
-
 export type Provenance = {
   sourceUrl: string | null;
   mataiReportId: number | null;
   syncedAt: string | null;
-  access: AccessTier;
   attribution: Attribution;
 };
 

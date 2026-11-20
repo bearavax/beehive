@@ -25,9 +25,10 @@ Every record has `provenance`:
 
 - `sourceUrl` — the public page or PDF this row came from, or null.
 - `mataiReportId` — the Mātai Manapori report id, or null when the row is not a report.
-- `access` — `"public"` on every record served today. Reserved so a later paper library can name another tier without renaming ids. No other tier is implemented. See [docs/roadmap.md](roadmap.md).
 - `attribution.dataModel` — the TrackDem data model (beta v0.1, February 2025), **CC BY 4.0**.
 - `attribution.records` — Te Kaunihera o Pōneke public records. Beehive does not relicense them.
+
+The API is free to read. There is no access tier. [docs/roadmap.md](roadmap.md) notes a later paper collection and local nodes, using this same shape.
 
 Bilingual fields are `{ "en": "...", "mi": "..." }` or `"mi": null` when te reo has not been sourced. Vote rows leave `abstain`, `absent`, and `conflictOfInterest` null. Empty `for` / `against` arrays mean the export did not name the division.
 
