@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { OutboundLink } from "@/components/outbound";
 import { T } from "@/lib/i18n";
 import type { RegisteredPlugin } from "@/plugins/registry";
@@ -50,7 +51,7 @@ export function PluginsView({ plugins }: { plugins: RegisteredPlugin[] }) {
         ))}
       </div>
       <p style={{ marginTop: "1.2rem" }}>
-        <a href="/api/v1">/api/v1</a>
+        <Link href="/api/v1">/api/v1</Link>
       </p>
     </article>
   );

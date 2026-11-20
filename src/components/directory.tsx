@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { FeedLink } from "@/components/outbound";
+import { LangLink } from "@/lib/i18n";
 import { committees } from "@/data/committees";
 import { members, wards } from "@/data/members";
 import { T, useLang } from "@/lib/i18n";
@@ -27,7 +27,7 @@ function roleLabel(member: Member) {
 export function PersonCard({ member }: { member: Member }) {
   const role = roleLabel(member);
   return (
-    <Link href={`/councillors/${member.slug}`} className="person">
+    <LangLink href={`/councillors/${member.slug}`} className="person">
       <div className="monogram" aria-hidden="true">
         {initials(member.name)}
       </div>
@@ -38,7 +38,7 @@ export function PersonCard({ member }: { member: Member }) {
       <p>
         <T en={member.wardEn} mi={member.wardMi} />
       </p>
-    </Link>
+    </LangLink>
   );
 }
 
@@ -225,7 +225,7 @@ export function Profile({ member, score }: { member: Member; score: MemberScore 
         ) : (
           <div className="timeline">
             {score.decisions.map((item) => (
-              <Link key={item.slug} href={`/decisions/${item.slug}`}>
+              <LangLink key={item.slug} href={`/decisions/${item.slug}`}>
                 <span className="meta">{formatDate(item.date, dateLang)}</span>
                 <br />
                 {item.title}
@@ -233,7 +233,7 @@ export function Profile({ member, score }: { member: Member; score: MemberScore 
                 <span className="meta">
                   <T en={stanceCopy[item.stance].en} mi={stanceCopy[item.stance].mi} />
                 </span>
-              </Link>
+              </LangLink>
             ))}
           </div>
         )}

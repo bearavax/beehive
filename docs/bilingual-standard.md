@@ -1,6 +1,6 @@
 # Bilingual standard
 
-Beehive is read in English, te reo Māori, or both. The toggle is `English`, `Te reo Māori`, and `Bilingual` (`Reo rua`). The choice is stored in the `beehive-reo` cookie and in the `reo` query (`en`, `mi`, `bi`) so a shared link keeps the language.
+Beehive is read in English, te reo Māori, or both. The toggle is `English`, `Te reo Māori`, and `Bilingual` (`Reo rua`). The choice is the path (`/en`, `/mi`, `/bi`). The `beehive-reo` cookie only remembers the last choice so `/` can redirect. An old `?reo=` link is sent to the matching path.
 
 ## Names
 

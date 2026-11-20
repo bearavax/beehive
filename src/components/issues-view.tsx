@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LangLink } from "@/lib/i18n";
 import { T, useLang } from "@/lib/i18n";
 import { formatDate } from "@/lib/format";
 import type { DecisionCard, Issue } from "@/lib/types";
@@ -22,7 +22,7 @@ export function IssueIndex({
       </h1>
       <div className="feed" style={{ marginTop: "1.4rem" }}>
         {issues.map((issue) => (
-          <Link key={issue.slug} href={`/issues/${issue.slug}`} className="card">
+          <LangLink key={issue.slug} href={`/issues/${issue.slug}`} className="card">
             <p className="kicker">
               <span>
                 {counts[issue.slug]?.total ?? 0} <T en="decisions" mi="ngā whakataunga" />
@@ -40,7 +40,7 @@ export function IssueIndex({
             <p>
               <T en={issue.summaryEn} mi={issue.summaryMi} />
             </p>
-          </Link>
+          </LangLink>
         ))}
       </div>
     </>
@@ -80,7 +80,7 @@ export function IssueThread({ issue, items }: { issue: Issue; items: DecisionCar
       ) : (
         <div className="timeline" style={{ marginTop: "1.2rem" }}>
         {items.map((item) => (
-          <Link key={item.slug} href={`/decisions/${item.slug}`}>
+          <LangLink key={item.slug} href={`/decisions/${item.slug}`}>
             <span className="meta">
               {formatDate(item.date, dateLang)} · {item.committeeMi}
               {" · "}
@@ -92,7 +92,7 @@ export function IssueThread({ issue, items }: { issue: Issue; items: DecisionCar
             <span>
               <T en={item.plain.decision.en} mi={item.plain.decision.mi} />
             </span>
-          </Link>
+          </LangLink>
         ))}
       </div>
       )}

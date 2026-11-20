@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { OutboundLink } from "@/components/outbound";
 import { usePathname } from "next/navigation";
-import { T, useLang, type Lang } from "@/lib/i18n";
+import { LangLink, stripLang, T, useLang, type Lang } from "@/lib/i18n";
 
 const links = [
   { href: "/", en: "Decisions", mi: "Ngā whakataunga" },
@@ -33,9 +33,9 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
           <div className="mast-top">
             <div className="brand">
               <p className="eyebrow">Te Whanganui-a-Tara</p>
-              <Link href="/" className="wordmark">
+              <LangLink href="/" className="wordmark">
                 Beehive
-              </Link>
+              </LangLink>
               <p className="tagline">
                 <T
                   en="Plain-language decisions of Te Kaunihera o Pōneke, Wellington City Council."
@@ -59,11 +59,12 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
           </div>
           <nav className="nav" aria-label="Primary">
             {links.map((link) => {
-              const current = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+              const bare = stripLang(pathname);
+              const current = link.href === "/" ? bare === "/" : bare === link.href || bare.startsWith(`${link.href}/`);
               return (
-                <Link key={link.href} href={link.href} aria-current={current ? "page" : undefined}>
+                <LangLink key={link.href} href={link.href} aria-current={current ? "page" : undefined}>
                   <T en={link.en} mi={link.mi} />
-                </Link>
+                </LangLink>
               );
             })}
           </nav>
@@ -83,13 +84,13 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
           <p className="sources">
             <OutboundLink href="https://meetings.wellington.govt.nz">Mātai Manapori</OutboundLink>
             <OutboundLink href="https://wellington.govt.nz">wellington.govt.nz</OutboundLink>
-            <Link href="/about">
+            <LangLink href="/about">
               <T en="Te Tiriti and methodology" mi="Te Tiriti me te tikanga" />
-            </Link>
-            <Link href="/plugins">
+            </LangLink>
+            <LangLink href="/plugins">
               <T en="Plug-ins" mi="" />
-            </Link>
-            <a href="/api/v1">API</a>
+            </LangLink>
+            <Link href="/api/v1">API</Link>
           </p>
         </div>
       </footer>

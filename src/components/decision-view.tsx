@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LangLink } from "@/lib/i18n";
 import { useState } from "react";
 import { issues } from "@/data/issues";
 import { matchMember } from "@/data/members";
@@ -18,7 +18,7 @@ function Names({ names }: { names: string[] }) {
         return (
           <span key={`${name}-${index}`}>
             {index > 0 ? ", " : null}
-            {member ? <Link href={`/councillors/${member.slug}`}>{name}</Link> : name}
+            {member ? <LangLink href={`/councillors/${member.slug}`}>{name}</LangLink> : name}
           </span>
         );
       })}
@@ -174,7 +174,7 @@ export function DecisionView({
 
   async function copyLink() {
     const url = new URL(window.location.href);
-    url.searchParams.set("reo", lang);
+    url.searchParams.delete("reo");
     await navigator.clipboard.writeText(url.toString());
     setCopied(true);
   }
@@ -262,9 +262,9 @@ export function DecisionView({
           {related.map((issue, index) => (
             <span key={issue.slug}>
               {index > 0 ? " · " : null}
-              <Link href={`/issues/${issue.slug}`}>
+              <LangLink href={`/issues/${issue.slug}`}>
                 <T en={issue.en} mi={issue.mi} />
-              </Link>
+              </LangLink>
             </span>
           ))}
         </p>

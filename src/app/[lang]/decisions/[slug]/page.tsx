@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DecisionView } from "@/components/decision-view";
-import { decisionBySlug, decisions, withPlain } from "@/lib/data";
+import { decisionBySlug, withPlain } from "@/lib/data";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return decisions.map((decision) => ({ slug: decision.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
