@@ -28,7 +28,11 @@ Every record has `provenance`:
 - `attribution.dataModel` — the TrackDem data model (beta v0.1, February 2025), **CC BY 4.0**.
 - `attribution.records` — Te Kaunihera o Pōneke public records. Beehive does not relicense them.
 
+The API is free to read. There is no access tier. [docs/roadmap.md](roadmap.md) notes a later paper collection and local nodes, using this same shape.
+
 Bilingual fields are `{ "en": "...", "mi": "..." }` or `"mi": null` when te reo has not been sourced. Vote rows leave `abstain`, `absent`, and `conflictOfInterest` null. Empty `for` / `against` arrays mean the export did not name the division.
+
+`implementation.status` is `"In progress"`, `"Completed"`, or `null`. `null` means Mātai Manapori did not publish an approved status for that row. `implementation.source` is the read URL that supplied the status, or `null` when the status itself is null or the clauses disagree about the source. The decision register is `GET /api/clause/getAllClauses`. A status is copied from there only when the clause text matches. It is never guessed from a neighbouring clause.
 
 Plain-language layers appear only when Beehive has written them. `statutoryRecord` on those layers is false. The clauses are the cited text.
 

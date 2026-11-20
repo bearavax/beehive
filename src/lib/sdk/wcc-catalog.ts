@@ -67,7 +67,11 @@ function summaryOf(decision: StoredDecision): ApiDecisionSummary {
     bodyId: decision.bodyId,
     body: text(decision.committeeEn, decision.committeeMi),
     result: decision.result || null,
-    implementation: decision.implementation || null,
+    implementation: {
+      status: decision.implementation?.status ?? null,
+      source: decision.implementation?.source ?? null,
+      updatedAt: decision.implementation?.updatedAt ?? null,
+    },
     issueIds: decision.issueIds,
     provenance: provenance(decision.mataiUrl || decision.minutesUrl, decision.reportId),
   };
@@ -112,8 +116,13 @@ export function getDecision(id: string): ApiDecision | null {
       result: clause.result || null,
       movedBy: clause.movedBy,
       secondedBy: clause.secondedBy,
-      actionStatus: clause.actionStatus,
-      actionComment: clause.actionComment,
+      implementation: {
+        status: clause.actionStatus === "In progress" || clause.actionStatus === "Completed" ? clause.actionStatus : null,
+        comment: clause.actionComment,
+        updatedAt: clause.actionUpdated,
+        clauseId: clause.clauseId,
+        source: clause.actionSource ?? null,
+      },
       votes: voteOf(clause),
     })),
     amendments: decision.amendments.map((clause: StoredAmendment) => ({

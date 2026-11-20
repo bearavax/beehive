@@ -12,7 +12,14 @@ export default function IssuesPage() {
   const counts = Object.fromEntries(
     issues.map((issue) => {
       const rows = decisions.filter((decision) => decision.issueIds.includes(issue.slug));
-      return [issue.slug, { total: rows.length, inProgress: rows.filter((row) => row.implementation === "in-progress").length }];
+      return [
+        issue.slug,
+        {
+          total: rows.length,
+          inProgress: rows.filter((row) => row.implementation.status === "In progress").length,
+          unrecorded: rows.filter((row) => row.implementation.status === null).length,
+        },
+      ];
     }),
   );
   return <IssueIndex issues={issues} counts={counts} />;

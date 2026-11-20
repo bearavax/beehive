@@ -10,7 +10,7 @@ export function IssueIndex({
   counts,
 }: {
   issues: Issue[];
-  counts: Record<string, { total: number; inProgress: number }>;
+  counts: Record<string, { total: number; inProgress: number; unrecorded: number }>;
 }) {
   return (
     <>
@@ -28,7 +28,10 @@ export function IssueIndex({
                 {counts[issue.slug]?.total ?? 0} <T en="decisions" mi="ngā whakataunga" />
               </span>
               <span>
-                {counts[issue.slug]?.inProgress ?? 0} <T en="still in progress" mi="kei te haere tonu" />
+                {counts[issue.slug]?.inProgress ?? 0} <T en="in progress" mi="kei te haere" />
+              </span>
+              <span>
+                {counts[issue.slug]?.unrecorded ?? 0} <T en="without an approved status" mi="kāore he tūnga kua whakaaetia" />
               </span>
             </p>
             <h2>
@@ -47,7 +50,8 @@ export function IssueIndex({
 export function IssueThread({ issue, items }: { issue: Issue; items: DecisionCard[] }) {
   const { lang } = useLang();
   const dateLang = lang === "mi" ? "mi" : "en";
-  const inProgress = items.filter((item) => item.implementation === "in-progress").length;
+  const inProgress = items.filter((item) => item.implementation.status === "In progress").length;
+  const unrecorded = items.filter((item) => item.implementation.status === null).length;
 
   return (
     <article>
@@ -62,8 +66,8 @@ export function IssueThread({ issue, items }: { issue: Issue; items: DecisionCar
       </p>
       <p className="meta">
         <T
-          en={`${items.length} decisions in this published set. ${inProgress} still marked in progress by Mātai Manapori.`}
-          mi={`${items.length} ngā whakataunga i tēnei huinga. ${inProgress} e kīia tonu ana kei te haere e Mātai Manapori.`}
+          en={`${items.length} decisions in this published set. ${inProgress} have an approved status of In progress. ${unrecorded} have no approved status, so none is shown. Status comes from Mātai Manapori’s decision register.`}
+          mi={`${items.length} ngā whakataunga i tēnei huinga. ${inProgress} kei te haere i te tūnga kua whakaaetia. ${unrecorded} kāore he tūnga kua whakaaetia, nō reira kāore e whakaaturia. Nō te rēhita whakataunga a Mātai Manapori te tūnga.`}
         />
       </p>
       {items.length === 0 ? (
@@ -79,6 +83,8 @@ export function IssueThread({ issue, items }: { issue: Issue; items: DecisionCar
           <Link key={item.slug} href={`/decisions/${item.slug}`}>
             <span className="meta">
               {formatDate(item.date, dateLang)} · {item.committeeMi}
+              {" · "}
+              {item.implementation.status ?? (lang === "mi" ? "Kāore he tūnga" : "No approved status")}
             </span>
             <br />
             <strong>{item.title}</strong>

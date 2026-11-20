@@ -23,7 +23,7 @@ npm run build
 npm run sync:wcc
 ```
 
-`sync:wcc` refreshes `src/data/synced/decisions.json` from live public endpoints. If Mātai Manapori cannot be reached, the script exits and leaves the seed unchanged.
+`sync:wcc` refreshes `src/data/synced/decisions.json` from the public Mātai Manapori read API. It waits between requests, caches responses locally for 12 hours, redacts email addresses, and leaves the seed file untouched when the decisions have not changed. If the service cannot be reached, the script exits without writing. A weekly GitHub Actions workflow (`.github/workflows/sync-wcc.yml`) runs the same script and opens a pull request only when the normalised file changes. That workflow starts once this branch is on the repository’s default branch.
 
 ## Data
 
