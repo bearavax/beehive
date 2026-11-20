@@ -1,7 +1,7 @@
 {
   "source": "wcc-minutes-pdf",
   "syncedAt": "2026-11-20T08:00:48.968Z",
-  "note": "Division blocks copied from public Wellington City Council minutes PDFs. A block is stored only when For and Against counts match the printed majority. Absent, abstained, and not voting stay separate. Closed-session text is not stored. Names that are not in a division list are not stored.",
+  "note": "Division blocks copied from public Wellington City Council minutes PDFs with pypdf 5.9.0. A block is stored only when For and Against counts match the printed majority. Absent, abstained, and not voting stay separate. Closed-session text is not stored. Names that are not in a division list are not stored. Poppler pdftotext without -layout yields 0 read blocks, so it is not used. A file over the byte cap is skipped and the previous reading is kept.",
   "meetings": [
     {
       "date": "2026-11-12",
@@ -10,13 +10,15 @@
       "sha256": "18b0894f6b92f3705c58395272645cc45602fc1fc468957f790a0906e1d57294",
       "bytes": 954648,
       "pages": 11,
-      "chars": 11797,
+      "chars": 11801,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -45,6 +47,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 1-6",
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "14:2",
           "for": [
@@ -74,6 +78,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 7.1",
+          "item": "2.1",
+          "page": 8,
           "result": "Carried",
           "majority": "15:1",
           "for": [
@@ -103,6 +109,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 7.2",
+          "item": "2.1",
+          "page": 8,
           "result": "Carried",
           "majority": "14:2",
           "for": [
@@ -132,6 +140,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 7.3",
+          "item": "2.1",
+          "page": 8,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -160,6 +170,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 7",
+          "item": "2.1",
+          "page": 8,
           "result": "Carried",
           "majority": "14:2",
           "for": [
@@ -189,6 +201,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 10,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -214,7 +228,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-11-12",
@@ -223,10 +243,16 @@
       "sha256": "3c5458dbb31396b684716fe0e7ad63c7f61dd91368cba49412b42071a7b30d38",
       "bytes": 9428993,
       "pages": 45,
-      "chars": 67728,
+      "chars": 67754,
       "status": "read",
       "closedSessionOmitted": false,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-11-05",
@@ -235,13 +261,15 @@
       "sha256": "a372e9f20285b7a0e235c9cd34288eaf2b0ebbba0432084928da850e5ea9de54",
       "bytes": 5753961,
       "pages": 46,
-      "chars": 45356,
+      "chars": 45365,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": "Clauses 5.4, 5.5 and 5.6.",
+          "item": "2.3",
+          "page": 12,
           "result": "Carried",
           "majority": "13:4",
           "for": [
@@ -272,6 +300,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 5, 5.1, 5.2 and 5.3.",
+          "item": "2.3",
+          "page": 12,
           "result": "Carried",
           "majority": "14:3",
           "for": [
@@ -299,7 +329,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-10-29",
@@ -308,10 +344,16 @@
       "sha256": "7a3e836508a128973e812c08774c885bc2952da65a1d956e38178f5a49830593",
       "bytes": 8728797,
       "pages": 51,
-      "chars": 48023,
+      "chars": 48038,
       "status": "read",
       "closedSessionOmitted": true,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-10-22",
@@ -327,6 +369,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -355,6 +399,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "15:1",
           "for": [
@@ -384,6 +430,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 8,
           "result": "Carried",
           "majority": "15:1",
           "for": [
@@ -413,6 +461,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 8,
           "result": "Lost",
           "majority": "5:11",
           "for": [
@@ -442,6 +492,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.4",
+          "page": 8,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -470,6 +522,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.4",
+          "page": 14,
           "result": "Carried",
           "majority": "14:2",
           "for": [
@@ -499,6 +553,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.6",
+          "page": 14,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -527,6 +583,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.7",
+          "page": 16,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -555,6 +613,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 16,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -583,6 +643,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 18,
           "result": "Carried",
           "majority": "15:1",
           "for": [
@@ -609,7 +671,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-10-22",
@@ -624,15 +692,21 @@
       "divisions": [
         {
           "read": false,
-          "clauseLabel": "Clause 3.1"
+          "clauseLabel": "Clause 3.1",
+          "item": "1.4",
+          "page": 12
         },
         {
           "read": false,
-          "clauseLabel": "Clause 4.1"
+          "clauseLabel": "Clause 4.1",
+          "item": "1.4",
+          "page": 12
         },
         {
           "read": true,
           "clauseLabel": "Clause 4.4",
+          "item": "1.4",
+          "page": 12,
           "result": "Carried",
           "majority": "11:7",
           "for": [
@@ -664,6 +738,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.1",
+          "item": "1.4",
+          "page": 14,
           "result": "Carried",
           "majority": "12:6",
           "for": [
@@ -695,6 +771,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.2",
+          "item": "1.4",
+          "page": 14,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -726,6 +804,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4",
+          "item": "1.4",
+          "page": 14,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -757,6 +837,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 1-4",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -787,6 +869,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.1.2",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "11:7",
           "for": [
@@ -817,15 +901,21 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clause 4.1.3"
+          "clauseLabel": "Clause 4.1.3",
+          "item": "1.4",
+          "page": 20
         },
         {
           "read": false,
-          "clauseLabel": "Clause 4.1.4"
+          "clauseLabel": "Clause 4.1.4",
+          "item": "1.4",
+          "page": 20
         },
         {
           "read": true,
           "clauseLabel": "Clause 4.1.5",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -857,6 +947,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.1.6",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -888,6 +980,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.1.15",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -919,6 +1013,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.1.17",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -950,6 +1046,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.1.21",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -981,6 +1079,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.1 and all remaining subclauses",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -1011,6 +1111,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.2.3",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -1042,6 +1144,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.2.6",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -1072,11 +1176,15 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clause 4.2.8"
+          "clauseLabel": "Clause 4.2.8",
+          "item": "1.4",
+          "page": 20
         },
         {
           "read": true,
           "clauseLabel": "Clauses 4.2.9-10",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -1108,6 +1216,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.2.14",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -1139,6 +1249,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.2 and all remaining subclauses",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -1169,6 +1281,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.3.1",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -1200,6 +1314,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.3.3",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "15:3",
           "for": [
@@ -1231,6 +1347,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4.3 and all remaining subclauses",
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -1261,6 +1379,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "1.4",
+          "page": 20,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -1288,7 +1408,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-10-15",
@@ -1297,19 +1423,29 @@
       "sha256": "9ad4eb44c0d86b0a0636ab8e416bf366c07212ba9202ee767a4ea57353158049",
       "bytes": 1075000,
       "pages": 16,
-      "chars": 21697,
+      "chars": 21700,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": false,
-          "clauseLabel": "clauses 5 and 5.1"
+          "clauseLabel": "clauses 5 and 5.1",
+          "item": "2.1",
+          "page": 6
         },
         {
           "read": false,
-          "clauseLabel": "clauses 5.2 and 5.3"
+          "clauseLabel": "clauses 5.2 and 5.3",
+          "item": "2.1",
+          "page": 8
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-10-01",
@@ -1318,13 +1454,15 @@
       "sha256": "e5e672e8affd189378d02cbc6af11245a2288b800bd07d40ecba49d9b4cd4d7d",
       "bytes": 1151938,
       "pages": 22,
-      "chars": 32481,
+      "chars": 32495,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2",
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "13:3",
           "for": [
@@ -1356,6 +1494,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.1",
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1387,6 +1527,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.2",
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1418,6 +1560,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.3",
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1449,6 +1593,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.4",
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1480,6 +1626,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.5",
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -1511,6 +1659,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.6",
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1542,6 +1692,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.7",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "13:3",
           "for": [
@@ -1573,6 +1725,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.8",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -1604,6 +1758,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.9",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1635,6 +1791,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.10",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1666,6 +1824,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.11",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1697,6 +1857,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.12",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -1728,6 +1890,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.13",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1759,6 +1923,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.14",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -1790,6 +1956,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.15",
+          "item": "2.2",
+          "page": 14,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -1821,6 +1989,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.16",
+          "item": "2.2",
+          "page": 14,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -1852,6 +2022,8 @@
         {
           "read": true,
           "clauseLabel": "Recommendation 2.2.17",
+          "item": "2.2",
+          "page": 14,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -1883,6 +2055,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 18,
           "result": "Carried",
           "majority": "13:3",
           "for": [
@@ -1914,6 +2088,8 @@
         {
           "read": true,
           "clauseLabel": "clauses 2.1 and 2.2",
+          "item": "2.3",
+          "page": 20,
           "result": "Carried",
           "majority": "15:2",
           "for": [
@@ -1944,6 +2120,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 20,
           "result": "Carried",
           "majority": "13:4",
           "for": [
@@ -1971,7 +2149,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-09-24",
@@ -1987,6 +2171,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 4,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -2014,6 +2200,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -2041,6 +2229,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": null,
           "majority": "15:0",
           "for": [
@@ -2068,6 +2258,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": null,
           "majority": "14:0",
           "for": [
@@ -2094,6 +2286,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 10,
           "result": null,
           "majority": "15:0",
           "for": [
@@ -2121,6 +2315,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.4",
+          "page": 10,
           "result": null,
           "majority": "15:0",
           "for": [
@@ -2148,6 +2344,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.5",
+          "page": 12,
           "result": null,
           "majority": "15:0",
           "for": [
@@ -2175,6 +2373,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.6",
+          "page": 12,
           "result": null,
           "majority": "15:0",
           "for": [
@@ -2202,6 +2402,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 14,
           "result": null,
           "majority": "15:0",
           "for": [
@@ -2229,6 +2431,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.2",
+          "page": 14,
           "result": null,
           "majority": "14:1",
           "for": [
@@ -2254,7 +2458,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-09-23",
@@ -2263,13 +2473,15 @@
       "sha256": "ca3d576623ec7102bd73efbcb8d2ebec095759a95c341e815644638303a5a435",
       "bytes": 974027,
       "pages": 15,
-      "chars": 25499,
+      "chars": 25515,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 8,
           "result": null,
           "majority": "15:2",
           "for": [
@@ -2300,6 +2512,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "10:7",
           "for": [
@@ -2330,6 +2544,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "10:7",
           "for": [
@@ -2357,7 +2573,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-09-17",
@@ -2366,13 +2588,15 @@
       "sha256": "daddc6f91eb49536120dd0f4a3f14b0562a4ee7b57417181a07a3f063dbfa8f8",
       "bytes": 7876349,
       "pages": 47,
-      "chars": 60408,
+      "chars": 60426,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": "Clause 2",
+          "item": "2.3",
+          "page": 12,
           "result": "Carried",
           "majority": "16:1",
           "for": [
@@ -2403,6 +2627,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 6 and 6.1",
+          "item": "2.3",
+          "page": 12,
           "result": "Carried",
           "majority": "12:5",
           "for": [
@@ -2433,6 +2659,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 6.2",
+          "item": "2.3",
+          "page": 12,
           "result": "Carried",
           "majority": "15:2",
           "for": [
@@ -2463,6 +2691,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 14,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -2489,7 +2719,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-08-27",
@@ -2498,13 +2734,15 @@
       "sha256": "99dc4886ba202cf8650e5877df247698b3f95392a7c7379d6e09b3b5f1af4333",
       "bytes": 1230998,
       "pages": 12,
-      "chars": 14112,
+      "chars": 14115,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 6,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -2533,7 +2771,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 1 – 2(a)(iii)",
+          "clauseLabel": "Clauses 1 \u2013 2(a)(iii)",
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "16:1",
           "for": [
@@ -2564,6 +2804,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2(a)(iv)",
+          "item": "2.2",
+          "page": 6,
           "result": null,
           "majority": "13:4",
           "for": [
@@ -2594,6 +2836,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": "Lost",
           "majority": "4:13",
           "for": [
@@ -2624,6 +2868,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": "Lost",
           "majority": "6:11",
           "for": [
@@ -2651,7 +2897,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-08-27",
@@ -2667,6 +2919,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 4,
           "result": "Carried",
           "majority": "14:0",
           "for": [
@@ -2693,6 +2947,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -2720,6 +2976,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -2747,6 +3005,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -2774,6 +3034,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.4",
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -2801,6 +3063,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.5",
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -2828,6 +3092,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.5",
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -2855,6 +3121,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.5",
+          "page": 12,
           "result": "Carried",
           "majority": "14:1",
           "for": [
@@ -2880,7 +3148,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-08-19",
@@ -2889,10 +3163,16 @@
       "sha256": "fa635de2e56c283cbb93cbc0c136a2e9c54c3f7007764f1849893799bbad6c23",
       "bytes": 3932754,
       "pages": 36,
-      "chars": 22834,
+      "chars": 22836,
       "status": "read",
       "closedSessionOmitted": false,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-08-13",
@@ -2901,13 +3181,15 @@
       "sha256": "da5edb6268883bb86ad66dec229efde454df3391264716915780f7a3e1a89c7f",
       "bytes": 939433,
       "pages": 11,
-      "chars": 13059,
+      "chars": 13063,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 10,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -2934,7 +3216,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-08-12",
@@ -2943,10 +3231,16 @@
       "sha256": "eb55246915fcb060ad217e4200a74e8d09edfaa4dd4ccbd1bdeafcd9032c903d",
       "bytes": 909994,
       "pages": 8,
-      "chars": 8965,
+      "chars": 8969,
       "status": "read",
       "closedSessionOmitted": false,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-08-06",
@@ -2955,13 +3249,15 @@
       "sha256": "cbacb87ea76f7d9f1beabf3b0bdd8d04163fb79b6ee539b3d7217c991a293a43",
       "bytes": 1270806,
       "pages": 14,
-      "chars": 22321,
+      "chars": 22323,
       "status": "read",
       "closedSessionOmitted": true,
       "divisions": [
         {
           "read": true,
           "clauseLabel": "Clause 2.1",
+          "item": "2.3",
+          "page": 8,
           "result": "Lost",
           "majority": "5:12",
           "for": [
@@ -2991,13 +3287,23 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clause 2.3"
+          "clauseLabel": "Clause 2.3",
+          "item": "2.3",
+          "page": 8
         },
         {
           "read": false,
-          "clauseLabel": null
+          "clauseLabel": null,
+          "item": "2.3",
+          "page": 8
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-08-06",
@@ -3006,13 +3312,15 @@
       "sha256": "b5030521ad26a1e7accb27ac50d2c287fdc7532f2831047d2123fd973509e534",
       "bytes": 1261800,
       "pages": 17,
-      "chars": 30854,
+      "chars": 30855,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 4,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3041,6 +3349,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 4,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3069,6 +3379,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": "Lost",
           "majority": "5:11",
           "for": [
@@ -3098,6 +3410,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3126,6 +3440,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "9:7",
           "for": [
@@ -3155,6 +3471,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "15:1",
           "for": [
@@ -3184,6 +3502,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 14,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3212,6 +3532,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 16,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3237,7 +3559,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-06-25",
@@ -3246,13 +3574,15 @@
       "sha256": "dd9dfe78e5342a070b760d2d25804015c6ee3ccb3dc69b9f3ad9851b230f2370",
       "bytes": 12290537,
       "pages": 146,
-      "chars": 106968,
+      "chars": 107102,
       "status": "read",
       "closedSessionOmitted": true,
       "divisions": [
         {
           "read": true,
           "clauseLabel": "Clause 2",
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -3284,6 +3614,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -3314,6 +3646,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 2.1 and 2.2",
+          "item": "2.1",
+          "page": 8,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -3345,6 +3679,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 8,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -3375,6 +3711,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 3",
+          "item": "2.2",
+          "page": 8,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -3406,6 +3744,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -3433,7 +3773,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-06-24",
@@ -3442,13 +3788,15 @@
       "sha256": "b0e1e0f7049b6fc2e110b254e8b967f7d7689e4e1a0071a5d99b493f39e57ff9",
       "bytes": 2230583,
       "pages": 30,
-      "chars": 30902,
+      "chars": 30808,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "10:7",
           "for": [
@@ -3481,6 +3829,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.2",
+          "page": 8,
           "result": "Carried",
           "majority": "13:4",
           "for": [
@@ -3513,6 +3863,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 1",
+          "item": "3.2",
+          "page": 10,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -3544,6 +3896,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2",
+          "item": "3.2",
+          "page": 10,
           "result": "Carried",
           "majority": "12:5",
           "for": [
@@ -3573,7 +3927,13 @@
           ],
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-06-18",
@@ -3582,13 +3942,15 @@
       "sha256": "e5f5eecc50ad4dc75cd207b2dcf9567e0bef83d989e62b47bfa1451b21c1851c",
       "bytes": 14807414,
       "pages": 67,
-      "chars": 46828,
+      "chars": 47218,
       "status": "read",
       "closedSessionOmitted": true,
       "divisions": [
         {
           "read": true,
           "clauseLabel": "Clause 1",
+          "item": "1.4",
+          "page": 8,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -3620,6 +3982,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.1",
+          "item": "1.4",
+          "page": 8,
           "result": "Carried",
           "majority": "15:3",
           "for": [
@@ -3650,19 +4014,27 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clause 2.3"
+          "clauseLabel": "Clause 2.3",
+          "item": "1.4",
+          "page": 8
         },
         {
           "read": false,
-          "clauseLabel": "Clause 2.4"
+          "clauseLabel": "Clause 2.4",
+          "item": "1.4",
+          "page": 8
         },
         {
           "read": false,
-          "clauseLabel": "Clause 2.5"
+          "clauseLabel": "Clause 2.5",
+          "item": "1.4",
+          "page": 8
         },
         {
           "read": true,
           "clauseLabel": null,
+          "item": "1.4",
+          "page": 8,
           "result": "Carried",
           "majority": "15:3",
           "for": [
@@ -3694,6 +4066,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 1",
+          "item": "2.1",
+          "page": 10,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3725,6 +4099,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2",
+          "item": "2.1",
+          "page": 10,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -3757,6 +4133,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.1",
+          "item": "2.1",
+          "page": 10,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3788,6 +4166,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 10,
           "result": "Carried",
           "majority": "13:3",
           "for": [
@@ -3820,6 +4200,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 1 and 2",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "13:3",
           "for": [
@@ -3852,6 +4234,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3880,7 +4264,13 @@
           ],
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-05-28",
@@ -3889,13 +4279,15 @@
       "sha256": "f08d85ce04d4a89368a13ae049ee9a1d4860f5ccf52ac8fd3ef1182e2f6dd6b3",
       "bytes": 1067560,
       "pages": 15,
-      "chars": 30744,
+      "chars": 30746,
       "status": "read",
       "closedSessionOmitted": true,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -3927,6 +4319,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 10,
           "result": "Lost",
           "majority": "3:15",
           "for": [
@@ -3958,6 +4352,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -3985,7 +4381,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-05-28",
@@ -4001,6 +4403,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 4,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4029,6 +4433,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 6,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -4058,6 +4464,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.2",
+          "page": 8,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4086,6 +4494,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.2",
+          "page": 10,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4114,6 +4524,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.2",
+          "page": 10,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4142,6 +4554,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 12,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4170,6 +4584,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 12,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4198,6 +4614,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 12,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4226,6 +4644,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 14,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4254,6 +4674,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 14,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4282,6 +4704,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.4",
+          "page": 14,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4310,6 +4734,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.4",
+          "page": 14,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4338,6 +4764,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.5",
+          "page": 16,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4363,7 +4791,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-05-27",
@@ -4372,13 +4806,15 @@
       "sha256": "9777c37a106de455d8f658c4d1c4482d8e180f8d485ff115f109112815faf800",
       "bytes": 1098054,
       "pages": 26,
-      "chars": 47921,
+      "chars": 47940,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": "Clause 7a(i)",
+          "item": "2.1",
+          "page": 12,
           "result": null,
           "majority": "17:0",
           "for": [
@@ -4408,6 +4844,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 12,
           "result": null,
           "majority": "5:13",
           "for": [
@@ -4439,6 +4877,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 7a - aa",
+          "item": "2.1",
+          "page": 14,
           "result": "Lost",
           "majority": "6:11",
           "for": [
@@ -4469,6 +4909,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 7d",
+          "item": "2.1",
+          "page": 14,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -4500,6 +4942,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 27.",
+          "item": "2.1",
+          "page": 14,
           "result": "Lost",
           "majority": "7:11",
           "for": [
@@ -4531,6 +4975,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 16,
           "result": null,
           "majority": "5:13",
           "for": [
@@ -4562,6 +5008,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 1-6",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -4592,6 +5040,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 7a(i)",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "14:3",
           "for": [
@@ -4621,11 +5071,15 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clause 7b"
+          "clauseLabel": "Clause 7b",
+          "item": "2.1",
+          "page": 20
         },
         {
           "read": true,
           "clauseLabel": "Clauses 7c-7e",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -4656,6 +5110,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 7A-8",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -4686,6 +5142,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 9",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "14:4",
           "for": [
@@ -4717,6 +5175,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 10",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "13:5",
           "for": [
@@ -4748,6 +5208,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 11a",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "15:3",
           "for": [
@@ -4779,6 +5241,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 11b-c",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "17:1",
           "for": [
@@ -4810,6 +5274,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 11d",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "13:5",
           "for": [
@@ -4841,6 +5307,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 11e",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "16:2",
           "for": [
@@ -4872,6 +5340,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 11f(i)-(iii)",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -4902,6 +5372,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 11f(iv)",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "15:3",
           "for": [
@@ -4933,6 +5405,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 12-26",
+          "item": "2.1",
+          "page": 20,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -4960,7 +5434,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-05-13",
@@ -4969,13 +5449,15 @@
       "sha256": "0593843812c65a4134581f4801fb26f1363b455b0426bef9555cb36056851df2",
       "bytes": 2869389,
       "pages": 22,
-      "chars": 20387,
+      "chars": 20422,
       "status": "read",
       "closedSessionOmitted": true,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 8,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -5006,6 +5488,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 10,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -5033,7 +5517,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-05-07",
@@ -5042,13 +5532,15 @@
       "sha256": "7119838413bd9a3ae28d24ca8489f9316e5b5de1e540f76ff68a928466853699",
       "bytes": 4809002,
       "pages": 40,
-      "chars": 42224,
+      "chars": 42302,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": "Clauses 2 & 2.1",
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -5080,6 +5572,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.2",
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -5111,6 +5605,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.3",
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "16:1",
           "for": [
@@ -5143,6 +5639,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -5174,6 +5672,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2",
+          "item": "2.4",
+          "page": 10,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -5204,6 +5704,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 3",
+          "item": "2.4",
+          "page": 10,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -5233,11 +5735,15 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clause 4"
+          "clauseLabel": "Clause 4",
+          "item": "2.4",
+          "page": 10
         },
         {
           "read": true,
           "clauseLabel": "Clause 5",
+          "item": "2.4",
+          "page": 10,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -5269,6 +5775,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 8",
+          "item": "2.4",
+          "page": 10,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -5298,11 +5806,15 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clause 9"
+          "clauseLabel": "Clause 9",
+          "item": "2.4",
+          "page": 10
         },
         {
           "read": true,
           "clauseLabel": "Clause 4",
+          "item": "2.4",
+          "page": 12,
           "result": "Carried",
           "majority": "12:6",
           "for": [
@@ -5331,7 +5843,13 @@
           "absent": [],
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-04-30",
@@ -5340,13 +5858,15 @@
       "sha256": "829cb2ef5fc63f4eba49c9effa149b6975ceacec3183371cd4a0bbc0be385d78",
       "bytes": 6183807,
       "pages": 37,
-      "chars": 23902,
+      "chars": 23994,
       "status": "read",
       "closedSessionOmitted": true,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 4,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -5375,6 +5895,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 4,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -5403,6 +5925,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "15:1",
           "for": [
@@ -5432,6 +5956,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -5460,6 +5986,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -5488,6 +6016,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 8,
           "result": "Carried",
           "majority": "10:6",
           "for": [
@@ -5517,6 +6047,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 8,
           "result": "Carried",
           "majority": "14:1",
           "for": [
@@ -5547,6 +6079,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.5",
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5576,6 +6110,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.5",
+          "page": 10,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5602,7 +6138,13 @@
           ],
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-04-02",
@@ -5611,10 +6153,16 @@
       "sha256": "cb4fea1af7f1bbffca451d8ec3d4eb9f1ee55b762dfe17b96c474db203cb0f36",
       "bytes": 911022,
       "pages": 7,
-      "chars": 4584,
+      "chars": 4586,
       "status": "read",
       "closedSessionOmitted": true,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-03-26",
@@ -5630,6 +6178,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 2,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5659,6 +6209,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 6,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5688,6 +6240,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 6,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5717,6 +6271,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5746,6 +6302,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5775,6 +6333,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 10,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5804,6 +6364,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 10,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5833,6 +6395,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.2",
+          "page": 12,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5859,7 +6423,13 @@
           ],
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-03-26",
@@ -5868,10 +6438,16 @@
       "sha256": "3c82f5257360378771fd7e50c6f14da4e57f9dbe647c5b1c6a959b8c61e23d5e",
       "bytes": 4943018,
       "pages": 52,
-      "chars": 113683,
+      "chars": 114778,
       "status": "read",
       "closedSessionOmitted": false,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-03-25",
@@ -5880,15 +6456,23 @@
       "sha256": "077ff7c4557e116d55e6898364a07bdfeac456502afe71d8336447fb633cbd48",
       "bytes": 20360487,
       "pages": 90,
-      "chars": 92600,
+      "chars": 92690,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": false,
-          "clauseLabel": null
+          "clauseLabel": null,
+          "item": "3.2",
+          "page": 6
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-03-19",
@@ -5897,10 +6481,16 @@
       "sha256": "94083c849f1a4bb0ee5674915b209bd9915dae37839ab703ba98e9b14e4f27fd",
       "bytes": 3862332,
       "pages": 16,
-      "chars": 8579,
+      "chars": 8572,
       "status": "read",
       "closedSessionOmitted": true,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-03-12",
@@ -5916,6 +6506,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 2,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5945,6 +6537,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 6,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -5974,6 +6568,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 6,
           "result": "Carried",
           "majority": "14:2",
           "for": [
@@ -6003,6 +6599,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -6028,7 +6626,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-03-12",
@@ -6037,13 +6641,15 @@
       "sha256": "575728f94d15a3da5e682ba893ef2f7a9b6fc872262fcdf664cfaf0a5b1ee045",
       "bytes": 1114411,
       "pages": 31,
-      "chars": 56283,
+      "chars": 56302,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": "Carried",
           "majority": "12:6",
           "for": [
@@ -6075,6 +6681,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6105,6 +6713,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 1 - 2.22",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6135,6 +6745,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.23",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -6166,6 +6778,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.24",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6195,7 +6809,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clause 2.25 – 2.25a",
+          "clauseLabel": "Clause 2.25 \u2013 2.25a",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "15:3",
           "for": [
@@ -6227,6 +6843,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.25b",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6257,6 +6875,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.26",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6286,7 +6906,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clause 2.27 – 2.27a",
+          "clauseLabel": "Clause 2.27 \u2013 2.27a",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -6318,6 +6940,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.27b",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6348,6 +6972,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.28",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "15:3",
           "for": [
@@ -6379,6 +7005,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.29",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6409,6 +7037,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.30",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -6440,6 +7070,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.31",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6470,6 +7102,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.32",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "15:3",
           "for": [
@@ -6501,6 +7135,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.33",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6531,6 +7167,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.34",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6561,6 +7199,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.35",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -6592,6 +7232,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 3",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6622,6 +7264,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 4 - 5",
+          "item": "2.2",
+          "page": 12,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6652,6 +7296,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 20,
           "result": "Lost",
           "majority": "6:12",
           "for": [
@@ -6682,11 +7328,15 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clauses 12.1 - 12.1.1"
+          "clauseLabel": "Clauses 12.1 - 12.1.1",
+          "item": "2.2",
+          "page": 20
         },
         {
           "read": true,
           "clauseLabel": "Clause 12.1.2",
+          "item": "2.2",
+          "page": 20,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -6718,6 +7368,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 16",
+          "item": "2.2",
+          "page": 22,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -6748,7 +7400,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clause 17 – 21",
+          "clauseLabel": "Clause 17 \u2013 21",
+          "item": "2.2",
+          "page": 22,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -6779,7 +7433,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 1 – 6",
+          "clauseLabel": "Clauses 1 \u2013 6",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6809,7 +7465,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 7 – 7.1",
+          "clauseLabel": "Clauses 7 \u2013 7.1",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6839,7 +7497,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 7.2 – 7.2.1",
+          "clauseLabel": "Clauses 7.2 \u2013 7.2.1",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -6870,7 +7530,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 7.2.3 – 7.2.4",
+          "clauseLabel": "Clauses 7.2.3 \u2013 7.2.4",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6901,6 +7563,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 7.3",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -6931,11 +7595,15 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clauses 8 – 11"
+          "clauseLabel": "Clauses 8 \u2013 11",
+          "item": "2.2",
+          "page": 26
         },
         {
           "read": true,
           "clauseLabel": "Clause 12.1.1",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -6967,6 +7635,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 12.1.2",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -6997,7 +7667,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clause 12 – 12.1",
+          "clauseLabel": "Clause 12 \u2013 12.1",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -7027,7 +7699,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 13 – 15",
+          "clauseLabel": "Clauses 13 \u2013 15",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -7058,6 +7732,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 16",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -7086,7 +7762,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 17 – 21",
+          "clauseLabel": "Clauses 17 \u2013 21",
+          "item": "2.2",
+          "page": 26,
           "result": "Carried",
           "majority": "14:3",
           "for": [
@@ -7116,9 +7794,17 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clause 22"
+          "clauseLabel": "Clause 22",
+          "item": "2.2",
+          "page": 26
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-02-26",
@@ -7127,13 +7813,15 @@
       "sha256": "01313664e9d718fce2dbe6371ef7b7e61b42a7deae8f3d6f36b950212fc7d647",
       "bytes": 947930,
       "pages": 14,
-      "chars": 14844,
+      "chars": 14847,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 2,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7163,6 +7851,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 6,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7192,6 +7882,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7221,6 +7913,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7250,6 +7944,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.3",
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7279,6 +7975,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.4",
+          "page": 10,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7308,6 +8006,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 10,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7337,6 +8037,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.2",
+          "page": 12,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7363,7 +8065,13 @@
           ],
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-02-19",
@@ -7372,13 +8080,15 @@
       "sha256": "ef3f7ae8efb9b88fe13f10136af1e503506ef228f307c3b856107fd726fbbca7",
       "bytes": 2033709,
       "pages": 23,
-      "chars": 15184,
+      "chars": 15189,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": "Clause 2",
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "15:3",
           "for": [
@@ -7410,6 +8120,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 2.1 and 2.1.1",
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -7441,6 +8153,8 @@
         {
           "read": true,
           "clauseLabel": "Clauses 2.2 and 2.2.1",
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -7472,6 +8186,8 @@
         {
           "read": true,
           "clauseLabel": "Clause 2.2.2",
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -7500,7 +8216,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-02-12",
@@ -7512,7 +8234,13 @@
       "chars": 4797,
       "status": "read",
       "closedSessionOmitted": false,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2026-02-05",
@@ -7527,9 +8255,17 @@
       "divisions": [
         {
           "read": false,
-          "clauseLabel": null
+          "clauseLabel": null,
+          "item": "2.2",
+          "page": 4
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2025-12-18",
@@ -7545,6 +8281,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 4,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7573,6 +8311,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 4,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7601,6 +8341,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7629,6 +8371,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7654,7 +8398,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2025-12-17",
@@ -7663,13 +8413,15 @@
       "sha256": "5b2398540e890927b5ad1e50425977cda06020d1f7e216774ebd8dd67da3b9b0",
       "bytes": 1246759,
       "pages": 17,
-      "chars": 22677,
+      "chars": 22681,
       "status": "read",
       "closedSessionOmitted": true,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 4,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -7698,7 +8450,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2025-12-11",
@@ -7707,10 +8465,16 @@
       "sha256": "5afff2ead43e8fff652a5d7b0b38f35cf87153b0ffa0fe2008d7a3a1514158f5",
       "bytes": 13614469,
       "pages": 39,
-      "chars": 51924,
+      "chars": 61400,
       "status": "read",
       "closedSessionOmitted": false,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2025-12-03",
@@ -7722,7 +8486,13 @@
       "chars": 13962,
       "status": "read",
       "closedSessionOmitted": false,
-      "divisions": []
+      "divisions": [],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2025-12-03",
@@ -7738,6 +8508,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 2,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7766,6 +8538,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7794,6 +8568,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "3.1",
+          "page": 8,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7819,7 +8595,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2025-11-20",
@@ -7828,13 +8610,15 @@
       "sha256": "aab1681dbca708118cc4aa683688d04cba04567f8ea0634eb4a7a9eef7df2bed",
       "bytes": 7887654,
       "pages": 51,
-      "chars": 51248,
+      "chars": 51374,
       "status": "read",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": null,
+          "page": 2,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7863,6 +8647,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7891,6 +8677,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 6,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7919,6 +8707,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 8,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7947,6 +8737,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -7975,6 +8767,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.5",
+          "page": 10,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8003,6 +8797,8 @@
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.6",
+          "page": 12,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8028,7 +8824,13 @@
           "absent": null,
           "notVoting": null
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "parsed",
+        "reason": null
+      }
     },
     {
       "date": "2025-10-30",
@@ -8067,7 +8869,9 @@
           "against": [],
           "abstained": null,
           "absent": null,
-          "notVoting": null
+          "notVoting": null,
+          "item": "2.1",
+          "page": 8
         },
         {
           "read": true,
@@ -8095,9 +8899,22 @@
           "against": [],
           "abstained": null,
           "absent": null,
-          "notVoting": null
+          "notVoting": null,
+          "item": "2.2",
+          "page": 10
         }
-      ]
+      ],
+      "extract": {
+        "name": "pypdf",
+        "version": "5.9.0",
+        "status": "skipped",
+        "reason": "over-byte-cap"
+      }
     }
-  ]
+  ],
+  "extractor": {
+    "name": "pypdf",
+    "version": "5.9.0",
+    "poppler": "Poppler pdftotext without -layout yields 0 read blocks on these minutes. Readings are built from pypdf only."
+  }
 }

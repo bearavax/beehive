@@ -136,6 +136,19 @@ export type ApiMember = {
     source: "official-minutes";
     note: string;
   };
+  /**
+   * @deprecated The score was removed. Use `minutesVotes`. The stub remains for one release
+   * so older clients still see the field. Counts are null and are not calculated.
+   */
+  record: {
+    deprecated: true;
+    note: string;
+    namedDivisions: null;
+    withMajority: null;
+    againstMajority: null;
+    notVoting: null;
+    decisions: [];
+  };
   provenance: Provenance;
 };
 

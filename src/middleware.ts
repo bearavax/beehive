@@ -60,6 +60,15 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   url.searchParams.delete("reo");
 
+  if (plan.action === "not-found") {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-nonce", token);
+    requestHeaders.set("content-security-policy", csp);
+    const response = NextResponse.next({ request: { headers: requestHeaders } });
+    privateDocument(response, csp);
+    return response;
+  }
+
   if (plan.action === "redirect") {
     url.pathname = plan.pathname;
     const response = NextResponse.redirect(url);
@@ -72,6 +81,7 @@ export function middleware(request: NextRequest) {
   requestHeaders.set("x-nonce", token);
   requestHeaders.set("content-security-policy", csp);
   requestHeaders.set("x-beehive-lang", plan.lang);
+  requestHeaders.set("x-beehive-path", pathname);
   const response = NextResponse.next({ request: { headers: requestHeaders } });
   privateDocument(response, csp);
   remember(response, plan.lang);

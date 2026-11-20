@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { isApiPath, planLanguage, preferredLang } from "./request-routing";
+import { isApiPath, isInvalidLocale, planLanguage, preferredLang } from "./request-routing";
 
 test("api paths are only the /api segment", () => {
   assert.equal(isApiPath("/api"), true);
@@ -29,6 +29,16 @@ test("an old reo query redirects onto the language path without a trailing slash
   });
   assert.deepEqual(planLanguage("/about", "en", "bi"), { action: "redirect", pathname: "/en/about", lang: "en" });
   assert.deepEqual(planLanguage("/", "mi", "bi"), { action: "redirect", pathname: "/mi", lang: "mi" });
+});
+
+test("an unknown locale is a direct 404 and a real page still redirects", () => {
+  assert.equal(isInvalidLocale("fr"), true);
+  assert.equal(isInvalidLocale("en-us"), true);
+  assert.equal(isInvalidLocale("en"), false);
+  assert.equal(isInvalidLocale("about"), false);
+  assert.deepEqual(planLanguage("/fr", null, "bi"), { action: "not-found" });
+  assert.deepEqual(planLanguage("/fr/decisions", "mi", "bi"), { action: "not-found" });
+  assert.deepEqual(planLanguage("/about", null, "bi"), { action: "redirect", pathname: "/bi/about", lang: "bi" });
 });
 
 test("a bare path uses the preferred language and a prefixed path renders", () => {
