@@ -1,12 +1,14 @@
 {
-  "name": "b1",
-  "version": "0.1.0",
+  "name": "beehive",
+  "version": "1.0.0",
   "private": true,
+  "description": "Bilingual Wellington City Council decision transparency for the 2025–2028 triennium.",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync:wcc": "node --experimental-strip-types scripts/sync-wcc.ts"
   },
   "dependencies": {
     "react": "^19.0.0",
