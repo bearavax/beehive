@@ -35,7 +35,9 @@ Verified read APIs on `https://meetings.wellington.govt.nz`:
 
 The sync does not call staff or write endpoints, and it does not store officer email addresses. The column notes are in [docs/matai-manapori-schema.md](docs/matai-manapori-schema.md).
 
-Routes: `/` decisions, `/decisions/[slug]`, `/councillors`, `/councillors/[slug]`, `/issues`, `/issues/[slug]`, `/about`.
+Routes: `/` decisions, `/decisions/[slug]`, `/councillors`, `/councillors/[slug]`, `/issues`, `/issues/[slug]`, `/about`, `/plugins`.
+
+The public read API is `/api/v1`. The plug-in contract for the May 2027 hackathon is [docs/plugin-sdk.md](docs/plugin-sdk.md). A starter with no sample votes is [examples/starter-plugin](examples/starter-plugin). Check manifests with `npm run plugins:check`.
 
 ## Te Tiriti o Waitangi
 

@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync:wcc": "node --experimental-strip-types scripts/sync-wcc.ts"
+    "sync:wcc": "node --experimental-strip-types scripts/sync-wcc.ts",
+    "plugins:check": "node --experimental-strip-types scripts/validate-plugins.ts"
   },
   "dependencies": {
     "react": "^19.0.0",

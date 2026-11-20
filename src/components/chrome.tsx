@@ -9,6 +9,7 @@ const links = [
   { href: "/councillors", en: "Members", mi: "Ngā mema" },
   { href: "/issues", en: "Issues", mi: "Ngā kaupapa" },
   { href: "/about", en: "Methodology", mi: "Te tikanga" },
+  { href: "/plugins", en: "Plug-ins", mi: "" },
 ];
 
 const modes: { id: Lang; en: string; mi: string }[] = [
@@ -84,6 +85,10 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
             <Link href="/about">
               <T en="Te Tiriti and methodology" mi="Te Tiriti me te tikanga" />
             </Link>
+            <Link href="/plugins">
+              <T en="Plug-ins" mi="" />
+            </Link>
+            <a href="/api/v1">API</a>
           </p>
         </div>
       </footer>

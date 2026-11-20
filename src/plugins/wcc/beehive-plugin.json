@@ -1,0 +1,32 @@
+{
+  "specVersion": "1.0.0",
+  "id": "nz.wcc.matai-manapori",
+  "kind": "statutory-adapter",
+  "name": {
+    "en": "Wellington City Council",
+    "mi": "Te Kaunihera o Pōneke"
+  },
+  "summary": {
+    "en": "Published Mātai Manapori records for the 2025–2028 triennium.",
+    "mi": null
+  },
+  "maintainer": {
+    "name": "Beehive",
+    "url": "https://github.com/bearavax/beehive"
+  },
+  "license": "MIT",
+  "scopes": [
+    "meetings:read",
+    "decisions:read",
+    "votes:read",
+    "members:read",
+    "issues:read",
+    "committees:read"
+  ],
+  "uiSlot": null,
+  "citationLock": true,
+  "council": {
+    "en": "Wellington City Council",
+    "mi": "Te Kaunihera o Pōneke"
+  }
+}

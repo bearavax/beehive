@@ -1,0 +1,22 @@
+{
+  "specVersion": "1.0.0",
+  "id": "community.example-starter",
+  "kind": "community",
+  "name": {
+    "en": "Example community plug-in",
+    "mi": null
+  },
+  "summary": {
+    "en": "Starter for the May 2027 hackathon. It holds no council records.",
+    "mi": null
+  },
+  "maintainer": {
+    "name": "Hackathon builder",
+    "url": null
+  },
+  "license": "MIT",
+  "scopes": ["decisions:read"],
+  "uiSlot": "feed.notice",
+  "citationLock": true,
+  "council": null
+}
