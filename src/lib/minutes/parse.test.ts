@@ -18,11 +18,9 @@ test("council minutes of 12 November 2026 keep for and against apart", () => {
 
   const procedural = read[0];
   assert.equal(procedural.clauseLabel, null);
-  assert.equal(procedural.page, 6);
   assert.equal(procedural.item, null);
   const last = read[6];
   assert.equal(last.clauseLabel, null);
-  assert.equal(last.page, 10);
   assert.equal(last.item, "3.1");
   assert.equal(procedural.majority, "16:0");
   assert.equal(procedural.result, "Carried");

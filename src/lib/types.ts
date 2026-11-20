@@ -123,7 +123,13 @@ export type Member = {
   mandateEn: string;
   mandateMi: string;
   since: string;
+  sinceCitation: string;
   until?: string;
+  untilCitation?: string;
+  /** Inclusive dates with no sourced day. Divisions here are left off, not marked Not recorded. */
+  uncertainFrom?: string;
+  uncertainUntil?: string;
+  uncertainCitation?: string;
   profileUrl: string;
   voteAliases: string[];
   committeeIds: string[];

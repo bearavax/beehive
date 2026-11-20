@@ -52,6 +52,14 @@ Caddy:
 	@json path *.json
 	header @json Content-Type "application/json; charset=utf-8"
 	header @json Cache-Control "public, max-age=3600"
+	# The clean URL is what the client requested. Cache that response too,
+	# not only the rewritten *.json path.
+	@api path /api/v1 /api/v1/*
+	header @api Content-Type "application/json; charset=utf-8"
+	header @api Cache-Control "public, max-age=3600"
+	header @api X-Content-Type-Options nosniff
+	header @api Access-Control-Allow-Origin *
+	header @api Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
 	@index path /api/v1
 	rewrite @index /api/v1/index.json
 	@decisionVotes path_regexp dv ^/api/v1/decisions/([^/]+)/votes$
@@ -70,30 +78,37 @@ Caddy:
 }
 ```
 
-nginx:
+nginx, in `deploy/mirror/nginx.conf`. CI starts this file. `break` keeps the rewrite inside the location. `last` searched the location again and turned `index.json` into `index.json.json`, which returned 500 for `/api/v1`, `/api/v1/decisions`, and `decisions.json`. A location that sets its own `add_header` does not inherit the server headers, so nosniff and CORS are repeated inside `location /api/v1`. The collection pattern is `^/api/v1/([^/.]+)$` so a path that already ends in `.json` is not rewritten.
 
 ```
 server {
-	listen 8080;
+	listen 127.0.0.1:18088;
 	root /var/www/beehive/out;
 	add_header X-Content-Type-Options nosniff always;
 	add_header Access-Control-Allow-Origin * always;
 	add_header Access-Control-Allow-Methods "GET, HEAD, OPTIONS" always;
+
 	location /api/v1 {
 		default_type application/json;
+		add_header X-Content-Type-Options nosniff always;
+		add_header Access-Control-Allow-Origin * always;
+		add_header Access-Control-Allow-Methods "GET, HEAD, OPTIONS" always;
 		add_header Cache-Control "public, max-age=3600" always;
-		rewrite ^/api/v1$ /api/v1/index.json last;
-		rewrite ^/api/v1/decisions$ /api/v1/decisions.json last;
-		rewrite ^/api/v1/decisions/([^/]+)/votes$ /api/v1/decisions/items/$1/votes.json last;
-		rewrite ^/api/v1/decisions/([^/]+)$ /api/v1/decisions/items/$1.json last;
-		rewrite ^/api/v1/members/([^/]+)/votes$ /api/v1/members/items/$1/votes.json last;
-		rewrite ^/api/v1/members/([^/]+)$ /api/v1/members/items/$1.json last;
-		rewrite ^/api/v1/([^/]+)$ /api/v1/$1.json last;
+
+		rewrite ^/api/v1$ /api/v1/index.json break;
+		rewrite ^/api/v1/decisions/([^/]+)/votes$ /api/v1/decisions/items/$1/votes.json break;
+		rewrite ^/api/v1/decisions/([^/]+)$ /api/v1/decisions/items/$1.json break;
+		rewrite ^/api/v1/members/([^/]+)/votes$ /api/v1/members/items/$1/votes.json break;
+		rewrite ^/api/v1/members/([^/]+)$ /api/v1/members/items/$1.json break;
+		rewrite ^/api/v1/issues/([^/]+)$ /api/v1/issues/items/$1.json break;
+		rewrite ^/api/v1/committees/([^/]+)$ /api/v1/committees/items/$1.json break;
+		rewrite ^/api/v1/meetings/([^/]+)$ /api/v1/meetings/items/$1.json break;
+		rewrite ^/api/v1/([^/.]+)$ /api/v1/$1.json break;
 	}
 }
 ```
 
-The same rewrites apply to `issues`, `committees`, and `meetings`: a bare collection is `<name>.json`, and one record is `items/<id>.json`. Offset pages stay at `offset/<n>.json` and do not need a rewrite.
+Offset pages stay at `offset/<n>.json` and do not need a rewrite.
 
 ## Still not built
 

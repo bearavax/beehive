@@ -7,7 +7,7 @@ import { createHash } from "node:crypto";
 import { spawn } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { EXTRACTOR } from "../src/lib/minutes/extractor.ts";
+import { EXTRACTOR, minutesPython } from "../src/lib/minutes/extractor.ts";
 import { allowFeedUrl } from "../src/lib/safe-url.ts";
 
 const UA =
@@ -120,11 +120,30 @@ export async function fetchMinutePdf(input: {
 
 function runExtractor(pdfPath: string, textPath: string): Promise<{ ok: true; pages: number; chars: number } | { ok: false; pages: number | null; reason: string }> {
   return new Promise((resolve) => {
+    let settled = false;
+    const finish = (value: { ok: true; pages: number; chars: number } | { ok: false; pages: number | null; reason: string }) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      resolve(value);
+    };
     const child = spawn(
-      "python3",
-      [path.join("scripts", "extract-minutes-pdf.py"), String(EXTRACTOR.pageCap), pdfPath, textPath],
+      "prlimit",
+      [
+        `--as=${EXTRACTOR.memoryBytes}`,
+        "--",
+        minutesPython(),
+        path.join("scripts", "extract-minutes-pdf.py"),
+        String(EXTRACTOR.pageCap),
+        pdfPath,
+        textPath,
+      ],
       { stdio: ["ignore", "pipe", "pipe"] },
     );
+    const timer = setTimeout(() => {
+      child.kill("SIGKILL");
+      finish({ ok: false, pages: null, reason: "timeout" });
+    }, EXTRACTOR.timeoutMs);
     let stdout = "";
     let stderr = "";
     child.stdout.on("data", (chunk) => {
@@ -133,7 +152,12 @@ function runExtractor(pdfPath: string, textPath: string): Promise<{ ok: true; pa
     child.stderr.on("data", (chunk) => {
       stderr += chunk.toString();
     });
-    child.on("close", (code) => {
+    child.on("error", () => finish({ ok: false, pages: null, reason: "extractor-failed" }));
+    child.on("close", (code, signal) => {
+      if (signal === "SIGKILL") {
+        finish({ ok: false, pages: null, reason: "timeout" });
+        return;
+      }
       let parsed: { pages?: number; chars?: number; reason?: string | null } = {};
       try {
         parsed = JSON.parse(stdout);
@@ -141,10 +165,10 @@ function runExtractor(pdfPath: string, textPath: string): Promise<{ ok: true; pa
         parsed = {};
       }
       if (code === 0 && typeof parsed.pages === "number") {
-        resolve({ ok: true, pages: parsed.pages, chars: parsed.chars ?? 0 });
+        finish({ ok: true, pages: parsed.pages, chars: parsed.chars ?? 0 });
         return;
       }
-      resolve({
+      finish({
         ok: false,
         pages: typeof parsed.pages === "number" ? parsed.pages : null,
         reason: parsed.reason || stderr.trim() || `extractor-exit-${code}`,

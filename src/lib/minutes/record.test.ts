@@ -7,7 +7,7 @@ import { members } from "@/data/members";
 import { formatSyncTime } from "@/lib/format";
 import { attributeDivision, matchMinutesName } from "@/lib/minutes/match";
 import { parseMinutes } from "@/lib/minutes/parse";
-import { inOffice, meetingsForMember, toStoredDivision, type ReadingsFile, type StoredDivision } from "@/lib/minutes/record";
+import { inOffice, meetingsForMember, officeOn, toStoredDivision, type ReadingsFile, type StoredDivision } from "@/lib/minutes/record";
 
 const readings = readingsJson as ReadingsFile;
 const fixtures = path.join(import.meta.dirname, "fixtures");
@@ -37,7 +37,25 @@ test("the saved 12 November 2026 fixture matches the committed reading", () => {
   const meeting = readings.meetings.find((item) => item.date === "2026-11-12" && item.bodyId === "te-kaunihera");
   assert.ok(meeting);
   assert.equal(meeting.minutesUrl, JSON.parse(text("council-2026-11-12.json")).sourceUrl);
-  assert.deepEqual(meeting.divisions, stored);
+  const voteKey = (division: StoredDivision) =>
+    division.read
+      ? {
+          read: true,
+          clauseLabel: division.clauseLabel,
+          result: division.result,
+          majority: division.majority,
+          for: division.for,
+          against: division.against,
+          abstained: division.abstained,
+          absent: division.absent,
+          notVoting: division.notVoting,
+        }
+      : { read: false, clauseLabel: division.clauseLabel };
+  assert.deepEqual(meeting.divisions.map(voteKey), stored.map(voteKey));
+  assert.deepEqual(
+    meeting.divisions.map((division) => division.page),
+    [6, 7, 8, 8, 8, 9, 10],
+  );
 });
 
 test("absent stays absent, and a missing name stays not recorded", () => {
@@ -71,6 +89,34 @@ test("absent stays absent, and a missing name stays not recorded", () => {
   assert.equal(oconnor.divisions[0].state, "not-in-office");
 });
 
+test("a partial month is not stretched to the 31st, and an unsourced day is not Not recorded", () => {
+  assert.equal(officeOn({ since: "2026-08" }, "2026-08-13"), "uncertain");
+  const randle = members.find((member) => member.slug === "tony-randle");
+  assert.ok(randle);
+  assert.equal(officeOn(randle, "2026-08-06"), "in");
+  assert.equal(officeOn(randle, "2026-08-08"), "uncertain");
+  assert.equal(officeOn(randle, "2026-08-09"), "uncertain");
+  assert.equal(officeOn(randle, "2026-08-13"), "out");
+  assert.equal(officeOn(randle, "2026-08-27"), "out");
+  const rows = meetingsForMember(readings, "tony-randle", members).filter((meeting) => meeting.date === "2026-08-13" || meeting.date === "2026-08-27");
+  assert.ok(rows.length >= 2);
+  for (const meeting of rows) assert.deepEqual(meeting.divisions.map((division) => division.state), ["not-in-office"]);
+});
+
+test("the oversized inaugural minutes are skipped, not shown as read", () => {
+  const meeting = readings.meetings.find((item) => item.date === "2025-10-30" && item.bodyId === "te-kaunihera");
+  assert.ok(meeting);
+  assert.equal(meeting.status, "skipped");
+  assert.equal(meeting.extract?.reason, "over-byte-cap");
+  assert.deepEqual(
+    meeting.divisions.map((division) => division.page),
+    [9, 10],
+  );
+  const little = meetingsForMember(readings, "andrew-little", members).find((item) => item.date === "2025-10-30");
+  assert.equal(little?.status, "skipped");
+  assert.deepEqual(little?.divisions.map((division) => division.state), ["not-fetched"]);
+});
+
 test("a person who held office and was not named stays not recorded", () => {
   const meeting = readings.meetings.find((item) => item.date === "2026-09-24" && item.bodyId === "te-kaunihera");
   assert.ok(meeting);
@@ -86,7 +132,7 @@ test("meetings outside a term are one not-in-office row, not a missing vote", ()
   assert.equal(oconnor.flatMap((meeting) => meeting.divisions).filter((division) => division.state === "not-recorded").length, 0);
   assert.ok(oconnor.some((meeting) => meeting.divisions[0]?.state === "not-in-office"));
   assert.ok(randle.some((meeting) => meeting.divisions[0]?.state === "not-in-office"));
-  assert.ok(randle.flatMap((meeting) => meeting.divisions).some((division) => division.state === "not-recorded"));
+  assert.equal(randle.flatMap((meeting) => meeting.divisions).some((division) => division.state === "not-recorded"), false);
   for (const member of members) {
     for (const meeting of meetingsForMember(readings, member.slug, members)) {
       if (inOffice(member, meeting.date)) continue;

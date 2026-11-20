@@ -45,3 +45,4 @@ next-env.d.ts
 
 # local Mātai Manapori response cache (not source data)
 .cache/
+.venv-minutes/

@@ -13,6 +13,8 @@ export const voteState: Record<MinuteVoteState, Phrase> = {
   "not-read": { en: "Not read", mi: "Kāore i pānuitia", review: true },
   "no-division": { en: "No division recorded", mi: "Kāore he wehenga i tuhia", review: true },
   "not-in-office": { en: "Not in office", mi: "", review: true },
+  "term-uncertain": { en: "Day not in a public source", mi: "", review: true },
+  "not-fetched": { en: "Minutes file not fetched", mi: "", review: true },
 };
 
 export const howNav: Phrase = { en: "How this works", mi: "Pēhea tēnei mahi", review: true };
@@ -46,6 +48,16 @@ export const minutesPhrases: Phrase[] = [
     mi: "",
     review: true,
   },
+  {
+    en: "Where a public source does not give a single day for the start or end of a term, divisions on the unsourced days are left off. They are not marked Not recorded.",
+    mi: "",
+    review: true,
+  },
+  {
+    en: "The 30 October 2025 Council minutes file is about 101 MB, over the 25 MB cap, so it is not fetched. That meeting is not shown as read.",
+    mi: "",
+    review: true,
+  },
 ];
 
 export const howParagraphs: { heading: string | null; headingMi: string; body: Phrase }[] = [
@@ -73,6 +85,15 @@ export const howParagraphs: { heading: string | null; headingMi: string; body: P
     body: {
       en: "A person who is not named is not recorded. That is not absence and it is not an abstention. The Mātai Manapori name lists are not copied onto the councillor page. In this set of minutes, no division block used an abstain list, so abstained is not shown for these meetings. Plain-language lines on a decision are a reading of the published clause. Where no Māori sentence has been written, the page says so.",
       mi: "Ko te tangata kāore i whakaingoatia, kāore i tuhia. Ehara i te tāwāhi, ehara hoki i te waiho. Kāore e tāruatia ngā rārangi ingoa a Mātai Manapori ki te whārangi kaikaunihera. I tēnei huinga meneti, kāore he poraka wehenga i whakamahi rārangi waiho, nō reira kāore e whakaaturia te waiho mō ēnei hui. He pānui o te wāhanga kua whakaputaina ngā rārangi reo māhorahora. Ki te kore anō kia tuhia he kupu Māori, ka kī te whārangi.",
+      review: true,
+    },
+  },
+  {
+    heading: "Dates of office",
+    headingMi: "",
+    body: {
+      en: "Each since and until date is a day from a public source, named on the member. A month is not stretched to the 31st. Tony Randle's death is reported as the night of 8 or 9 August 2026, not one day, and the Council acknowledgement is dated 10 August 2026. Meetings from 8 August 2026 are left off his page. They are not marked Not recorded. Pouiwi were appointed on 30 October 2025 after that meeting's divisions, so their first day is 31 October 2025. The 30 October 2025 Council minutes are about 101 MB and are over the fetch cap, so that meeting is skipped rather than shown as read.",
+      mi: "",
       review: true,
     },
   },

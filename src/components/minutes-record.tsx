@@ -50,7 +50,7 @@ export function MinutesRecord({ meetings }: { meetings: MemberMeeting[] }) {
       </p>
       {meetings.map((meeting) => {
         const body = committees.find((committee) => committee.id === meeting.bodyId);
-        const rows = meeting.divisions.filter((row) => row.state !== "not-in-office");
+        const rows = meeting.divisions.filter((row) => row.state !== "not-in-office" && row.state !== "term-uncertain");
         if (rows.length === 0) return null;
         return (
           <section key={`${meeting.date}-${meeting.bodyId}`} style={{ marginTop: "1.4rem" }}>
@@ -66,7 +66,12 @@ export function MinutesRecord({ meetings }: { meetings: MemberMeeting[] }) {
               )}
             </h3>
             <p className="meta">
-              {meeting.closedSessionOmitted ? (
+              {meeting.status === "skipped" ? (
+                <T
+                  en="This minutes file was not fetched. It is over the 25 MB cap, so the meeting is not shown as read."
+                  mi=""
+                />
+              ) : meeting.closedSessionOmitted ? (
                 <T en={closedCopied.en} mi={closedCopied.mi} />
               ) : (
                 <T en={closedNone.en} mi={closedNone.mi} />

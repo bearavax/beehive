@@ -11,7 +11,9 @@ export type MinuteVoteState =
   | "not-recorded"
   | "not-read"
   | "no-division"
-  | "not-in-office";
+  | "not-in-office"
+  | "term-uncertain"
+  | "not-fetched";
 
 export type StoredDivision =
   | { read: false; clauseLabel: string | null; item: string | null; page: number | null }
@@ -44,7 +46,7 @@ export type StoredMeeting = {
   bytes: number;
   pages: number | null;
   chars: number;
-  status: "read" | "unreadable";
+  status: "read" | "unreadable" | "skipped";
   closedSessionOmitted: boolean;
   extract: ExtractRecord | null;
   divisions: StoredDivision[];
@@ -72,7 +74,8 @@ export type MemberMeeting = {
   bodyId: string;
   minutesUrl: string | null;
   syncedAt: string;
-  status: "read" | "unreadable";
+  status: "read" | "unreadable" | "skipped";
+  extract: ExtractRecord | null;
   closedSessionOmitted: boolean;
   divisions: MemberDivision[];
 };
@@ -96,28 +99,38 @@ export function toStoredDivision(division: MinuteDivision): StoredDivision {
   };
 }
 
-/** Expand a year or year-month to a day so a partial term date can be compared. */
-export function termBound(value: string, edge: "start" | "end"): string {
-  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
-  if (/^\d{4}-\d{2}$/.test(value)) return edge === "start" ? `${value}-01` : `${value}-31`;
-  if (/^\d{4}$/.test(value)) return edge === "start" ? `${value}-01-01` : `${value}-12-31`;
-  return value;
+const DAY = /^\d{4}-\d{2}-\d{2}$/;
+
+export type Office = "in" | "out" | "uncertain";
+
+/** A month such as 2026-08 is not expanded to the 31st. An unsourced day is uncertain. */
+export function officeOn(
+  member: { since: string; until?: string; uncertainFrom?: string; uncertainUntil?: string },
+  date: string,
+): Office {
+  if (!DAY.test(member.since) || (member.until !== undefined && !DAY.test(member.until))) return "uncertain";
+  if (member.uncertainFrom && member.uncertainUntil && date >= member.uncertainFrom && date <= member.uncertainUntil) {
+    return "uncertain";
+  }
+  if (date < member.since) return "out";
+  if (member.until && date > member.until) return "out";
+  return "in";
 }
 
-/** True when the meeting date falls inside since/until. A missing until means the person is still in office. */
-export function inOffice(member: { since: string; until?: string }, date: string): boolean {
-  if (date < termBound(member.since, "start")) return false;
-  if (!member.until) return true;
-  return date <= termBound(member.until, "end");
+export function inOffice(member: { since: string; until?: string; uncertainFrom?: string; uncertainUntil?: string }, date: string) {
+  return officeOn(member, date) === "in";
 }
 
-function notInOfficeRow(): MemberDivision {
-  return { clauseLabel: null, item: null, page: null, result: null, state: "not-in-office", recordedAs: null };
+function marker(state: MinuteVoteState): MemberDivision {
+  return { clauseLabel: null, item: null, page: null, result: null, state, recordedAs: null };
 }
 
 function rowsForMeeting(meeting: StoredMeeting, slug: string, members: Member[]): MemberDivision[] {
   const member = members.find((item) => item.slug === slug);
-  if (member && !inOffice(member, meeting.date)) return [notInOfficeRow()];
+  const office = member ? officeOn(member, meeting.date) : "in";
+  if (office === "out") return [marker("not-in-office")];
+  if (office === "uncertain") return [marker("term-uncertain")];
+  if (meeting.status === "skipped" || meeting.extract?.status === "skipped") return [marker("not-fetched")];
   if (meeting.status !== "read") {
     return [{ clauseLabel: null, item: null, page: null, result: null, state: "not-read", recordedAs: null }];
   }
@@ -185,6 +198,7 @@ export function meetingsForMember(file: ReadingsFile, slug: string, members: Mem
     minutesUrl: meeting.minutesUrl,
     syncedAt: file.syncedAt,
     status: meeting.status,
+    extract: meeting.extract,
     closedSessionOmitted: meeting.closedSessionOmitted,
     divisions: rowsForMeeting(meeting, slug, members),
   }));
