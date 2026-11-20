@@ -43,9 +43,11 @@ The public read API is `/api/v1`. The plug-in contract for the May 2027 hackatho
 
 The Council’s terms of reference record obligations to iwi and Māori under Te Tiriti o Waitangi. Pouiwi are full voting members of the committees they are appointed to. At full Council, Tākai Here representatives may attend and speak, and they do not vote. That limit is stated on the member pages and on the methodology page at `/about`.
 
-## Legacy `backend/`
+## Legacy Express API
 
-`backend/` is an earlier Express API from before this website. It is not used by the Next.js app. Its `.env` and `node_modules` are not tracked. If that file was ever public, rotate the database password and JWT secret. Do not commit them again.
+The old Express API is archived at `archive/legacy-express`. Nothing in the Next.js app imports it, and CI does not install it. A `.env` from that service was removed from the tree and remains in git history. Rotate the database password and JWT secret. Do not rewrite history until that rotation is confirmed.
+
+A later local node and signed data bundles are described in [docs/static-nodes.md](docs/static-nodes.md). They are not built.
 
 ## Stack
 

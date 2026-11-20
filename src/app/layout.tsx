@@ -34,9 +34,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const headerStore = await headers();
   const cookieStore = await cookies();
   const initial = readLang(headerStore.get("x-beehive-reo") ?? cookieStore.get("beehive-reo")?.value);
+  const nonce = headerStore.get("x-nonce") ?? undefined;
 
   return (
-    <html lang={initial === "mi" ? "mi" : "en"} className={`${serif.variable} ${sans.variable}`}>
+    <html lang={initial === "mi" ? "mi" : "en"} nonce={nonce} className={`${serif.variable} ${sans.variable}`}>
       <body>
         <LanguageProvider initial={initial}>
           <SiteFrame>{children}</SiteFrame>

@@ -1,14 +1,13 @@
-import starterManifestJson from "../../examples/starter-plugin/beehive-plugin.json";
 import wccManifestJson from "@/plugins/wcc/beehive-plugin.json";
 import { pluginBadge, validatePluginManifest, type PluginManifest } from "@/lib/sdk/manifest";
 
 export type RegisteredPlugin = {
   manifest: PluginManifest;
-  trust: "core" | "example";
+  trust: "core";
   badge: "statutory-record" | "community-plugin";
 };
 
-function load(input: unknown, trust: RegisteredPlugin["trust"], expect: PluginManifest["kind"]): RegisteredPlugin {
+function load(input: unknown, expect: PluginManifest["kind"]): RegisteredPlugin {
   const result = validatePluginManifest(input);
   if (!result.ok) {
     throw new Error(`Plug-in manifest failed validation: ${result.errors.join("; ")}`);
@@ -16,13 +15,11 @@ function load(input: unknown, trust: RegisteredPlugin["trust"], expect: PluginMa
   if (result.manifest.kind !== expect) {
     throw new Error(`${result.manifest.id} must be kind ${expect}`);
   }
-  return { manifest: result.manifest, trust, badge: pluginBadge(result.manifest.kind, trust) };
+  return { manifest: result.manifest, trust: "core", badge: pluginBadge(result.manifest.kind, "core") };
 }
 
-export const plugins: RegisteredPlugin[] = [
-  load(wccManifestJson, "core", "statutory-adapter"),
-  load(starterManifestJson, "example", "community"),
-];
+/** Production register. Community plug-ins are not loaded here. They run outside this process. */
+export const plugins: RegisteredPlugin[] = [load(wccManifestJson, "statutory-adapter")];
 
 export function pluginById(id: string) {
   return plugins.find((plugin) => plugin.manifest.id === id) ?? null;
