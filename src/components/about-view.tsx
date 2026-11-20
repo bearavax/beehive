@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { T } from "@/lib/i18n";
 
 export function AboutView({ syncedAt }: { syncedAt: string }) {
@@ -90,6 +91,23 @@ export function AboutView({ syncedAt }: { syncedAt: string }) {
             en="It is not a poll, a whip count, or a prediction. Alignment on a profile is the share of named divisions in this set where the member’s vote matched the recorded result. It will move when more reports are synced. The legacy Express API under backend/ is an earlier, unused project and is not part of this website."
             mi="Ehara i te pōti whakaaro, i te tatau porotēhi, i te matapae rānei. Ko te hāngai i te kōtaha te wāhi o ngā wehenga kua whakaingoatia i tēnei huinga i ōrite ai te pōti a te mema ki te hua i tuhia. Ka neke ina tukutahitia ētahi atu pūrongo. He kaupapa tawhito kāore i te whakamahia te API Express i raro i a backend/, ā, ehara i te wāhanga o tēnei paetukutuku."
           />
+        </p>
+      </section>
+
+      <section>
+        <h2>
+          <T en="Plug-ins" mi="" />
+        </h2>
+        <p>
+          <T
+            en="Other councils connect through a CouncilAdapter. Community hackathon plug-ins are badged separately from the statutory Wellington record. The public read API is /api/v1."
+            mi=""
+          />
+        </p>
+        <p>
+          <Link href="/plugins">
+            <T en="See the plug-in register" mi="" />
+          </Link>
         </p>
       </section>
 
