@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Newsreader, Public_Sans } from "next/font/google";
+import { htmlLang } from "@/lib/lang";
 import "./globals.css";
 
 const serif = Newsreader({
@@ -23,9 +25,10 @@ export const metadata: Metadata = {
     "A bilingual record of Wellington City Council decisions for the 2025–2028 triennium. Plain language, named votes only when Mātai Manapori publishes them, and a standing place for Tākai Here Pouiwi.",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const lang = htmlLang((await headers()).get("x-beehive-lang"));
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+    <html lang={lang} className={`${serif.variable} ${sans.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { isLang, type Lang } from "@/lib/lang";
+import { isApiPath, planLanguage, preferredLang } from "@/lib/request-routing";
 
 function contentSecurityPolicy(nonce: string) {
   return [
@@ -22,15 +22,7 @@ function nonce() {
   return btoa(String.fromCharCode(...bytes));
 }
 
-function preferredLang(request: NextRequest): Lang {
-  const saved = request.cookies.get("beehive-reo")?.value;
-  if (isLang(saved)) return saved;
-  const first = (request.headers.get("accept-language") ?? "").split(",")[0]?.trim().toLowerCase() ?? "";
-  if (first.startsWith("mi")) return "mi";
-  return "bi";
-}
-
-function remember(response: NextResponse, lang: Lang) {
+function remember(response: NextResponse, lang: "en" | "mi" | "bi") {
   response.cookies.set("beehive-reo", lang, {
     path: "/",
     maxAge: 60 * 60 * 24 * 365,
@@ -39,12 +31,19 @@ function remember(response: NextResponse, lang: Lang) {
   });
 }
 
+function privateDocument(response: NextResponse, csp: string) {
+  response.headers.set("content-security-policy", csp);
+  response.headers.set("cache-control", "private, no-store");
+  response.headers.set("vary", "Cookie, Accept-Language");
+  return response;
+}
+
 export function middleware(request: NextRequest) {
   const token = nonce();
   const csp = contentSecurityPolicy(token);
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/api")) {
+  if (isApiPath(pathname)) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-nonce", token);
     requestHeaders.set("content-security-policy", csp);
@@ -53,40 +52,39 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
-  const requested = request.nextUrl.searchParams.get("reo");
-  const segment = pathname.split("/")[1];
+  const plan = planLanguage(
+    pathname,
+    request.nextUrl.searchParams.get("reo"),
+    preferredLang(request.cookies.get("beehive-reo")?.value, request.headers.get("accept-language")),
+  );
   const url = request.nextUrl.clone();
   url.searchParams.delete("reo");
 
-  if (isLang(requested) && segment !== requested) {
-    const rest = isLang(segment) ? pathname.slice(segment.length + 1) : pathname;
-    url.pathname = rest === "/" ? `/${requested}` : `/${requested}${rest.startsWith("/") ? rest : `/${rest}`}`;
+  if (plan.action === "redirect") {
+    url.pathname = plan.pathname;
     const response = NextResponse.redirect(url);
-    response.headers.set("content-security-policy", csp);
-    remember(response, requested);
-    return response;
-  }
-
-  if (!isLang(segment)) {
-    const lang = preferredLang(request);
-    url.pathname = pathname === "/" ? `/${lang}` : `/${lang}${pathname}`;
-    const response = NextResponse.redirect(url);
-    response.headers.set("content-security-policy", csp);
-    remember(response, lang);
+    privateDocument(response, csp);
+    remember(response, plan.lang);
     return response;
   }
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", token);
   requestHeaders.set("content-security-policy", csp);
+  requestHeaders.set("x-beehive-lang", plan.lang);
   const response = NextResponse.next({ request: { headers: requestHeaders } });
-  response.headers.set("content-security-policy", csp);
-  remember(response, segment);
+  privateDocument(response, csp);
+  remember(response, plan.lang);
   return response;
 }
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:ico|png|jpg|jpeg|gif|webp|svg|css|js|map|txt|xml|woff2?|json)$).*)",
+    {
+      // Skip Next's static assets and real file extensions. A dotted decision
+      // slug such as /en/decisions/a.b still gets the nonce policy.
+      // Prefetch is not excluded: skipping middleware made those requests 500.
+      source: "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:ico|png|jpg|jpeg|gif|webp|svg|css|js|map|txt|xml|woff2?|json)$).*)",
+    },
   ],
 };

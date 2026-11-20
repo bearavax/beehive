@@ -25,6 +25,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -34,6 +36,9 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci --ignore-scripts
+      - run: npx tsc --noEmit
+      - run: npm test
       - run: npm run lint
       - run: npm run build
+      - run: npm run api:check
       - run: npm run scan:secrets
