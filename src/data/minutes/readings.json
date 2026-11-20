@@ -1,7 +1,7 @@
 {
   "source": "wcc-minutes-pdf",
   "syncedAt": "2026-11-20T08:00:48.968Z",
-  "note": "Division blocks copied from public Wellington City Council minutes PDFs with pypdf 5.9.0. A block is stored only when For and Against counts match the printed majority. Absent, abstained, and not voting stay separate. Closed-session text is not stored. Names that are not in a division list are not stored. Poppler pdftotext without -layout yields 0 read blocks, so it is not used. A file over the byte cap is skipped and the previous reading is kept.",
+  "note": "Division blocks copied from public Wellington City Council minutes PDFs with pypdf 7.1.1. A block is stored only when For and Against counts match the printed majority. Absent, abstained, and not voting stay separate. Closed-session text is not stored. Names that are not in a division list are not stored. Poppler pdftotext without -layout yields 0 read blocks, so it is not used. A file over the byte cap is skipped and the previous reading is kept.",
   "meetings": [
     {
       "date": "2026-11-12",
@@ -48,7 +48,7 @@
           "read": true,
           "clauseLabel": "Clauses 1-6",
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "14:2",
           "for": [
@@ -171,7 +171,7 @@
           "read": true,
           "clauseLabel": "Clause 7",
           "item": "2.1",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "14:2",
           "for": [
@@ -231,7 +231,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -249,7 +249,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -269,7 +269,7 @@
           "read": true,
           "clauseLabel": "Clauses 5.4, 5.5 and 5.6.",
           "item": "2.3",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "13:4",
           "for": [
@@ -301,7 +301,7 @@
           "read": true,
           "clauseLabel": "Clauses 5, 5.1, 5.2 and 5.3.",
           "item": "2.3",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "14:3",
           "for": [
@@ -332,7 +332,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -350,7 +350,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -400,7 +400,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "15:1",
           "for": [
@@ -493,7 +493,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.4",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -554,7 +554,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.6",
-          "page": 14,
+          "page": 15,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -614,7 +614,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.1",
-          "page": 16,
+          "page": 17,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -644,7 +644,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.1",
-          "page": 18,
+          "page": 19,
           "result": "Carried",
           "majority": "15:1",
           "for": [
@@ -674,7 +674,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -694,19 +694,19 @@
           "read": false,
           "clauseLabel": "Clause 3.1",
           "item": "1.4",
-          "page": 12
+          "page": 13
         },
         {
           "read": false,
           "clauseLabel": "Clause 4.1",
           "item": "1.4",
-          "page": 12
+          "page": 13
         },
         {
           "read": true,
           "clauseLabel": "Clause 4.4",
           "item": "1.4",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "11:7",
           "for": [
@@ -739,7 +739,7 @@
           "read": true,
           "clauseLabel": "Clause 4.1",
           "item": "1.4",
-          "page": 14,
+          "page": 15,
           "result": "Carried",
           "majority": "12:6",
           "for": [
@@ -772,7 +772,7 @@
           "read": true,
           "clauseLabel": "Clause 4.2",
           "item": "1.4",
-          "page": 14,
+          "page": 15,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -805,7 +805,7 @@
           "read": true,
           "clauseLabel": "Clause 4",
           "item": "1.4",
-          "page": 14,
+          "page": 15,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -838,7 +838,7 @@
           "read": true,
           "clauseLabel": "Clauses 1-4",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -870,7 +870,7 @@
           "read": true,
           "clauseLabel": "Clause 4.1.2",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "11:7",
           "for": [
@@ -903,19 +903,19 @@
           "read": false,
           "clauseLabel": "Clause 4.1.3",
           "item": "1.4",
-          "page": 20
+          "page": 21
         },
         {
           "read": false,
           "clauseLabel": "Clause 4.1.4",
           "item": "1.4",
-          "page": 20
+          "page": 21
         },
         {
           "read": true,
           "clauseLabel": "Clause 4.1.5",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -948,7 +948,7 @@
           "read": true,
           "clauseLabel": "Clause 4.1.6",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -981,7 +981,7 @@
           "read": true,
           "clauseLabel": "Clause 4.1.15",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -1014,7 +1014,7 @@
           "read": true,
           "clauseLabel": "Clause 4.1.17",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -1047,7 +1047,7 @@
           "read": true,
           "clauseLabel": "Clause 4.1.21",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -1080,7 +1080,7 @@
           "read": true,
           "clauseLabel": "Clause 4.1 and all remaining subclauses",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -1112,7 +1112,7 @@
           "read": true,
           "clauseLabel": "Clause 4.2.3",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -1145,7 +1145,7 @@
           "read": true,
           "clauseLabel": "Clause 4.2.6",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "14:4",
           "for": [
@@ -1178,13 +1178,13 @@
           "read": false,
           "clauseLabel": "Clause 4.2.8",
           "item": "1.4",
-          "page": 20
+          "page": 21
         },
         {
           "read": true,
           "clauseLabel": "Clauses 4.2.9-10",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -1217,7 +1217,7 @@
           "read": true,
           "clauseLabel": "Clause 4.2.14",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -1250,7 +1250,7 @@
           "read": true,
           "clauseLabel": "Clause 4.2 and all remaining subclauses",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -1282,7 +1282,7 @@
           "read": true,
           "clauseLabel": "Clause 4.3.1",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -1315,7 +1315,7 @@
           "read": true,
           "clauseLabel": "Clause 4.3.3",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "15:3",
           "for": [
@@ -1348,7 +1348,7 @@
           "read": true,
           "clauseLabel": "Clause 4.3 and all remaining subclauses",
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -1380,7 +1380,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "1.4",
-          "page": 20,
+          "page": 21,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -1411,7 +1411,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -1431,18 +1431,18 @@
           "read": false,
           "clauseLabel": "clauses 5 and 5.1",
           "item": "2.1",
-          "page": 6
+          "page": 8
         },
         {
           "read": false,
           "clauseLabel": "clauses 5.2 and 5.3",
           "item": "2.1",
-          "page": 8
+          "page": 9
         }
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -1594,7 +1594,7 @@
           "read": true,
           "clauseLabel": "Recommendation 2.2.4",
           "item": "2.2",
-          "page": 10,
+          "page": 11,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1627,7 +1627,7 @@
           "read": true,
           "clauseLabel": "Recommendation 2.2.5",
           "item": "2.2",
-          "page": 10,
+          "page": 11,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -1660,7 +1660,7 @@
           "read": true,
           "clauseLabel": "Recommendation 2.2.6",
           "item": "2.2",
-          "page": 10,
+          "page": 11,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1825,7 +1825,7 @@
           "read": true,
           "clauseLabel": "Recommendation 2.2.11",
           "item": "2.2",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1858,7 +1858,7 @@
           "read": true,
           "clauseLabel": "Recommendation 2.2.12",
           "item": "2.2",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -1891,7 +1891,7 @@
           "read": true,
           "clauseLabel": "Recommendation 2.2.13",
           "item": "2.2",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "11:5",
           "for": [
@@ -1924,7 +1924,7 @@
           "read": true,
           "clauseLabel": "Recommendation 2.2.14",
           "item": "2.2",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -2152,7 +2152,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -2230,7 +2230,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": null,
           "majority": "15:0",
           "for": [
@@ -2259,7 +2259,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 8,
+          "page": 9,
           "result": null,
           "majority": "14:0",
           "for": [
@@ -2316,7 +2316,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.4",
-          "page": 10,
+          "page": 11,
           "result": null,
           "majority": "15:0",
           "for": [
@@ -2374,7 +2374,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.6",
-          "page": 12,
+          "page": 13,
           "result": null,
           "majority": "15:0",
           "for": [
@@ -2432,7 +2432,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.2",
-          "page": 14,
+          "page": 15,
           "result": null,
           "majority": "14:1",
           "for": [
@@ -2461,7 +2461,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -2545,7 +2545,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 10,
+          "page": 11,
           "result": "Carried",
           "majority": "10:7",
           "for": [
@@ -2576,7 +2576,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -2692,7 +2692,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.3",
-          "page": 14,
+          "page": 15,
           "result": "Carried",
           "majority": "12:4",
           "for": [
@@ -2722,7 +2722,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -2742,7 +2742,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.3",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -2771,9 +2771,9 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 1 \u2013 2(a)(iii)",
+          "clauseLabel": "Clauses 1 – 2(a)(iii)",
           "item": "2.2",
-          "page": 6,
+          "page": 8,
           "result": "Carried",
           "majority": "16:1",
           "for": [
@@ -2805,7 +2805,7 @@
           "read": true,
           "clauseLabel": "Clause 2(a)(iv)",
           "item": "2.2",
-          "page": 6,
+          "page": 8,
           "result": null,
           "majority": "13:4",
           "for": [
@@ -2837,7 +2837,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 8,
+          "page": 9,
           "result": "Lost",
           "majority": "4:13",
           "for": [
@@ -2869,7 +2869,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 8,
+          "page": 10,
           "result": "Lost",
           "majority": "6:11",
           "for": [
@@ -2900,7 +2900,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -2920,7 +2920,7 @@
           "read": true,
           "clauseLabel": null,
           "item": null,
-          "page": 4,
+          "page": 5,
           "result": "Carried",
           "majority": "14:0",
           "for": [
@@ -2948,7 +2948,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -2977,7 +2977,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 6,
+          "page": 8,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -3006,7 +3006,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.3",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -3035,7 +3035,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.4",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -3064,7 +3064,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.5",
-          "page": 8,
+          "page": 10,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -3093,7 +3093,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.5",
-          "page": 8,
+          "page": 10,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -3122,7 +3122,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.5",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "14:1",
           "for": [
@@ -3151,7 +3151,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -3169,7 +3169,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -3219,7 +3219,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -3237,7 +3237,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -3257,7 +3257,7 @@
           "read": true,
           "clauseLabel": "Clause 2.1",
           "item": "2.3",
-          "page": 8,
+          "page": 10,
           "result": "Lost",
           "majority": "5:12",
           "for": [
@@ -3289,18 +3289,18 @@
           "read": false,
           "clauseLabel": "Clause 2.3",
           "item": "2.3",
-          "page": 8
+          "page": 10
         },
         {
           "read": false,
           "clauseLabel": null,
           "item": "2.3",
-          "page": 8
+          "page": 10
         }
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -3350,7 +3350,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 4,
+          "page": 5,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3380,7 +3380,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 8,
+          "page": 9,
           "result": "Lost",
           "majority": "5:11",
           "for": [
@@ -3472,7 +3472,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 10,
+          "page": 11,
           "result": "Carried",
           "majority": "15:1",
           "for": [
@@ -3503,7 +3503,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 14,
+          "page": 15,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -3562,7 +3562,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -3582,7 +3582,7 @@
           "read": true,
           "clauseLabel": "Clause 2",
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -3615,7 +3615,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -3647,7 +3647,7 @@
           "read": true,
           "clauseLabel": "Clauses 2.1 and 2.2",
           "item": "2.1",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -3680,7 +3680,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -3712,7 +3712,7 @@
           "read": true,
           "clauseLabel": "Clause 3",
           "item": "2.2",
-          "page": 8,
+          "page": 10,
           "result": "Carried",
           "majority": "17:1",
           "for": [
@@ -3745,7 +3745,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 8,
+          "page": 10,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -3776,7 +3776,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -3796,7 +3796,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "10:7",
           "for": [
@@ -3830,7 +3830,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.2",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "13:4",
           "for": [
@@ -3930,7 +3930,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -4201,7 +4201,7 @@
           "read": true,
           "clauseLabel": "Clause 1 and 2",
           "item": "2.2",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "13:3",
           "for": [
@@ -4235,7 +4235,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4267,7 +4267,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -4287,7 +4287,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "16:2",
           "for": [
@@ -4353,7 +4353,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -4384,7 +4384,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -4404,7 +4404,7 @@
           "read": true,
           "clauseLabel": null,
           "item": null,
-          "page": 4,
+          "page": 5,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4465,7 +4465,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.2",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4525,7 +4525,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.2",
-          "page": 10,
+          "page": 11,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4585,7 +4585,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.1",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4615,7 +4615,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4675,7 +4675,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.3",
-          "page": 14,
+          "page": 15,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4705,7 +4705,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.4",
-          "page": 14,
+          "page": 15,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4735,7 +4735,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.4",
-          "page": 14,
+          "page": 15,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -4794,7 +4794,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -4845,7 +4845,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 12,
+          "page": 13,
           "result": null,
           "majority": "5:13",
           "for": [
@@ -5009,7 +5009,7 @@
           "read": true,
           "clauseLabel": "Clauses 1-6",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -5041,7 +5041,7 @@
           "read": true,
           "clauseLabel": "Clause 7a(i)",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "14:3",
           "for": [
@@ -5073,13 +5073,13 @@
           "read": false,
           "clauseLabel": "Clause 7b",
           "item": "2.1",
-          "page": 20
+          "page": 21
         },
         {
           "read": true,
           "clauseLabel": "Clauses 7c-7e",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -5111,7 +5111,7 @@
           "read": true,
           "clauseLabel": "Clauses 7A-8",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -5143,7 +5143,7 @@
           "read": true,
           "clauseLabel": "Clause 9",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "14:4",
           "for": [
@@ -5176,7 +5176,7 @@
           "read": true,
           "clauseLabel": "Clause 10",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "13:5",
           "for": [
@@ -5209,7 +5209,7 @@
           "read": true,
           "clauseLabel": "Clause 11a",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "15:3",
           "for": [
@@ -5242,7 +5242,7 @@
           "read": true,
           "clauseLabel": "Clauses 11b-c",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "17:1",
           "for": [
@@ -5275,7 +5275,7 @@
           "read": true,
           "clauseLabel": "Clause 11d",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "13:5",
           "for": [
@@ -5308,7 +5308,7 @@
           "read": true,
           "clauseLabel": "Clause 11e",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "16:2",
           "for": [
@@ -5341,7 +5341,7 @@
           "read": true,
           "clauseLabel": "Clause 11f(i)-(iii)",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -5373,7 +5373,7 @@
           "read": true,
           "clauseLabel": "Clause 11f(iv)",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "15:3",
           "for": [
@@ -5406,7 +5406,7 @@
           "read": true,
           "clauseLabel": "Clauses 12-26",
           "item": "2.1",
-          "page": 20,
+          "page": 21,
           "result": null,
           "majority": "18:0",
           "for": [
@@ -5437,7 +5437,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -5489,7 +5489,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 10,
+          "page": 9,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -5520,7 +5520,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -5540,7 +5540,7 @@
           "read": true,
           "clauseLabel": "Clauses 2 & 2.1",
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -5573,7 +5573,7 @@
           "read": true,
           "clauseLabel": "Clause 2.2",
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -5606,7 +5606,7 @@
           "read": true,
           "clauseLabel": "Clause 2.3",
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "16:1",
           "for": [
@@ -5640,7 +5640,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "17:0",
           "for": [
@@ -5814,7 +5814,7 @@
           "read": true,
           "clauseLabel": "Clause 4",
           "item": "2.4",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "12:6",
           "for": [
@@ -5846,7 +5846,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -5896,7 +5896,7 @@
           "read": true,
           "clauseLabel": null,
           "item": null,
-          "page": 4,
+          "page": 5,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -5957,7 +5957,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -5987,7 +5987,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -6080,7 +6080,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.5",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -6141,7 +6141,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -6159,7 +6159,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -6179,7 +6179,7 @@
           "read": true,
           "clauseLabel": null,
           "item": null,
-          "page": 2,
+          "page": 5,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -6241,7 +6241,7 @@
           "read": true,
           "clauseLabel": null,
           "item": null,
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -6303,7 +6303,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -6365,7 +6365,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.1",
-          "page": 10,
+          "page": 11,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -6426,7 +6426,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -6444,7 +6444,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -6464,12 +6464,12 @@
           "read": false,
           "clauseLabel": null,
           "item": "3.2",
-          "page": 6
+          "page": 7
         }
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -6487,7 +6487,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -6507,7 +6507,7 @@
           "read": true,
           "clauseLabel": null,
           "item": null,
-          "page": 2,
+          "page": 5,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -6569,7 +6569,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "14:2",
           "for": [
@@ -6600,7 +6600,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -6629,7 +6629,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -6682,7 +6682,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "18:0",
           "for": [
@@ -6809,7 +6809,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clause 2.25 \u2013 2.25a",
+          "clauseLabel": "Clause 2.25 – 2.25a",
           "item": "2.2",
           "page": 12,
           "result": "Carried",
@@ -6906,7 +6906,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clause 2.27 \u2013 2.27a",
+          "clauseLabel": "Clause 2.27 – 2.27a",
           "item": "2.2",
           "page": 12,
           "result": "Carried",
@@ -7400,7 +7400,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clause 17 \u2013 21",
+          "clauseLabel": "Clause 17 – 21",
           "item": "2.2",
           "page": 22,
           "result": "Carried",
@@ -7433,7 +7433,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 1 \u2013 6",
+          "clauseLabel": "Clauses 1 – 6",
           "item": "2.2",
           "page": 26,
           "result": "Carried",
@@ -7465,7 +7465,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 7 \u2013 7.1",
+          "clauseLabel": "Clauses 7 – 7.1",
           "item": "2.2",
           "page": 26,
           "result": "Carried",
@@ -7497,7 +7497,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 7.2 \u2013 7.2.1",
+          "clauseLabel": "Clauses 7.2 – 7.2.1",
           "item": "2.2",
           "page": 26,
           "result": "Carried",
@@ -7530,7 +7530,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 7.2.3 \u2013 7.2.4",
+          "clauseLabel": "Clauses 7.2.3 – 7.2.4",
           "item": "2.2",
           "page": 26,
           "result": "Carried",
@@ -7595,7 +7595,7 @@
         },
         {
           "read": false,
-          "clauseLabel": "Clauses 8 \u2013 11",
+          "clauseLabel": "Clauses 8 – 11",
           "item": "2.2",
           "page": 26
         },
@@ -7667,7 +7667,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clause 12 \u2013 12.1",
+          "clauseLabel": "Clause 12 – 12.1",
           "item": "2.2",
           "page": 26,
           "result": "Carried",
@@ -7699,7 +7699,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 13 \u2013 15",
+          "clauseLabel": "Clauses 13 – 15",
           "item": "2.2",
           "page": 26,
           "result": "Carried",
@@ -7762,7 +7762,7 @@
         },
         {
           "read": true,
-          "clauseLabel": "Clauses 17 \u2013 21",
+          "clauseLabel": "Clauses 17 – 21",
           "item": "2.2",
           "page": 26,
           "result": "Carried",
@@ -7801,7 +7801,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -7821,7 +7821,7 @@
           "read": true,
           "clauseLabel": null,
           "item": null,
-          "page": 2,
+          "page": 5,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7883,7 +7883,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -7945,7 +7945,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.3",
-          "page": 8,
+          "page": 9,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -8007,7 +8007,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.1",
-          "page": 10,
+          "page": 11,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -8038,7 +8038,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.2",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "15:0",
           "for": [
@@ -8068,7 +8068,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8219,7 +8219,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8237,7 +8237,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8257,12 +8257,12 @@
           "read": false,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 4
+          "page": 5
         }
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8312,7 +8312,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 4,
+          "page": 5,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8372,7 +8372,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "3.1",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8401,7 +8401,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8421,7 +8421,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.1",
-          "page": 4,
+          "page": 5,
           "result": "Carried",
           "majority": "13:5",
           "for": [
@@ -8453,7 +8453,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8471,7 +8471,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8489,7 +8489,7 @@
       "divisions": [],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8509,7 +8509,7 @@
           "read": true,
           "clauseLabel": null,
           "item": null,
-          "page": 2,
+          "page": 5,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8598,7 +8598,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8618,7 +8618,7 @@
           "read": true,
           "clauseLabel": null,
           "item": null,
-          "page": 2,
+          "page": 5,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8678,7 +8678,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.2",
-          "page": 6,
+          "page": 7,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8798,7 +8798,7 @@
           "read": true,
           "clauseLabel": null,
           "item": "2.6",
-          "page": 12,
+          "page": 13,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8827,7 +8827,7 @@
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "parsed",
         "reason": null
       }
@@ -8840,12 +8840,14 @@
       "bytes": 101272935,
       "pages": 30,
       "chars": 17001,
-      "status": "read",
+      "status": "skipped",
       "closedSessionOmitted": false,
       "divisions": [
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.1",
+          "page": 9,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8869,13 +8871,13 @@
           "against": [],
           "abstained": null,
           "absent": null,
-          "notVoting": null,
-          "item": "2.1",
-          "page": 8
+          "notVoting": null
         },
         {
           "read": true,
           "clauseLabel": null,
+          "item": "2.2",
+          "page": 10,
           "result": "Carried",
           "majority": "16:0",
           "for": [
@@ -8899,14 +8901,12 @@
           "against": [],
           "abstained": null,
           "absent": null,
-          "notVoting": null,
-          "item": "2.2",
-          "page": 10
+          "notVoting": null
         }
       ],
       "extract": {
         "name": "pypdf",
-        "version": "5.9.0",
+        "version": "7.1.1",
         "status": "skipped",
         "reason": "over-byte-cap"
       }
@@ -8914,7 +8914,7 @@
   ],
   "extractor": {
     "name": "pypdf",
-    "version": "5.9.0",
+    "version": "7.1.1",
     "poppler": "Poppler pdftotext without -layout yields 0 read blocks on these minutes. Readings are built from pypdf only."
   }
 }

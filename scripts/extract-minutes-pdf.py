@@ -7,9 +7,12 @@ This script refuses any pypdf other than the pin in requirements-minutes.txt.
 """
 
 import json
+import resource
 import sys
 
-REQUIRED = "5.9.0"
+REQUIRED = "7.1.1"
+# A minutes file under the byte cap should extract well inside this address-space limit.
+MEMORY_BYTES = 256 * 1024 * 1024
 
 
 def main() -> int:
@@ -19,6 +22,11 @@ def main() -> int:
     page_cap = int(sys.argv[1])
     source = sys.argv[2]
     target = sys.argv[3]
+    try:
+        resource.setrlimit(resource.RLIMIT_AS, (MEMORY_BYTES, MEMORY_BYTES))
+    except (ValueError, OSError) as error:
+        print(f"could not set memory limit: {error}", file=sys.stderr)
+        return 2
     try:
         import pypdf
     except ImportError:
@@ -35,10 +43,15 @@ def main() -> int:
             sys.stdout,
         )
         return 3
+    # A running footer such as "Page 6" belongs to the previous page. Join on a
+    # form feed and let the parser count pages from those marks.
     parts: list[str] = []
     for page in reader.pages:
-        parts.append(page.extract_text() or "")
-    text = "\n".join(parts)
+        part = page.extract_text() or ""
+        if part and not part.endswith("\n"):
+            part += "\n"
+        parts.append(part)
+    text = "\f".join(parts)
     with open(target, "w", encoding="utf-8") as handle:
         handle.write(text)
     json.dump(

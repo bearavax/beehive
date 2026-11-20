@@ -8,6 +8,7 @@ export function HowView({
   syncedAt,
   files,
   unreadableFiles,
+  skippedFiles,
   closedSessions,
   read,
   unread,
@@ -15,12 +16,13 @@ export function HowView({
   syncedAt: string;
   files: number;
   unreadableFiles: number;
+  skippedFiles: number;
   closedSessions: number;
   read: number;
   unread: number;
 }) {
   const counts = {
-    en: `This copy read ${files} minutes files at ${syncedAt}. ${read} division blocks were read. ${unread} division blocks were not read. ${unreadableFiles} files could not be read as text. ${closedSessions} files had a closed session, and that text was not copied.`,
+    en: `This copy read ${files} minutes files at ${syncedAt}. ${read} division blocks were read. ${unread} division blocks were not read. ${unreadableFiles} files could not be read as text. ${skippedFiles} files were skipped because they are over the size cap and are not shown as read. ${closedSessions} files had a closed session, and that text was not copied.`,
     mi: `I pānui tēnei kape i ngā kōnae meneti ${files} i te ${syncedAt}. ${read} ngā poraka wehenga i pānuitia. ${unread} ngā poraka kāore i pānuitia. ${unreadableFiles} ngā kōnae kāore i taea te pānui hei kupu. ${closedSessions} ngā kōnae he wāhanga kati, ā, kāore i tāruatia taua kupu.`,
     review: true,
   };

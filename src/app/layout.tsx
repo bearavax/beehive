@@ -16,7 +16,10 @@ const sans = Public_Sans({
   display: "swap",
 });
 
+const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL ?? "https://beehive.local";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteOrigin),
   title: {
     default: "Beehive — Ngā whakataunga o Te Kaunihera o Pōneke",
     template: "%s — Beehive",

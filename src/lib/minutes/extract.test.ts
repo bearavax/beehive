@@ -5,7 +5,7 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { EXTRACTOR } from "@/lib/minutes/extractor";
+import { EXTRACTOR, minutesPython } from "@/lib/minutes/extractor";
 import { parseMinutes } from "@/lib/minutes/parse";
 
 const fixtures = path.join(import.meta.dirname, "fixtures");
@@ -15,6 +15,13 @@ const pdfs = [
     file: "council-2026-11-12.pdf",
     sha256: "18b0894f6b92f3705c58395272645cc45602fc1fc468957f790a0906e1d57294",
     read: 7,
+    pages: [6, 7, 8, 8, 8, 9, 10],
+  },
+  {
+    file: "csd-2026-05-28.pdf",
+    sha256: "f08d85ce04d4a89368a13ae049ee9a1d4860f5ccf52ac8fd3ef1182e2f6dd6b3",
+    read: 3,
+    pages: [7, 10, 13],
   },
   {
     file: "council-2026-03-12.pdf",
@@ -41,7 +48,7 @@ test("pinned pypdf reads the three committed minutes PDFs", () => {
     assert.equal(createHash("sha256").update(bytes).digest("hex"), pdf.sha256);
     const textPath = path.join(mkdtempSync(path.join(tmpdir(), "beehive-minutes-")), "extract.txt");
     const child = spawnSync(
-      "python3",
+      minutesPython(),
       [path.join("scripts", "extract-minutes-pdf.py"), String(EXTRACTOR.pageCap), file, textPath],
       { encoding: "utf8" },
     );
@@ -52,9 +59,6 @@ test("pinned pypdf reads the three committed minutes PDFs", () => {
     const parsed = parseMinutes(readFileSync(textPath, "utf8"));
     const read = parsed.divisions.filter((division) => division.read);
     assert.equal(read.length, pdf.read, pdf.file);
-    for (const division of read) {
-      if (division.clauseLabel) continue;
-      assert.ok(division.page !== null || division.item !== null, pdf.file);
-    }
+    if (pdf.pages) assert.deepEqual(parsed.divisions.map((division) => division.page), pdf.pages, pdf.file);
   }
 });

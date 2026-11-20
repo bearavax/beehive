@@ -60,9 +60,10 @@ export function parseMinutes(text: string): MinutesParse {
 
 function pageBefore(text: string, index: number): number | null {
   const before = text.slice(0, index);
-  let page: number | null = null;
-  for (const match of before.matchAll(/\bPage\s+(\d+)\b/gi)) {
-    page = Number(match[1]);
+  if (!before.includes("\f") && !text.includes("\f")) return null;
+  let page = 1;
+  for (let i = 0; i < before.length; i += 1) {
+    if (before.charCodeAt(i) === 12) page += 1;
   }
   return page;
 }
