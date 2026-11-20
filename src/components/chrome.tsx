@@ -4,11 +4,13 @@ import Link from "next/link";
 import { OutboundLink } from "@/components/outbound";
 import { usePathname } from "next/navigation";
 import { LangLink, stripLang, T, useLang, type Lang } from "@/lib/i18n";
+import { howNav } from "@/lib/minutes/copy";
 
 const links = [
   { href: "/", en: "Decisions", mi: "Ngā whakataunga" },
   { href: "/councillors", en: "Members", mi: "Ngā mema" },
   { href: "/issues", en: "Issues", mi: "Ngā kaupapa" },
+  { href: "/how-this-works", en: howNav.en, mi: howNav.mi },
   { href: "/about", en: "Methodology", mi: "Te tikanga" },
   { href: "/plugins", en: "Plug-ins", mi: "" },
 ];
@@ -84,6 +86,9 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
           <p className="sources">
             <OutboundLink href="https://meetings.wellington.govt.nz">Mātai Manapori</OutboundLink>
             <OutboundLink href="https://wellington.govt.nz">wellington.govt.nz</OutboundLink>
+            <LangLink href="/how-this-works">
+              <T en={howNav.en} mi={howNav.mi} />
+            </LangLink>
             <LangLink href="/about">
               <T en="Te Tiriti and methodology" mi="Te Tiriti me te tikanga" />
             </LangLink>

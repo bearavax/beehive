@@ -154,21 +154,3 @@ export type Issue = {
   summaryMi: string;
 };
 
-export type Stance = "for" | "against" | "not-voting" | "mixed";
-
-export type MemberDecision = {
-  slug: string;
-  title: string;
-  date: string;
-  bodyId: string;
-  stance: Stance;
-};
-
-export type MemberScore = {
-  slug: string;
-  namedDivisions: number;
-  matchedResult: number;
-  opposedResult: number;
-  notVoting: number;
-  decisions: MemberDecision[];
-};

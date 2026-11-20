@@ -44,9 +44,10 @@ export type ApiVote = {
   for: string[];
   against: string[];
   notVoting: string[];
-  abstain: null;
-  absent: null;
-  conflictOfInterest: null;
+  /** Null means that list was not in the source. An empty array means the source listed nobody. */
+  abstain: string[] | null;
+  absent: string[] | null;
+  conflictOfInterest: string[] | null;
 };
 
 export type ApiDecisionSummary = {
@@ -130,13 +131,10 @@ export type ApiMember = {
   since: string | null;
   until: string | null;
   committees: string[];
-  record: {
+  minutesVotes: {
+    href: string;
+    source: "official-minutes";
     note: string;
-    namedDivisions: number;
-    withMajority: number;
-    againstMajority: number;
-    notVoting: number;
-    decisions: { id: string; date: string; stance: string }[];
   };
   provenance: Provenance;
 };
@@ -164,8 +162,8 @@ export type ApiCommittee = {
 
 /**
  * What another council implements. Methods return only records the adapter
- * actually holds. Unknown ids return null. Missing vote names stay empty,
- * and abstain, absent, and conflict stay null.
+ * actually holds. Unknown ids return null. A missing vote list stays null.
+ * It is not copied from another list.
  */
 export interface CouncilAdapter {
   readonly manifest: PluginManifest;

@@ -207,10 +207,10 @@ export function Feed({ items, syncedAt }: { items: DecisionCard[]; syncedAt: str
               <div className="tally">
                 {item.tally.kind === "uniform" ? (
                   <>
-                    <span className="pill for">
+                    <span className="pill">
                       <T en={`For ${item.tally.for}`} mi={`Āe ${item.tally.for}`} />
                     </span>
-                    <span className="pill against">
+                    <span className="pill">
                       <T en={`Against ${item.tally.against}`} mi={`Whakahē ${item.tally.against}`} />
                     </span>
                     <span className="pill">

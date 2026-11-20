@@ -13,6 +13,7 @@ import { GET as meetingsGet } from "../src/app/api/v1/meetings/route.ts";
 import { GET as meetingGet } from "../src/app/api/v1/meetings/[id]/route.ts";
 import { GET as membersGet } from "../src/app/api/v1/members/route.ts";
 import { GET as memberGet } from "../src/app/api/v1/members/[id]/route.ts";
+import { GET as memberVotesGet } from "../src/app/api/v1/members/[id]/votes/route.ts";
 import { readResourceId } from "../src/lib/api/respond.ts";
 import { syncedAt } from "../src/lib/data.ts";
 import {
@@ -82,7 +83,13 @@ export function staticDocuments(): Published[] {
     ...pages("decisions", decisions.length),
     ...[...decisionIds].flatMap((id) => [item("decisions", id), item("decisions", id, true)]),
     ...pages("members", listMembers().length),
-    ...listMembers().map((member) => item("members", member.id)),
+    ...listMembers().flatMap((member) => [
+      item("members", member.id),
+      {
+        url: `/api/v1/members/${publishable(member.id, "members")}/votes`,
+        file: `api/v1/members/items/${publishable(member.id, "members")}/votes.json`,
+      },
+    ]),
     { url: "/api/v1/issues", file: "api/v1/issues.json" },
     ...listIssues().map((issue) => item("issues", issue.id)),
     { url: "/api/v1/committees", file: "api/v1/committees.json" },
@@ -108,12 +115,14 @@ export async function renderPublic(url: string): Promise<string> {
   else {
     const votes = pathname.match(/^\/api\/v1\/decisions\/([^/]+)\/votes$/);
     const decision = pathname.match(/^\/api\/v1\/decisions\/([^/]+)$/);
+    const memberVotes = pathname.match(/^\/api\/v1\/members\/([^/]+)\/votes$/);
     const member = pathname.match(/^\/api\/v1\/members\/([^/]+)$/);
     const issue = pathname.match(/^\/api\/v1\/issues\/([^/]+)$/);
     const committee = pathname.match(/^\/api\/v1\/committees\/([^/]+)$/);
     const meeting = pathname.match(/^\/api\/v1\/meetings\/([^/]+)$/);
     if (votes) response = await votesGet(request, context(decodeURIComponent(votes[1])));
     else if (decision) response = await decisionGet(request, context(decodeURIComponent(decision[1])));
+    else if (memberVotes) response = await memberVotesGet(request, context(decodeURIComponent(memberVotes[1])));
     else if (member) response = await memberGet(request, context(decodeURIComponent(member[1])));
     else if (issue) response = await issueGet(request, context(decodeURIComponent(issue[1])));
     else if (committee) response = await committeeGet(request, context(decodeURIComponent(committee[1])));

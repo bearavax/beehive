@@ -1,12 +1,14 @@
 "use client";
 
+import { MinutesRecord } from "@/components/minutes-record";
 import { FeedLink } from "@/components/outbound";
 import { LangLink } from "@/lib/i18n";
 import { committees } from "@/data/committees";
 import { members, wards } from "@/data/members";
 import { T, useLang } from "@/lib/i18n";
 import { formatDate } from "@/lib/format";
-import type { Member, MemberScore } from "@/lib/types";
+import type { MemberMeeting } from "@/lib/minutes/record";
+import type { Member } from "@/lib/types";
 
 function initials(name: string) {
   return name
@@ -124,19 +126,11 @@ export function Directory() {
   );
 }
 
-const stanceCopy: Record<MemberScore["decisions"][number]["stance"], { en: string; mi: string }> = {
-  for: { en: "Voted for", mi: "I pōti āe" },
-  against: { en: "Voted against", mi: "I pōti whakahē" },
-  "not-voting": { en: "Recorded as not voting", mi: "I tuhia kāore i pōti" },
-  mixed: { en: "Different sides across clauses", mi: "He rerekē ngā taha i ngā wāhanga" },
-};
-
-export function Profile({ member, score }: { member: Member; score: MemberScore }) {
+export function Profile({ member, meetings }: { member: Member; meetings: MemberMeeting[] }) {
   const { lang } = useLang();
   const role = roleLabel(member);
   const dateLang = lang === "mi" ? "mi" : "en";
   const seats = committees.filter((committee) => member.committeeIds.includes(committee.id));
-  const comparable = score.matchedResult + score.opposedResult;
 
   return (
     <article>
@@ -161,27 +155,6 @@ export function Profile({ member, score }: { member: Member; score: MemberScore 
           </>
         ) : null}
         . <FeedLink href={member.profileUrl}><T en="Public source" mi="Puna tūmatanui" /></FeedLink>
-      </p>
-
-      <div className="statrow" aria-label="Recorded divisions">
-        <div className="stat">
-          <strong>{score.namedDivisions}</strong>
-          <T en="Named divisions in this set" mi="Ngā wehenga kua whakaingoatia i tēnei huinga" />
-        </div>
-        <div className="stat">
-          <strong>{comparable === 0 ? "—" : `${score.matchedResult}/${comparable}`}</strong>
-          <T en="Voted with the majority" mi="I pōti ki te taha nui" />
-        </div>
-        <div className="stat">
-          <strong>{score.notVoting}</strong>
-          <T en="Recorded as not voting" mi="I tuhia kāore i pōti" />
-        </div>
-      </div>
-      <p className="meta">
-        <T
-          en="This count uses only the published reports Beehive has synced. It is not a full triennium score, and a missing name is not treated as an absence."
-          mi="Ka whakamahia e tēnei tatau ngā pūrongo kua tukutahi e Beehive anake. Ehara i te kaute tau toru katoa, ā, kāore e kīia he tāwāhitanga te ingoa ngaro."
-        />
       </p>
 
       <section style={{ marginTop: "1.6rem" }}>
@@ -211,33 +184,7 @@ export function Profile({ member, score }: { member: Member; score: MemberScore 
         </ul>
       </section>
 
-      <section style={{ marginTop: "1.6rem" }}>
-        <h2>
-          <T en="Voting in this published set" mi="Ngā pōti i tēnei huinga kua whakaputaina" />
-        </h2>
-        {score.decisions.length === 0 ? (
-          <p>
-            <T
-              en="No named division in the current set includes this person."
-              mi="Kāore he wehenga kua whakaingoatia i te huinga o nāianei e uru ana tēnei tangata."
-            />
-          </p>
-        ) : (
-          <div className="timeline">
-            {score.decisions.map((item) => (
-              <LangLink key={item.slug} href={`/decisions/${item.slug}`}>
-                <span className="meta">{formatDate(item.date, dateLang)}</span>
-                <br />
-                {item.title}
-                <br />
-                <span className="meta">
-                  <T en={stanceCopy[item.stance].en} mi={stanceCopy[item.stance].mi} />
-                </span>
-              </LangLink>
-            ))}
-          </div>
-        )}
-      </section>
+      <MinutesRecord meetings={meetings} />
     </article>
   );
 }

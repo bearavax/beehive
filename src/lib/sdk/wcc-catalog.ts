@@ -2,7 +2,7 @@ import { committees, torUrl } from "@/data/committees";
 import { issues } from "@/data/issues";
 import { members } from "@/data/members";
 import { plainLanguage } from "@/data/plain-language";
-import { decisions, scoreFor, syncedAt } from "@/lib/data";
+import { decisions, syncedAt } from "@/lib/data";
 import type {
   AdapterQuery,
   ApiCommittee,
@@ -186,11 +186,11 @@ export function getMeeting(id: string): ApiMeeting | null {
   return listMeetings().find((meeting) => meeting.id === id) ?? null;
 }
 
-const scores = new Map(members.map((member) => [member.slug, scoreFor(member)]));
+export const MINUTES_VOTE_NOTE =
+  "Votes on this record are read from official minutes, not from the Mātai Manapori name lists. For, against, abstained, absent, and not voting stay separate. Not recorded means the person was not named. Not read means the block could not be checked. A missing list is not inferred.";
 
 export function listMembers(): ApiMember[] {
   return members.map((member) => {
-    const score = scores.get(member.slug);
     return {
       id: member.slug,
       name: member.name,
@@ -201,13 +201,10 @@ export function listMembers(): ApiMember[] {
       since: member.since || null,
       until: member.until ?? null,
       committees: member.committeeIds,
-      record: {
-        note: "Counts use only named divisions in the published Mātai Manapori set loaded by Beehive. A missing name is not an absence.",
-        namedDivisions: score?.namedDivisions ?? 0,
-        withMajority: score?.matchedResult ?? 0,
-        againstMajority: score?.opposedResult ?? 0,
-        notVoting: score?.notVoting ?? 0,
-        decisions: (score?.decisions ?? []).map((item) => ({ id: item.slug, date: item.date, stance: item.stance })),
+      minutesVotes: {
+        href: `/api/v1/members/${member.slug}/votes`,
+        source: "official-minutes",
+        note: MINUTES_VOTE_NOTE,
       },
       provenance: provenance(member.profileUrl, null, null),
     };

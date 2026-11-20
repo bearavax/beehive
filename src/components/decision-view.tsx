@@ -6,6 +6,7 @@ import { issues } from "@/data/issues";
 import { matchMember } from "@/data/members";
 import { FeedLink } from "@/components/outbound";
 import { T, useLang } from "@/lib/i18n";
+import { minutesNotMatai } from "@/lib/minutes/copy";
 import { formatDate } from "@/lib/format";
 import type { PlainLayers, StoredAmendment, StoredClause, StoredDecision, Tally, VoteBlock } from "@/lib/types";
 
@@ -285,6 +286,9 @@ export function DecisionView({
             en="Under the Local Government Act 2002, Schedule 7, clause 28, minutes that have been entered and authenticated are prima facie evidence of the proceedings. Mātai Manapori is a transparency tool. Where it does not name a vote, Beehive leaves the names blank."
             mi="I raro i te Local Government Act 2002, Te Āpitihanga 7, te wāhanga 28, ko ngā meneti kua whakaurua, kua whakamanaia, he taunakitanga tuatahi o ngā whakahaere. He taputapu pūataata a Mātai Manapori. Ki te kore ia e whakaingoa i tētahi pōti, ka waiho wātea ngā ingoa e Beehive."
           />
+        </p>
+        <p>
+          <T en={minutesNotMatai.en} mi={minutesNotMatai.mi} />
         </p>
       </section>
 
