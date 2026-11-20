@@ -6,6 +6,11 @@ export function isLang(value: string | null | undefined): value is Lang {
   return value === "en" || value === "mi" || value === "bi";
 }
 
+/** Bilingual pages keep English on the document element. Māori spans carry `lang="mi"`. */
+export function htmlLang(lang: string | null | undefined): "en" | "mi" {
+  return lang === "mi" ? "mi" : "en";
+}
+
 export function withLang(lang: Lang, path: string) {
   if (path === "/" || path === "") return `/${lang}`;
   return `/${lang}${path.startsWith("/") ? path : `/${path}`}`;

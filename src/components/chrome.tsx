@@ -43,7 +43,7 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
                 />
               </p>
             </div>
-            <div className="lang" role="radiogroup" aria-label="Language">
+            <div className="lang" role="radiogroup" aria-label={lang === "mi" ? "Reo" : "Language"}>
               {modes.map((mode) => (
                 <button
                   key={mode.id}

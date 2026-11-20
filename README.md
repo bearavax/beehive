@@ -47,7 +47,7 @@ The Council’s terms of reference record obligations to iwi and Māori under Te
 
 The old Express API is archived at `archive/legacy-express`. Nothing in the Next.js app imports it, and CI does not install it. A `.env` from that service was removed from the tree and remains in git history. Rotate the database password and JWT secret. Do not rewrite history until that rotation is confirmed.
 
-A later local node and signed data bundles are described in [docs/static-nodes.md](docs/static-nodes.md). They are not built.
+`npm run build` also writes the public `/api/v1` JSON into `out/`, with an unsigned SHA-256 manifest. The pages stay dynamic: Next.js 15.5 cannot cover its inline bootstrap scripts with a strict hash policy, so the per-request nonce stays. A signed bundle is not built. See [docs/static-nodes.md](docs/static-nodes.md).
 
 ## Stack
 

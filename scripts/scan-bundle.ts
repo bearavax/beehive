@@ -5,7 +5,7 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
-const ROOTS = [".next", "src/data/synced"];
+const ROOTS = [".next", "src/data/synced", "out"];
 const TEXT = new Set([".js", ".json", ".html", ".txt", ".css", ".rsc", ".map"]);
 const EMAIL = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
 const PHONE = /(?:\+64|0064)[\s-]?(?:\d[\s-]?){8,10}|\b02\d[\s-]?\d{3}[\s-]?\d{4}\b/g;
@@ -34,7 +34,7 @@ for (const root of ROOTS) {
     missing.push(root);
   }
 }
-if (missing.includes(".next")) {
+if (missing.includes(".next") || missing.includes("out")) {
   console.error("scan:secrets needs a production build. Run npm run build first.");
   process.exit(2);
 }

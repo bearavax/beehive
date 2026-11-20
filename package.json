@@ -4,13 +4,15 @@
   "private": true,
   "description": "Bilingual Wellington City Council decision transparency for the 2025–2028 triennium.",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "NEXT_TELEMETRY_DISABLED=1 next dev --turbopack",
+    "build": "NEXT_TELEMETRY_DISABLED=1 next build && node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/register-alias.mjs scripts/export-api.ts && node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-dynamic-shell.ts",
+    "start": "NEXT_TELEMETRY_DISABLED=1 next start",
+    "lint": "NEXT_TELEMETRY_DISABLED=1 next lint",
+    "test": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/register-alias.mjs --test src/lib/request-routing.test.ts src/lib/html-lang.test.ts scripts/static-bundle.test.ts",
+    "api:check": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/register-alias.mjs scripts/check-api-export.ts",
     "sync:wcc": "node --experimental-strip-types scripts/sync-wcc.ts",
     "plugins:check": "node --experimental-strip-types scripts/validate-plugins.ts",
-    "scan:secrets": "node --experimental-strip-types scripts/scan-bundle.ts"
+    "scan:secrets": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/scan-bundle.ts"
   },
   "dependencies": {
     "next": "15.5.29",
@@ -31,5 +33,8 @@
     "eslint-config-next": "15.5.29",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
